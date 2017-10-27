@@ -1,0 +1,117 @@
+<div id='inThePlace'>
+<?php $imp=$this->myUser->getImpot();?>
+<script type="text/javascript">
+
+$(document).ready(function() {
+	$("#onTalk").val(0);
+	$("#onMyTalk").val(0);
+	
+
+$("#retour_hangar").click(function() {
+	if($('#onTalk').val()==0){
+		$('#onTalk').val(1);	
+		if(<?php echo $imp;?>>=5)
+			var dstination='trone';else dstination='couloir';
+		var request = $.ajax({
+		url: url_site+'Core/index/'+dstination,
+		type: "POST"							
+		}); 
+		request.done(function(msg) {
+						$("#inThePlace").fadeOut(1000);
+						setTimeout(function(){
+						  $("#inThePlace").hide();
+						  $("#inThePlace").html(msg); 
+						$("#inThePlace").fadeIn(1000);
+						}, 1000);
+						
+					});
+	}
+});
+
+$(".vers_vaisseau").click(function() {
+	if($('#onTalk').val()==0){
+		$('#onTalk').val(1);
+		if(<?php echo $imp;?>>=5)
+			var dstination='trone';else dstination='vaisseaux';
+		var request = $.ajax({
+		url: url_site+'Core/index/'+dstination,
+		type: "POST",							
+		}); 
+		request.done(function(msg) {
+						$("#inThePlace").fadeOut(1000);
+						setTimeout(function(){
+						  $("#inThePlace").hide();
+						  $("#inThePlace").html(msg); 
+						$("#inThePlace").fadeIn(1000);
+						}, 1000);
+						
+					});
+	}
+});
+
+$("#carteEtoile").click(function() {
+	if($('#onTalk').val()==0){
+		$('#onTalk').val(1);	
+		if(<?php echo $imp;?>>=5)
+			var dstination='trone';else dstination='carte';
+		var request = $.ajax({
+		url: url_site+'Core/index/'+dstination,
+		type: "POST"							
+		}); 
+		request.done(function(msg) {
+						$("#inThePlace").fadeOut(1000);
+						setTimeout(function(){
+						  $("#inThePlace").hide();
+						  $("#inThePlace").html(msg); 
+						$("#inThePlace").fadeIn(1000);
+						}, 1000);
+						
+					});
+	}
+});
+
+$("#vers_diplomate").click(function() {
+	if($('#onTalk').val()==0){
+		$('#onTalk').val(1);	
+		if(<?php echo $imp;?>>=5)
+			var dstination='trone';else dstination='diplomate';
+		var request = $.ajax({
+		url: url_site+'Core/index/'+dstination,
+		type: "POST"							
+		}); 
+		request.done(function(msg) {
+						$("#inThePlace").fadeOut(1000);
+						setTimeout(function(){
+						  $("#inThePlace").hide();
+						  $("#inThePlace").html(msg); 
+						$("#inThePlace").fadeIn(1000);
+						}, 1000);
+						
+					});
+	}
+});
+
+});
+ 
+if($("#sayyaoto").length)
+	$("#sayyaoto").mouvArretGch();
+
+$("#mesTexto").html('<img src="images/plan/hangar_plan.png" />'); 
+$("#plan").val('hangar_plan');
+</script>
+</head>
+
+<?php
+if($this->myUser->getHeure()>=67)$stylePiece='nuit';else $stylePiece='';
+$stylePiece='';
+?>
+<div id="<?php echo $this->salle;?>" class='<?php echo $stylePiece;?>'>
+	<div class='vers_vaisseau'>&nbsp;</div>
+	<div id="carteEtoile">&nbsp;</div>
+	<div id='vers_diplomate'>&nbsp;</div>
+	<div id='retour_hangar' style='z-index:1000'></div>
+	<?php if($this->indice==1)
+	echo '<div class="indices" onclick="setIndice()">&nbsp;</div>';?>
+</div>
+
+</div>

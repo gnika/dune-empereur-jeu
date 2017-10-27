@@ -1,0 +1,195 @@
+
+<?php $imp=$this->myUser->getImpot();?>
+<script type="text/javascript">
+
+$(document).ready(function() {
+	$("#onTalk").val(0);
+	$("#onMyTalk").val(0);
+	aniX = 0;
+	aniY = 0;
+	
+	jQuery.fn.arretGch = function() {
+		$(this).oneTime(200,function() {
+			$(this).css({backgroundPosition:'-23px -28px'});
+		}).oneTime(400,function() {
+			$(this).css({backgroundPosition:'-123px -28px'});
+		}).oneTime(600,function() {
+			$(this).css({backgroundPosition:'-223px -28px'});
+		}).oneTime(800,function() {
+			$(this).css({backgroundPosition:'-123px -28px'});
+		});
+	};
+	
+	jQuery.fn.mouvArretGch = function(){
+		$(this).arretGch();
+		$(this).everyTime(800,function(){
+			$(this).arretGch();
+		});
+	}
+	jQuery.fn.marcheGch = function() {
+		$(this).oneTime(200,function() {
+			$(this).css({backgroundPosition:'-23px -228px'});
+		}).oneTime(400,function() {
+			$(this).css({backgroundPosition:'-123px -228px'});
+		}).oneTime(600,function() {
+			$(this).css({backgroundPosition:'-223px -228px'});
+		}).oneTime(800,function() {
+			$(this).css({backgroundPosition:'-323px -228px'});
+		});
+	};
+	jQuery.fn.mouvMarcheGch = function(){
+		$(this).marcheGch();
+		$(this).everyTime(800,function(){
+			$(this).marcheGch();
+		});
+	}
+	
+	///
+	jQuery.fn.arretDrt = function() {
+		$(this).oneTime(200,function() {
+			$(this).css({backgroundPosition:'-21px -128px'});
+		}).oneTime(400,function() {
+			$(this).css({backgroundPosition:'-121px -128px'});
+		}).oneTime(600,function() {
+			$(this).css({backgroundPosition:'-221px -128px'});
+		}).oneTime(800,function() {
+			$(this).css({backgroundPosition:'-121px -128px'});
+		});
+	};
+	jQuery.fn.mouvArretDrt = function(){
+		$(this).arretDrt();
+		$(this).everyTime(800,function(){
+			$(this).arretDrt();
+		});
+	}
+
+	jQuery.fn.marcheDrt = function() {
+		$(this).oneTime(200,function() {
+			$(this).css({backgroundPosition:'-18px -328px'});
+		}).oneTime(400,function() {
+			$(this).css({backgroundPosition:'-118px -328px'});
+		}).oneTime(600,function() {
+			$(this).css({backgroundPosition:'-218px -328px'});
+		}).oneTime(800,function() {
+			$(this).css({backgroundPosition:'-318px -328px'});
+		});
+	};
+	jQuery.fn.mouvMarcheDrt = function(){
+		$(this).marcheDrt();
+		$(this).everyTime(800,function(){
+			$(this).marcheDrt();
+		});
+	}
+	///
+	var arret = 0;
+
+	$("#karaguhl").click(function() {
+			if($("#onTalk").val()==0 && $("#onMyTalk").val()==0){
+				$("#texto").removeClass().addClass('karaguhlTexthabitat1');
+				if (arret == 0 || arrestation==1) {
+					$("#texto").show();
+					$("#onTalk").val(1);
+					$("#karaguhl").stopTime().mouvMarcheGch();
+
+					var request = $.ajax({
+					url: url_site+"Core/index/ajaxquote", 
+					type: "POST",
+					data: { idDiv: 'karaguhl', idPerso: '22', talk: 'mouvArretGch', stopTalk: 'mouvMarcheGch' },			
+					
+					}); 
+					request.done(function(msg) { 
+					$("#texto").html(msg); 
+					});
+					 
+				}else{
+					arret = 0;
+					$("#karaguhl").stopTime().mouvArretGch();
+					$("#texto").invisible();
+				}
+			}
+		});
+		
+	$("#fremen2").click(function() {
+			if($("#onTalk").val()==0 && $("#onMyTalk").val()==0){
+				$("#texto").removeClass().addClass('fremen2Texthabitat1');
+				if (arret == 0 || arrestation==1) {
+					$("#texto").show();
+					$("#onTalk").val(1);
+					$("#fremen2").stopTime().mouvMarcheDrt();
+
+					var request = $.ajax({
+					url: url_site+"Core/index/ajaxquote", 
+					type: "POST",
+					data: { idDiv: 'fremen2', idPerso: '26', talk: 'mouvArretDrt', stopTalk: 'mouvMarcheDrt' },			
+					
+					}); 
+					request.done(function(msg) { 
+					$("#texto").html(msg); 
+					});
+					 
+				}else{
+					arret = 0;
+					$("#fremen2").stopTime().mouvArretDrt();
+					$("#texto").invisible();
+				}
+			}
+		});
+
+$("#retour_habitat1").click(function() {
+	if($('#onTalk').val()==0){
+		$('#onTalk').val(1);	
+		if(<?php echo $imp;?>>=5)
+			var dstination='trone';else dstination='village1';
+		var request = $.ajax({
+		url: url_site+'Core/index/'+dstination,
+		type: "POST"							
+		}); 
+		request.done(function(msg) {
+						$("#inThePlace").fadeOut(1000);
+						setTimeout(function(){
+						  $("#inThePlace").hide();
+						  $("#inThePlace").html(msg); 
+						$("#inThePlace").fadeIn(1000);
+						}, 1000);
+						
+					});
+	}
+});
+
+
+
+});
+ 
+if($("#karaguhl").length)
+	$("#karaguhl").mouvArretGch();
+	
+if($("#fremen2").length)
+	$("#fremen2").mouvArretDrt();
+
+
+
+</script>
+</head>
+
+<?php
+if($this->myUser->getHeure()>=67)$stylePiece='nuit';else $stylePiece='';
+$stylePiece='';
+?>
+<div id="<?php echo $this->salle;?>" class='<?php echo $stylePiece;?>'>
+	<div id="perso"></div><p>&nbsp;</p>
+	<div id='retour_habitat1' style='z-index:1000'></div>
+	
+	<?php
+	
+	foreach($this->porteDansSalle as $porte){
+		echo '<div id="porte_'.$porte['por_id'].'" class="porte_'.$porte['por_id_type'].'_'.$porte['poru_etat'].'"></div>';
+	}	?>
+	<div id="texto"></div>
+	<?php foreach($this->persoDansSalle as $clef => $perso){
+		echo '<div class="'.$clef.'_village1" id="'.$clef.'"></div>';
+	}
+	?>
+	
+</div>
+
+

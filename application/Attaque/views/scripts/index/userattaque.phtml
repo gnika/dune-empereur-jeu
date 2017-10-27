@@ -1,0 +1,94 @@
+<form method='post' action="<?php echo URL_MAIN_ABS.'Attaque/index/assaut';?>"><?php
+	$fois=0;
+    $attaqueMilitaire=0;
+    $defenseMilitaire=0;
+    $magieMilitaire=0;
+    $pillageMilitaire=0;
+    
+    if(count($this->myUnite)!=0)
+    {
+        echo '<p>Vous possedez :</p>';
+        foreach($this->myUnite as $result){
+        
+            $defenseUnite=$result['uu_quantite']*$result['pu_defense'];
+            $attaqueUnite=$result['uu_quantite']*$result['pu_attaque'];
+            $magieUnite=$result['uu_quantite']*$result['pu_magie'];
+            $pillageUnite=$result['uu_quantite']*$result['pu_pillage'];
+            $attaqueMilitaire+=$attaqueUnite;
+            $defenseMilitaire+=$defenseUnite;
+            $magieMilitaire+=$magieUnite;
+            $pillageMilitaire+=$pillageUnite;
+            if($result['uu_quantite']!=0)
+            echo '<p>'.$result['uu_quantite']. ' '.$result['pu_titre'].' <img src="'.URL_MAIN_ABS.'images/unite/' . $result['pu_image'] . '"></p>';
+            echo '<p>'.$attaqueUnite.' attaque & '.$defenseUnite.' defense & '.$magieUnite.' magie & '.$pillageUnite.' pillage</p><br/>';
+			echo '<input type="text" value="'.$result['uu_quantite'].'" name="assaut'.$fois.'">';
+			echo '<input type="hidden" value="'.$result['uu_produit_unite_id'].'" name="id'.$fois.'">';
+			$fois++;
+        }
+
+
+        echo '<input type="hidden" name="pa_id" value="'.$this->userId->getId().'"><input type="hidden" value="'.$fois.'" name="hidunit"><input type="submit" value="Partir en guerre"></form>';
+        
+        
+
+       echo '<br/><p>Votre attaque militaire est de '.$attaqueMilitaire .'pts d\'attaque</p>';
+       echo '<p>Votre defense militaire est de '.$defenseMilitaire .'pts de defense</p>';
+       echo '<p>Votre magie est de '.$magieMilitaire .'pts </p>';
+	   echo '<p>Votre pillage est de '.$pillageMilitaire .'pts</p>';
+    }
+    else
+    echo 'vous ne possedez pas encore d\'unite';
+    
+    $attaqueBatiment=0;
+    $defenseBatiment=0;
+    $magieBatiment=0;
+    $pillageBatiment=0;
+
+    foreach($this->myBatiment as $bat){
+        if($bat['ub_duree']!=0)
+        {
+            $defenseparBatiment=$bat['ub_quantite']*$bat['pb_defense'];
+            $attaqueparBatiment=$bat['ub_quantite']*$bat['pb_attaque'];
+            $magieparBatiment=$bat['ub_quantite']*$bat['pb_magie'];
+            $pillageparBatiment=$bat['ub_quantite']*$bat['pb_pillage'];
+            $attaqueBatiment+=$attaqueparBatiment;
+            $defenseBatiment+=$defenseparBatiment;
+            $magieBatiment+=$magieparBatiment;
+            $pillageBatiment+=$pillageparBatiment;
+			echo '<p>'.$bat['ub_quantite']. ' '.$result['pb_titre'].' <img src="'.URL_MAIN_ABS.'images/batiment/' . $result['pb_image'] . '"></p>';
+            echo '<p>'.$attaqueparBatiment.' attaque & '.$defenseparBatiment.' defense & '.$magieparBatiment.' magie & '.$pillageparBatiment.' pillage</p><br/>';
+			
+        }
+
+    }
+	
+	   echo '<br/><p>Votre attaque par batiment est de '.$attaqueBatiment .'pts d\'attaque</p>';
+       echo '<p>Votre defense par batiment est de '.$defenseBatiment .'pts de defense</p>';
+	   echo '<p>Votre magie par batiment est de '.$magieBatiment .'pts </p>';
+       echo '<p>Votre pillage par batiment est de '.$pillageBatiment .'pts</p><br/>';
+	   
+	   echo '<br/><p>Votre attaque générale est de '.$attaqueBatiment+$attaqueMilitaire .'pts d\'attaque</p>';
+       echo '<p>Votre defense générale est de '.$defenseBatiment+$defenseMilitaire .'pts de defense</p>';
+	   echo '<p>Votre magie générale est de '.$magieBatiment+ $magieMilitaire.'pts </p>';
+       echo '<p>Votre pillage général est de '.$pillageBatiment+ $pillageMilitaire .'pts</p><br/>';
+	   
+       if(count($this->magieEnCoursEnnemy)!=0){
+           echo 'sort actuellement utilisés par le joueur :<br/>';
+           foreach($this->magieEnCoursEnnemy as $magiEn){
+                echo '<p><img src="'.URL_MAIN_ABS.'images/magie/' . $this->$magiEn['pm_image']. '" alt="' . $this->$magiEn['pm_titre']. '"></p>';
+           }
+        }
+        else
+        echo 'ce joueur n\'utilise pas de sort actuellement<br/>';
+	   
+       if(count($this->magieEnCours)!=0){
+           echo 'sort actuellement utilisés par vous :<br/>';
+           
+           foreach($this->magieEnCours as $myMag){
+                echo '<p><img src="'.URL_MAIN_ABS.'images/magie/' . $this->$myMag['pm_image']. '" alt="' . $this->$myMag['pm_titre']. '"></p>';
+           }
+        }
+        else
+        echo "<a href=''>lancer un sort magique</a><br/><br/>";
+       
+?>

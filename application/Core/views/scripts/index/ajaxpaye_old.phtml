@@ -1,0 +1,466 @@
+<?php 
+	$epiceIx=$this->epiceIx;if($epiceIx<0)$epiceIx=0;
+	$epiceGuesserit=$this->epiceGuesserit;if($epiceGuesserit<0)$epiceGuesserit=0;
+	$epiceTleilax=$this->epiceTleilax;if($epiceTleilax<0)$epiceTleilax=0;
+	$epiceGuilde=$this->epiceGuilde;if($epiceGuilde<0)$epiceGuilde=0;
+	$totalEpice=-($epiceIx+$epiceGuesserit+$epiceTleilax+$epiceGuilde);
+	$end=0;
+	if($this->myEpice + $totalEpice < 0)
+		$notEnough=1;
+	else
+		$notEnough=0;
+
+	$totalRenommee=$this->renommeeGagnee;
+	$totalCorruption=$this->corruptionVoulu;
+?>
+<div id='textoIn'>
+	<?php 
+	if($notEnough){$totalEpice=-$totalEpice;
+		$text='Nous voici donc réuni pour la cérémonie du partage !///MAIS...///Haaaaaaaaaaaaaa...///Moneo, mon cher Moneo, les caisses sont vides ! Nous ne pouvons plus continuer !///Nous avons besoin de '.$totalEpice.' unités d\'épices...///ainsi se termine donc votre aventure...le jeu restera bloqué ainsi jusqu\'à ce que vous refassiez un nouveau compte...///ou une nouvelle partie à partir de ce compte///Merci d\'avoir tenté l\'aventure avec nous///bloquage du jeu !';//creer le scenarii de crise
+		$end=1;
+	}else
+		$text= 'Nous voici donc réuni pour la cérémonie du partage !///A la Guilde, j\'offre '.$epiceGuilde.' epices';	
+		// echo $text;die();
+	$pieces = explode("///", $text);
+	echo $pieces[0];
+?>
+</div>
+<?php if(count($pieces)>1) { ?>
+		<a href='' onclick='return false;' id='textoLink'>suite ... </a> 
+	<?php 
+	} ?>
+	<input type='hidden' id='stepDial' value='0'/>
+	<?php if(count($pieces)>1){
+	?>
+		<input type='hidden' id='closeWindow' value='0'/>
+	<?php }else{ ?>
+		<input type='hidden' id='closeWindow' value='1'/>
+	<?php } ?>
+	<input type='hidden' id='maxDial' value='<?php echo count($pieces);?>'/>
+	<!-------------------------------->
+<?php 
+	$text2= 'A la maison Ix, j\'offre '.$epiceIx.' epices/// ils ont mérités un bonus !';	
+		$pieces2 = explode("///", $text2);
+		?>
+<div id='textoIn2'>
+	<div id='text2' style='display:none;'>
+		<?php echo $pieces2[0];?>
+	</div>
+</div>
+
+	<?php if(count($pieces2)>1) { ?>
+		<a href='' onclick='return false;' id='textoLink2'>suite ... </a> 
+		<?php 
+		} ?>
+		<input type='hidden' id='stepDial2' value='0'/>
+		<?php if(count($pieces2)>1){
+		?>
+			<input type='hidden' id='closeWindow2' value='0'/>
+		<?php }else{ ?>
+			<input type='hidden' id='closeWindow2' value='1'/>
+		<?php } ?>
+		<input type='hidden' id='maxDial2' value='<?php echo count($pieces2);?>'/>
+	<!-------------------------------->
+<?php 
+	$text3= 'A la maison Bene Tleilax, j\'offre '.$epiceTleilax.' epices/// Veuillez vous repentir !';	
+		$pieces3 = explode("///", $text3);
+		?>
+<div id='textoIn3'>
+	<div id='text3' style='display:none;'>
+		<?php echo $pieces3[0];?>
+	</div>
+</div>
+
+	<?php if(count($pieces3)>1) { ?>
+		<a href='' onclick='return false;' id='textoLink3'>suite ... </a> 
+		<?php 
+		} ?>
+		<input type='hidden' id='stepDial3' value='0'/>
+		<?php if(count($pieces3)>1){
+		?>
+			<input type='hidden' id='closeWindow3' value='0'/>
+		<?php }else{ ?>
+			<input type='hidden' id='closeWindow3' value='1'/>
+		<?php } ?>
+		<input type='hidden' id='maxDial3' value='<?php echo count($pieces3);?>'/>
+	<!-------------------------------->
+<?php 
+	$text4= 'A la maison Bene Guesserit, j\'offre '.$epiceGuesserit.' epices/// Veuillez en faire bon usage !';	
+		$pieces4 = explode("///", $text4);
+		?>
+<div id='textoIn4'>
+	<div id='text4' style='display:none;'>
+		<?php echo $pieces4[0];?>
+	</div>
+</div>
+
+	<?php if(count($pieces4)>1) { ?>
+		<a href='' onclick='return false;' id='textoLink4'>suite ... </a> 
+		<?php 
+		} ?>
+		<input type='hidden' id='stepDial4' value='0'/>
+		<?php if(count($pieces4)>1){
+		?>
+			<input type='hidden' id='closeWindow4' value='0'/>
+		<?php }else{ ?>
+			<input type='hidden' id='closeWindow4' value='1'/>
+		<?php } ?>
+		<input type='hidden' id='maxDial4' value='<?php echo count($pieces4);?>'/>
+<!-------------------------------->
+<?php 
+	$text5= 'Ainsi se termine la dime d\'épice pour ce jour.../// Veuillez revenir d\'ici cinq jours !';	
+		$pieces5 = explode("///", $text5);
+		?>
+<div id='textoIn5'>
+	<div id='text5' style='display:none;'>
+		<?php echo $pieces5[0];?>
+	</div>
+</div>
+
+	<?php if(count($pieces5)>1) { ?>
+		<a href='' onclick='return false;' id='textoLink5'>suite ... </a> 
+		<?php 
+		} ?>
+		<input type='hidden' id='stepDial5' value='0'/>
+		<?php if(count($pieces5)>1){
+		?>
+			<input type='hidden' id='closeWindow5' value='0'/>
+		<?php }else{ ?>
+			<input type='hidden' id='closeWindow5' value='1'/>
+		<?php } ?>
+		<input type='hidden' id='maxDial5' value='<?php echo count($pieces5);?>'/>
+	<!-------------------------------->
+	<!-------------------------------->
+	<!-------------------------------->
+	<!-------------------------------->
+<div style='display:none' id='textoInGuilde'>
+<?php 
+$text= 'Nous vous remercions du fond du coeur///Remerciez Moneo pour son dévouement à notre cause...';	
+	$piecesGuilde = explode("///", $text);
+	echo $piecesGuilde[0];
+	?>
+</div>
+<?php if(count($piecesGuilde)>1) { ?>
+		<a href='' onclick='return false;' style='display:none;' id='textoLinkGuilde'>suite ... </a> 
+	<?php 
+	} ?>
+	<input type='hidden' id='stepDialGuilde' value='0'/>
+	<?php if(count($piecesGuilde)>1){
+	?>
+		<input type='hidden' id='closeWindowGuilde' value='0'/>
+	<?php }else{ ?>
+		<input type='hidden' id='closeWindowGuilde' value='1'/>
+	<?php } ?>
+	<input type='hidden' id='maxDialGuilde' value='<?php echo count($piecesGuilde);?>'/>
+	
+<!--/*//////////////-->
+<div style='display:none' id='textoInIx'>
+<?php 
+$text= 'Nous vous remercions du fond du coeur///Remerciez Moneo pour son dévouement à notre cause ixienne...';	
+	$piecesIx = explode("///", $text);
+	echo $piecesIx[0];
+	?>
+</div>
+<?php if(count($piecesIx)>1) { ?>
+		<a href='' onclick='return false;' style='display:none;' id='textoLinkIx'>suite ... </a> 
+	<?php 
+	} ?>
+	<input type='hidden' id='stepDialIx' value='0'/>
+	<?php if(count($piecesIx)>1){
+	?>
+		<input type='hidden' id='closeWindowIx' value='0'/>
+	<?php }else{ ?>
+		<input type='hidden' id='closeWindowIx' value='1'/>
+	<?php } ?>
+	<input type='hidden' id='maxDialIx' value='<?php echo count($piecesIx);?>'/>
+<!--/*//////////////-->
+<!--/*//////////////-->
+<div style='display:none' id='textoInTleilax'>
+<?php 
+$text= 'ho ouiiiiiiiiiiimaiiitre///ouiouiouiouioui...';	
+	$piecesTleilax = explode("///", $text);
+	echo $piecesTleilax[0];
+	?>
+</div>
+<?php if(count($piecesTleilax)>1) { ?>
+		<a href='' onclick='return false;' style='display:none;' id='textoLinkTleilax'>suite ... </a> 
+	<?php 
+	} ?>
+	<input type='hidden' id='stepDialTleilax' value='0'/>
+	<?php if(count($piecesTleilax)>1){
+	?>
+		<input type='hidden' id='closeWindowTleilax' value='0'/>
+	<?php }else{ ?>
+		<input type='hidden' id='closeWindowTleilax' value='1'/>
+	<?php } ?>
+	<input type='hidden' id='maxDialTleilax' value='<?php echo count($piecesTleilax);?>'/>
+<!--/*//////////////-->
+<!--/*//////////////-->
+<div style='display:none' id='textoInGuesserit'>
+<?php 
+$text= 'Je vous en prie///nous partageons bien plus en commun que vous ne le supposez...';	
+	$piecesGuesserit = explode("///", $text);
+	echo $piecesGuesserit[0];
+	?>
+</div>
+<?php if(count($piecesGuesserit)>1) { ?>
+		<a href='' onclick='return false;' style='display:none;' id='textoLinkGuesserit'>suite ... </a> 
+	<?php 
+	} ?>
+	<input type='hidden' id='stepDialGuesserit' value='0'/>
+	<?php if(count($piecesGuesserit)>1){
+	?>
+		<input type='hidden' id='closeWindowGuesserit' value='0'/>
+	<?php }else{ ?>
+		<input type='hidden' id='closeWindowGuesserit' value='1'/>
+	<?php } ?>
+	<input type='hidden' id='maxDialGuesserit' value='<?php echo count($piecesGuesserit);?>'/>
+<!--/*//////////////-->
+
+	<SCRIPT language="Javascript">
+		// $("#onTalk").val(0);
+		// $("#onMyTalk").val(0);
+		$("#texto").show();
+		var end=<?php echo $end;?>;
+		$("#texto").removeClass().addClass('naylaText');
+		$("#nayla").stopTime().mouvMarcheDrt();
+		$("#texto").css('background-color', '#FFFFFF');
+		$("#texto").visible();
+		$("#textoLink3, #textoLink2, #textoLink4, #textoLink5").hide();
+		$("#textoIn3, #textoIn2, #textoIn4, #textoIn5").hide();
+		
+		$("#textoLink, #textoLink2, #textoLink3, #textoLink4, #textoLink5").click(function() {
+			var idClique=this.id;
+			if(idClique=='textoLink2'){
+				var tab = <?php echo json_encode($pieces2); ?>;var inTex='textoIn2';var stepDial='stepDial2';var maxDial='maxDial2';var closeWindow='closeWindow2';}
+				else if(idClique=='textoLink3'){var tab = <?php echo json_encode($pieces3); ?>;var inTex='textoIn3';var stepDial='stepDial3';var maxDial='maxDial3';var closeWindow='closeWindow3';}
+				else if(idClique=='textoLink4'){var tab = <?php echo json_encode($pieces4); ?>;var inTex='textoIn4';var stepDial='stepDial4';var maxDial='maxDial4';var closeWindow='closeWindow4';}
+				else if(idClique=='textoLink5'){var tab = <?php echo json_encode($pieces5); ?>;var inTex='textoIn5';var stepDial='stepDial5';var maxDial='maxDial5';var closeWindow='closeWindow5';}
+				else if(idClique=='textoLink'){var tab = <?php echo json_encode($pieces); ?>;var inTex='textoIn';var stepDial='stepDial';var maxDial='maxDial';var closeWindow='closeWindow';}
+			
+			$("#"+inTex).empty();
+			var newVal=$("#"+stepDial).val();
+			if(newVal < $("#"+maxDial).val()){
+				newVal=parseInt(newVal)+1;
+				$("#"+stepDial).val(newVal);
+				
+				$("#"+inTex).html(tab[newVal]);
+			}
+			if(end==0){
+				if(newVal+1==$("#"+maxDial).val()){
+					$("#"+idClique).hide();
+					$("#"+closeWindow).val(1);
+				}
+			}
+		})
+		
+		$("#textoLinkGuilde").click(function() {
+			var tab = <?php echo json_encode($piecesGuilde); ?>;
+			$("#textoInGuilde").empty();
+			var newVal=$("#stepDialGuilde").val();
+			if(newVal < $("#maxDialGuilde").val()){
+				newVal=parseInt(newVal)+1;
+				$("#stepDialGuilde").val(newVal);
+				
+				$("#textoInGuilde").html(tab[newVal]);
+			}
+			
+			if(newVal+1==$("#maxDialGuilde").val()){
+				$("#textoLinkGuilde").hide();
+				$("#closeWindowGuilde").val(1);
+			}
+			
+		})
+		
+		$("#textoLinkIx").click(function() {
+			var tab = <?php echo json_encode($piecesIx); ?>;
+			$("#textoInIx").empty();
+			var newVal=$("#stepDialIx").val();
+			if(newVal < $("#maxDialIx").val()){
+				newVal=parseInt(newVal)+1;
+				$("#stepDialIx").val(newVal);
+				
+				$("#textoInIx").html(tab[newVal]);
+			}
+			
+			if(newVal+1==$("#maxDialIx").val()){
+				$("#textoLinkIx").hide();
+				$("#closeWindowIx").val(1);
+			}
+		})
+		
+		$("#textoLinkTleilax").click(function() {
+			var tab = <?php echo json_encode($piecesTleilax); ?>;
+			$("#textoInTleilax").empty();
+			var newVal=$("#stepDialTleilax").val();
+			if(newVal < $("#maxDialTleilax").val()){
+				newVal=parseInt(newVal)+1;
+				$("#stepDialTleilax").val(newVal);
+				
+				$("#textoInTleilax").html(tab[newVal]);
+			}
+			
+			if(newVal+1==$("#maxDialTleilax").val()){
+				$("#textoLinkTleilax").hide();
+				$("#closeWindowTleilax").val(1);
+			}
+		})
+		
+		$("#textoLinkGuesserit").click(function() {
+			var tab = <?php echo json_encode($piecesGuesserit); ?>;
+			$("#textoInGuesserit").empty();
+			var newVal=$("#stepDialGuesserit").val();
+			if(newVal < $("#maxDialGuesserit").val()){
+				newVal=parseInt(newVal)+1;
+				$("#stepDialGuesserit").val(newVal);
+				
+				$("#textoInGuesserit").html(tab[newVal]);
+			}
+			
+			if(newVal+1==$("#maxDialGuesserit").val()){
+				$("#textoLinkGuesserit").hide();
+				$("#closeWindowGuesserit").val(1);
+			}
+		})
+		
+		$("#textoIn, #textoIn2, #textoIn3, #textoIn4, #textoIn5").click(function() {
+				if($("#closeWindow").val()==1){
+					$("#nayla").stopTime().mouvArretDrt();
+					$("#texto").invisible();
+					///
+					$("#textoIn, #textoIn2, #textoIn3, #textoLink3, #textoLink2, #textoLink").hide();
+					$("#textoInGuilde").show();
+					$("#textoLinkGuilde").show();
+					$("#texto").removeClass().addClass('representant_guildeText');
+					$("#representant_guilde").stopTime().mouvParleGui();
+					$("#texto").css('background-color', '#FFFFFF');
+					$("#texto").visible();
+				}
+				if($("#closeWindow2").val()==1){
+					$("#nayla").stopTime().mouvArretDrt();
+					$("#texto").invisible();
+					///
+					$("#textoIn2").hide();
+					$("#textoInIx").show();
+					$("#textoLinkIx").show();
+					$("#texto").removeClass().addClass('representant_ixText');
+					$("#representant_ix").stopTime().mouvParleIx();
+					$("#texto").css('background-color', '#FFFFFF');
+					$("#texto").visible();
+				}
+				if($("#closeWindow3").val()==1){
+					$("#nayla").stopTime().mouvArretDrt();
+					$("#texto").invisible();
+					///
+					$("#textoIn3").hide();
+					$("#textoInTleilax").show();
+					$("#textoLinkTleilax").show();
+					$("#texto").removeClass().addClass('representant_tleilaxText');
+					$("#representant_tleilax").stopTime().mouvParleTle();
+					$("#texto").css('background-color', '#FFFFFF');
+					$("#texto").visible();
+				}
+				if($("#closeWindow4").val()==1){
+					$("#nayla").stopTime().mouvArretDrt();
+					$("#texto").invisible();
+					///
+					$("#textoIn4").hide();
+					$("#textoInGuesserit").show();
+					$("#textoLinkGuesserit").show();
+					$("#texto").removeClass().addClass('representant_guesseritText');
+					$("#representant_guesserit").stopTime().mouvParleGue();
+					$("#texto").css('background-color', '#FFFFFF');
+					$("#texto").visible();
+				}
+				if($("#closeWindow5").val()==1){
+					$("#nayla").stopTime().mouvArretDrt();
+					$("#texto").invisible();
+					
+					var request2 = $.ajax({
+					url: "<?php echo URL_MAIN_ABS . 'Core/ajax/ajaximpot';?>", 
+					type: "POST",
+					data: {epice: <?php echo $totalEpice;?>, renommee: <?php echo $totalRenommee;?>, corruption: <?php echo $totalCorruption;?>},			
+					});
+					recompenseDisplay('<tr><td>Total épice dépensé : <?php echo $totalEpice;?></td><td>Renommée : + <?php echo $totalRenommee;?></td></tr><?php if($totalCorruption)echo'<tr><td>Corruption : + '.$totalCorruption.'</td></tr>';?>');
+					request2.done(function(msg) {
+					$("#impot").val(1);
+					});
+					afficheSpice();
+					$("#onTalk").val(0);
+					$("#onMyTalk").val(0);
+				}
+		})
+		
+		$("#textoInGuilde").click(function() {
+				if($("#closeWindowGuilde").val()==1){
+					$("#representant_guilde").stopTime().mouvArretParleGui();
+					$("#texto").invisible();
+					$("#closeWindow").val(0);
+					mouveLeft('representant_guilde');
+					///
+					$("#textoInGuilde").hide();
+					$("#textoIn2").show();
+					$("#text2").show();
+					$("#textoLink2").show();
+					$("#texto").removeClass().addClass('naylaText');
+					$("#nayla").stopTime().mouvMarcheDrt();
+					$("#texto").css('background-color', '#FFFFFF');
+					$("#texto").visible();
+				}
+		})
+		
+		$("#textoInIx").click(function() {
+				if($("#closeWindowIx").val()==1){
+					$("#representant_ix").stopTime().mouvArretParleIx();
+					$("#texto").invisible();
+					$("#closeWindow2").val(0);
+					mouveLeft('representant_ix');
+					///
+					$("#textoInIx").hide();
+					$("#textoIn3").show();
+					$("#text3").show();
+					$("#textoLink3").show();
+					$("#texto").removeClass().addClass('naylaText');
+					$("#nayla").stopTime().mouvMarcheDrt();
+					$("#texto").css('background-color', '#FFFFFF');
+					$("#texto").visible();
+				}
+		})
+		
+		$("#textoInTleilax").click(function() {
+				if($("#closeWindowTleilax").val()==1){
+					$("#representant_tleilax").stopTime().mouvArretParleTle();
+					$("#texto").invisible();
+					$("#closeWindow3").val(0);
+					mouveLeft('representant_tleilax');
+					$("#textoInTleilax").hide();
+					///
+					$("#textoIn4").show();
+					$("#text4").show();
+					$("#textoLink4").show();
+					$("#texto").removeClass().addClass('naylaText');
+					$("#nayla").stopTime().mouvMarcheDrt();
+					$("#texto").css('background-color', '#FFFFFF');
+					$("#texto").visible();
+				}
+		})
+
+		$("#textoInGuesserit").click(function() {
+				if($("#closeWindowGuesserit").val()==1){
+					$("#representant_guesserit").stopTime().mouvArretParleGue();
+					$("#texto").invisible();
+					$("#closeWindow4").val(0);
+					mouveLeft('representant_guesserit');
+					$("#textoInGuesserit").hide();
+					///
+					$("#textoIn5").show();
+					$("#text5").show();
+					$("#textoLink5").show();
+					$("#texto").removeClass().addClass('naylaText');
+					$("#nayla").stopTime().mouvMarcheDrt();
+					$("#texto").css('background-color', '#FFFFFF');
+					$("#texto").visible();
+				}
+		})
+		
+	</SCRIPT>

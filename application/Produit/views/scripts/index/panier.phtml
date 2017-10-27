@@ -1,0 +1,12 @@
+<h2>Panier</h2>
+
+<ul>
+<?php
+		$panier=new Zend_Session_Namespace('panier');
+		$unites_panier=$panier->listeunite;
+foreach ($this->pageData as $membre) {
+	echo "<li>$membre->pa_titre</li> nombre demandé : ".$unites_panier[$membre->pa_id];?>
+				<?php
+}
+?>
+</ul>

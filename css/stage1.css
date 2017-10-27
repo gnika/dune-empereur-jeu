@@ -1,0 +1,1692 @@
+
+body {
+    margin: 0;
+}
+
+.flags{
+	float:right;
+}
+#explorerYes a, .attaqueYes a, .diplomateYes a{
+	color: red!important;
+}
+#mesObjets{
+	background-color: #b38f45;
+    border: 1px solid #000000;
+    left: 16px;
+    min-height: 106px;
+    position: relative;
+    width: 1008px;
+    z-index: 10000;
+    top: 16px;
+    border-radius: 12px;
+}
+
+#mesObjets img{
+	padding-left: 10px
+}
+
+#messages{
+	bottom: 140px;
+    min-height: 38px;
+    position: relative;
+    z-index: 500000;
+}
+
+#contientGraph{
+	background: #b38f45 none repeat scroll 0 0;
+    color: #ffffff;
+    height: 118px;
+    left: 451px;
+    position: relative;
+    top: 12px;
+    width: 575px;
+    z-index: 1002;
+}
+
+#divForGraph .graphFielddivForGraph{
+	font-weight: bold;
+	font-family: Arial, Helvetica, sans-serif;
+}
+#recompense {
+    margin: auto;
+    position: relative;
+    text-align: center;
+    top: 34px;
+    z-index: 20000;
+	visibility:hidden;
+	border-radius: 10px 10px 10px 10px;
+	background-color: #FFFFFF;
+	height:134px;
+	color:#000000;
+	padding-top: 10px;
+}
+
+#tableauBord .ui-tabs .ui-tabs-panel{
+	padding: 0;
+}
+
+ul.errors{
+	
+}
+#retour:hover, #retour_journal:hover, #retour_map:hover, #retour_cuisine:hover, #retour_marches:hover, #retour_hangar:hover, #retour_indice:hover, #retour_vaisseaux:hover, #retour_diplomate:hover
+, #retour_commune:hover, #retour_magasin:hover, #retour_bibliotheque:hover, #retour_bar:hover, #retour_barfond:hover
+, #retour_chambre:hover, #retour_entree:hover, #retour_representants:hover, #retour_couloir2:hover, #retour_couloir3:hover, #retour_couloir4:hover, #retour_couloir:hover{
+	background: url("../images/tapis-hover.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+#retour{
+	background: url("../images/tapis.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    bottom: 218px;
+    cursor: pointer;
+    height: 44px;
+    left: 394px;
+    position: relative;
+    top: 546px;
+    width: 217px;
+    z-index: 1000;
+}
+.reserve .draggable{
+	padding-top:5px;
+	padding-left:5px;
+}
+#tableauBord .ixPerso{
+	background: url("../images/tableau/representant-ix.gif") no-repeat scroll -1px -5px rgba(0, 0, 0, 0);
+    height: 267px;
+    left: 184px;
+    width: 94px;
+}
+#tableauBord .tleilaxPerso{
+	background: url("../images/tableau/representant-bene-tleilax.gif") no-repeat scroll -1px -5px rgba(0, 0, 0, 0);
+    height: 267px;
+    left: 184px;
+    width: 94px;
+}
+#tableauBord .guildePerso{
+	background: url("../images/tableau/representant-guilde.gif") no-repeat scroll -1px -5px rgba(0, 0, 0, 0);
+    height: 267px;
+    left: 184px;
+    width: 94px;
+}
+#infojoueur .progBarBg {
+	background:url('fond.png');
+}
+#tableauBord .gesseritPerso{
+	background: url("../images/tableau/representant-gesserit.gif") no-repeat scroll -1px -5px rgba(0, 0, 0, 0);
+    height: 267px;
+    left: 184px;
+    width: 94px;
+}
+
+#retour_habitat1{
+	background: url("../images/tapis-retour-sable.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    bottom: 218px;
+    cursor: pointer;
+    height: 44px;
+    left: 376px;
+    top: 515px;
+    position: relative;
+    width: 260px;
+    z-index: 1000;
+}
+#retour_village1{
+	background: url("../images/tapis-retour-sable.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    bottom: 218px;
+    cursor: pointer;
+    height: 44px;
+    left: 376px;
+    top: 515px;
+    position: relative;
+    width: 260px;
+    z-index: 1000;
+}
+#retour_village2{
+	background: url("../images/tapis-retour-sable.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    bottom: 218px;
+    cursor: pointer;
+    height: 44px;
+    left: 376px;
+    top: 515px;
+    position: relative;
+    width: 260px;
+    z-index: 1000;
+}
+#retour_village3{
+	background: url("../images/tapis-retour-sable.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    bottom: 218px;
+    cursor: pointer;
+    height: 44px;
+    left: 376px;
+    top: 515px;
+    position: relative;
+    width: 260px;
+    z-index: 1000;
+}
+#retour_village4{
+	background: url("../images/tapis-retour-sable.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    bottom: 218px;
+    cursor: pointer;
+    height: 44px;
+    left: 376px;
+    top: 515px;
+    position: relative;
+    width: 260px;
+    z-index: 1000;
+}
+#fond_bar{
+	cursor: pointer;
+    height: 102px;
+    left: 747px;
+    position: relative;
+    top: 207px;
+    width: 111px;
+}
+
+
+#retour, #retour_journal, #retour_map, #retour_indice, #retour_hangar, #retour_marches, #retour_vaisseaux, #retour_diplomate, #retour_commune, #retour_magasin, #retour_bibliotheque, 
+#retour_bar, #retour_barfond, #retour_chambre, #retour_entree, #retour_representants, #retour_couloir2, #retour_couloir3, #retour_couloir4, #retour_couloir{
+	background: rgba(0, 0, 0, 0) url("../images/tapis.png") no-repeat scroll 0 0;
+    cursor: pointer;
+    height: 44px;
+    left: 376px;
+    position: absolute;
+    top: 529px;
+    width: 264px;
+    z-index: 1000;
+}
+
+#retour_indice{
+	left: 317px;
+	top: 459px;
+}
+#retour_journal{
+	left: 376px;
+    top: 541px;
+}
+#retour_cuisine{
+	background: rgba(0, 0, 0, 0) url("../images/tapis.png") no-repeat scroll 0 0;
+    cursor: pointer;
+    height: 44px;
+    left: 386px;
+    position: absolute;
+    top: 542px;
+    width: 264px;
+    z-index: 1000;
+}
+#map_canvas{
+	padding-left: 326px;
+}
+#magasinpalais{
+	background: url("../images/magasinpalais/magasinpalais.jpg")no-repeat;
+	border-top-left-radius: 10px;border-top-right-radius: 10px;
+    height: 580px;
+    overflow: hidden;
+    position: relative;
+    top: 12px;width: 1015px;left: 11px;
+}
+#trone {
+    border-top-left-radius: 10px;border-top-right-radius: 10px;
+    height: 580px;
+    overflow: hidden;
+    position: relative;
+    top: 12px;width: 1015px;left: 11px;
+	background: url("../images/trone/trone.png") no-repeat;
+}
+#journal {
+    border-top-left-radius: 10px;border-top-right-radius: 10px;
+    height: 580px;
+    overflow: hidden;
+    position: relative;
+    top: 12px;width: 1015px;left: 11px;
+	background: url("../images/journal/journal.jpg") no-repeat;
+}
+#journal, #journal h3{
+	font-family: "pixelFonte", Helvetica, sans-serif;
+}
+#indice {
+    border-top-left-radius: 10px;border-top-right-radius: 10px;
+    height: 580px;
+    overflow: hidden;
+    position: relative;
+    top: 85px;width: 1015px;left: 70px;
+	background: url("../images/indice/RDV.png") no-repeat;
+}
+#marches {
+    border-top-left-radius: 10px;border-top-right-radius: 10px;
+    height: 580px;
+    overflow: hidden;
+    position: relative;
+    top: 12px;width: 1015px;left: 11px;
+	background: url("../images/marches/Castle.gif") no-repeat;
+}
+#village1 {
+    border-top-left-radius: 10px;border-top-right-radius: 10px;
+    height: 580px;
+    overflow: hidden;
+    position: relative;
+    top: 12px;width: 1015px;left: 11px;
+	background: url("../images/village1/village-desert.gif") no-repeat;
+}
+#village2 {
+    border-top-left-radius: 10px;border-top-right-radius: 10px;
+    height: 580px;
+    overflow: hidden;
+    position: relative;
+    top: 12px;width: 1015px;left: 11px;
+	background: url("../images/village2/village-desert-2.gif") no-repeat;
+}
+#village3 {
+    border-top-left-radius: 10px;border-top-right-radius: 10px;
+    height: 580px;
+    overflow: hidden;
+    position: relative;
+    top: 12px;width: 1015px;left: 11px;
+	background: url("../images/village3/village-desert-3.gif") no-repeat;
+}
+#village4 {
+    border-top-left-radius: 10px;border-top-right-radius: 10px;
+    height: 580px;
+    overflow: hidden;
+    position: relative;
+    top: 12px;width: 1015px;left: 11px;
+	background: url("../images/village4/village4.jpg") no-repeat;
+}
+#desert1, #desert2, #desert3{
+    border-top-left-radius: 10px;border-top-right-radius: 10px;
+    height: 580px;
+    overflow: hidden;
+    position: relative;
+    top: 12px;width: 1015px;left: 11px;
+}
+#trone.nuit{
+	background: url("../images/trone/trone_nuit.png") no-repeat;
+}
+#salle_trone, #inscription, #commentjouer{
+    left: 11px;
+    overflow: hidden;
+    position: relative;
+    top: 12px;
+    width: 995px;
+	/*background: url("../images/index/index.png") no-repeat;*/
+}
+#salle_trone, #inscription, #commentjouer{
+	height:560px;
+	font-family: "pixelFonte", Helvetica, sans-serif;
+	font-weight: normal;
+	padding: 10px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+}
+#commentjouer{
+	height:515px;
+}
+#contentGame h1, #commentjouer p{
+	color:#025fa1;
+}
+#salle_trone p{
+	color: #000000;
+	line-height: 20px;
+}
+h1, h2, h3 {
+	color:#7c2c7c;
+	line-height: 30px;
+}
+h1, h2 {
+	line-height: 30px;
+}
+
+b, li{
+	color:#7c2c7c;
+}
+ul{
+	list-style-type: none;
+	padding-top:5px;
+}
+li{
+	padding:5px;
+}
+#commentjouer p{
+	line-height:20px;
+}
+#commentjouer{
+	overflow: auto;
+}
+#salle_trone p, #commentjouer p{
+	margin: 2px 2px 2px;
+}
+#inscription form{
+	padding-left:10px;
+}
+#inscription a{
+	color:#7EB9D0;
+    float: right;
+    position: relative;
+    right: 250px;
+    top: -36px;
+}
+#inscription{
+	color:#762a76;
+}
+.optional, .description, .required{
+	padding:5px;
+}
+#inscription input{
+	margin:5px;
+}
+
+#salle_trone .warning, #commentjouer .warning{
+	margin-top:00px;
+	margin-right:10px;
+	margin-left:10px;
+	font-size:18px;
+	margin-bottom:25px;
+	color:#FF8400;
+	width: 61%;
+}
+#salle_trone .warning, #journal .warning{
+	width: 93%;
+	text-align: center;
+}
+#journal .warning{
+	width: 98%!important;
+	margin-top: 83px;
+	cursor: pointer;
+}
+#couloir {
+    border-top-left-radius: 10px;border-top-right-radius: 10px;
+    height: 580px;
+    overflow: hidden;
+    position: relative;
+    top: 12px;width: 1015px;left: 11px;
+	background: url("../images/couloir/couloir.png") no-repeat;
+}
+#couloir2 {
+    border-top-left-radius: 10px;border-top-right-radius: 10px;
+    height: 580px;
+    overflow: hidden;
+    position: relative;
+    top: 12px;width: 1015px;left: 11px;
+	background: url("../images/couloir/couloir2.png") no-repeat;
+}
+#couloir3 {
+    border-top-left-radius: 10px;border-top-right-radius: 10px;
+    height: 580px;
+    overflow: hidden;
+    position: relative;
+    top: 12px;width: 1015px;left: 11px;
+	background: url("../images/couloir/couloir3.png") no-repeat;
+}
+#couloir4 {
+    border-top-left-radius: 10px;border-top-right-radius: 10px;
+    height: 580px;
+    overflow: hidden;
+    position: relative;
+    top: 12px;width: 1015px;left: 11px;
+	background: url("../images/couloir/couloir4.png") no-repeat;
+}
+canvas[resize] {
+    width: 100%;
+    height: 15%;
+	bottom: 344px;
+	position: relative;
+}
+canvas[imageCanvas] {
+    width: 100%;
+    height: 25%;
+	bottom: 568px;
+}
+#siaynoq {
+    border-top-left-radius: 10px;border-top-right-radius: 10px;
+    height: 580px;
+    overflow: hidden;
+    position: relative;
+    top: 12px;width: 1015px;left: 11px;
+	background: url("../images/siaynoq/siaynoq.png") no-repeat;
+}
+#commune {
+    border-top-left-radius: 10px;border-top-right-radius: 10px;
+    height: 580px;
+    overflow: hidden;
+    position: relative;
+    top: 12px;width: 1015px;left: 11px;
+	background: url("../images/commune/commune.jpg") no-repeat;
+}
+
+#bibliotheque {
+    border-top-left-radius: 10px;border-top-right-radius: 10px;
+    height: 580px;
+    overflow: hidden;
+    position: relative;
+    top: 12px;width: 1015px;left: 11px;
+	background: url("../images/bibliotheque/bibliotheque.jpg") no-repeat;
+}
+#inscription_bib{
+    height: 42px;
+    width: 8px;
+    position: absolute;
+    top: 192px;
+    left: 845px;
+}
+#bar {
+    border-top-left-radius: 10px;border-top-right-radius: 10px;
+    height: 580px;
+    overflow: hidden;
+    position: relative;
+    top: 12px;width: 1015px;left: 11px;
+	background: url("../images/bar/bar.jpg") no-repeat;
+}
+.bouteilles{
+	background: url("../images/bar/bouteilles.png") no-repeat;
+	height: 50px;
+    width: 57px;
+    left: 328px;
+    position: relative;
+    top: 217px;
+}
+.enseignes{
+	background: url("../images/bar/neon-bar.png") no-repeat scroll 0 4px rgba(0, 0, 0, 0);
+    height: 34px;
+    left: 751px;
+    position: relative;
+    top: 13px;
+    width: 50px;
+}
+#barfond {
+    border-top-left-radius: 10px;border-top-right-radius: 10px;
+    height: 580px;
+    overflow: hidden;
+    position: relative;
+    top: 12px;width: 1015px;left: 11px;
+	background: url("../images/barfond/arriere-cour.gif") no-repeat;
+}
+#chambre1 {
+    border-top-left-radius: 10px;border-top-right-radius: 10px;
+    height: 580px;
+    overflow: hidden;
+    position: relative;
+    top: 12px;width: 1015px;left: 11px;
+	background: url("../images/chambre/chambre.gif") no-repeat;
+}
+#chambre2 {
+    border-top-left-radius: 10px;border-top-right-radius: 10px;
+    height: 580px;
+    overflow: hidden;
+    position: relative;
+    top: 12px;width: 1015px;left: 11px;
+	background: url("../images/chambre/chambre.gif") no-repeat;
+}
+#chambre3 {
+    border-top-left-radius: 10px;border-top-right-radius: 10px;
+    height: 580px;
+    overflow: hidden;
+    position: relative;
+    top: 12px;width: 1015px;left: 11px;
+	background: url("../images/chambre/chambre.gif") no-repeat;
+}
+#chambre4 {
+    border-top-left-radius: 10px;border-top-right-radius: 10px;
+    height: 580px;
+    overflow: hidden;
+    position: relative;
+    top: 12px;width: 1015px;left: 11px;
+	background: url("../images/chambre/chambre.gif") no-repeat;
+}
+#representants {
+    border-top-left-radius: 10px;border-top-right-radius: 10px;
+    height: 580px;
+    overflow: hidden;
+    position: relative;
+    top: 12px;width: 1015px;left: 11px;
+	background: url("../images/representants/representants.jpg") no-repeat;
+}
+#entree {
+    border-top-left-radius: 10px;border-top-right-radius: 10px;
+    height: 580px;
+    overflow: hidden;
+    position: relative;
+    top: 12px;width: 1015px;left: 11px;
+	background: url("../images/entree/entree.jpg") no-repeat;
+}
+#entree_sugar{
+    ccursor: pointer;
+    height: 40px;
+    width: 36px;
+    position: absolute;
+    top: 121px;
+    left: 101px;
+}
+#habitat1 {
+    border-top-left-radius: 10px;border-top-right-radius: 10px;
+    height: 580px;
+    overflow: hidden;
+    position: relative;
+    top: 12px;width: 1015px;left: 11px;
+	background: url("../images/habitat1/habitat1.jpg") no-repeat;
+}
+#hangar {
+    border-top-left-radius: 10px;border-top-right-radius: 10px;
+    height: 580px;
+    overflow: hidden;
+    position: relative;
+    top: 12px;width: 1015px;left: 11px;
+	background: url("../images/hangar/hangar.png") no-repeat;
+}
+#diplomate {
+    border-top-left-radius: 10px;border-top-right-radius: 10px;
+    height: 580px;
+    overflow: hidden;
+    position: relative;
+    top: 12px;width: 1015px;left: 11px;
+	background: url("../images/diplomate/diplomate.png") no-repeat;
+}
+#carte{
+	border-top-left-radius: 10px;border-top-right-radius: 10px;
+    height: 580px;
+    overflow: hidden;
+    position: relative;
+    top: 12px;width: 1015px;left: 11px;
+	background: url("../images/couloir/couloir.png") no-repeat;
+}
+.popupcontent a, .popupcontent p{
+	color:#000000;
+}
+#journal{
+	border-top-left-radius: 10px;border-top-right-radius: 10px;
+    height: 580px;
+    overflow: hidden;
+    position: relative;
+    top: 0px;width: 1015px;left: 11px;
+	background: url("../images/journal/Tablette_rapport.png") no-repeat;
+}
+#forceTab{
+	text-align: center;
+    background: darkgreen;
+    padding: 15px;
+    line-height: 40px;
+    width: 589px;
+    margin-left: 211px;
+}
+
+.displayCorruption{
+	color: white;
+	text-align: center;
+	width: 589px;
+    margin-left: 211px;
+	padding: 10px;
+	background: darkorchid;
+}
+.rapport{
+	
+    color: #fff;
+    font-size: 15px;
+    line-height: 25px;
+    text-align: center;
+    text-shadow: 0 1px 1px #111111;
+    margin-bottom: 10px;
+    border: 1px solid #eee;
+    height: 150px;
+    overflow-y: scroll;
+    width: 595px;
+    margin-left: 219px;
+    margin-top: 42px;
+	background-color: darkgray;
+}
+.impairJ{
+
+    background-color: #C0C0C0;
+}
+
+#journal .ship{
+	cursor:pointer;
+	width: 91px; 
+}
+#myFlotte{
+    height: 150px;
+    left: 57px;
+    position: relative;
+    top: 0px;
+    width: 916px;
+}
+#myFlotte a{
+	height: 123px;
+    padding-left: 20px;
+    position: relative;
+    top: 9px;
+    width: 200px;
+}
+#myFlotte a{
+	float:left;
+	font-family: "pixelFonte",Helvetica,sans-serif;
+    font-size: 32px;
+    font-weight: normal;
+	color:#FFFFFF;
+}
+
+#myFlotte p{
+	margin:50px;
+	color:#000000;
+}
+.prixEpice{
+	display:block;
+	width:93px;
+}
+#myFlotte .prixEpice{
+	display:block;
+	width:auto;
+	text-align:center;
+	position: relative;
+    top: 70px;
+}
+.nbFlotte{
+	color: #ffffff;
+    font-family: "pixelFonte",Helvetica,sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    left: 4px;
+    position: relative;
+    top: 136px;
+    text-align: center;
+    width: 154px;
+    line-height: 24px;
+}
+.vers_habitat1{
+	height: 219px;
+    width: 100px;
+    left: 52px;
+    position: relative;
+    top: 94px;
+    cursor: pointer;
+}
+.vers_vaisseau{
+	cursor: pointer;
+    height: 159px;
+    position: relative;
+    top: 284px;
+    width: 326px;
+}
+.vers_desert1_village4, .vers_desert2_village4, .vers_desert3_village4{
+	background: none repeat scroll 0 0 #FF0000;
+    cursor: pointer;
+    height: 135px;
+    position: relative;
+    top: 12px;
+    width: 300px;
+}
+.vers_desert1, .vers_desert2, .vers_desert3{
+	background: none repeat scroll 0 0 #FF0000;
+    cursor: pointer;
+    height: 135px;
+    position: relative;
+    top: -25px;
+    width: 300px;
+    left: 5px;
+}
+.vers_desert2{
+	top: -157px;
+	left:322px;
+}
+.vers_desert3{
+	left:650px;
+	top: -288px;
+}
+.vers_desert2_village4{
+	left: 360px;
+    top: -122px;
+}
+.vers_desert3_village4{
+	left: 700px;
+    top: -255px;
+}
+.vers_village2{
+	cursor: pointer;
+    height: 143px;
+    left: 720px;
+    position: relative;
+    top: 52px;
+    width: 139px;
+}
+.vers_village3{
+	cursor: pointer;
+    height: 219px;
+    left: 518px;
+    position: relative;
+    top: 103px;
+    width: 150px;
+}
+.vers_village4{
+    cursor: pointer;
+    height: 220px;
+    left: 864px;
+    position: relative;
+    top: 147px;
+    width: 110px;
+}
+}
+.vers_entree{
+	cursor: pointer;
+    height: 107px;
+    left: 358px;
+    position: relative;
+    top: 349px;
+    width: 97px;
+}
+.vers_hangar{
+	cursor: pointer;
+    height: 110px;
+    left: 382px;
+    position: relative;
+    top: 175px;
+    width: 101px;
+}
+.vers_trone{
+	cursor: pointer;
+    height: 204px;
+    left: 692px;
+    position: relative;
+    top: 23px;
+    width: 150px;
+}
+.vers_commune{
+	cursor: pointer;
+    height: 206px;
+    left: 739px;
+    position: relative;
+    top: 208px;
+    width: 129px;
+}
+.vers_couloir2{
+	cursor: pointer;
+    height: 154px;
+    left: 567px;
+    position: relative;
+    top: 154px;
+    width: 121px;
+}
+.vers_couloir3{
+    cursor: pointer;
+    height: 242px;
+    left: 435px;
+    position: relative;
+    top: -153px;
+    width: 160px;
+}
+.vers_couloir4{
+	cursor: pointer;
+    height: 263px;
+    left: 233px;
+    position: relative;
+    top: 14px;
+    width: 89px;
+}
+.vers_biblio{
+	cursor: pointer;
+    height: 173px;
+    left: 111px;
+    position: relative;
+    top: -315px;
+    width: 96px;
+}
+.vers_bar{
+	cursor: pointer;
+    height: 181px;
+    left: 851px;
+    position: relative;
+    top: -371px;
+    width: 107px;
+}
+.vers_representants{
+    cursor: pointer;
+    height: 391px;
+    left: 816px;
+    position: relative;
+    top: 164px;
+    width: 123px;
+}
+#vaisseaux {
+    border-top-left-radius: 10px;border-top-right-radius: 10px;
+    height: 580px;
+    overflow: hidden;
+    position: relative;
+    top: 12px;width: 1015px;left: 11px;
+	background: url("../images/vaisseau/vaisseau.png") no-repeat;
+}
+#accordeon, #GUILDE, #GUESSERIT, #IX, #TLEILAX{
+		background: url("../images/tableau/fond-tableau.png") no-repeat;
+
+}
+.encoursAttaque{
+    border: 1px solid red;
+}
+.surplus_vaisseaux{
+    background: url("../images/perso/guard_girl_ship.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    cursor: pointer;
+    height: 270px;
+    left: 616px;
+    position: absolute;
+    top: 301px;
+    width: 98px;
+    z-index: 1001;
+}
+.commandant_carte{
+	background: url("../images/perso/Blue-Guard-Girl-3.png") no-repeat scroll 0px 0px transparent;
+    left: 860px;
+    top: 300px;
+    cursor: pointer;
+    height: 270px;
+    position: absolute;
+    width: 94px;
+    z-index: 1001;
+}
+.commandantTextCarte  #triangle{
+	left:256px;
+}
+.menace_guildeText  #triangle{
+	left:276px;
+}
+.memoire{
+	cursor: pointer;
+    left: 390px;
+    position: absolute;
+    top: 317px;
+}
+#diploHolo{
+	background: url("../images/diplomate/lumieres.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    height: 39px;
+    left: 371px;
+    position: absolute;
+    top: 362px;
+    width: 245px;
+    z-index: 1001;
+}
+#rahuyta {
+    background: url("../images/perso/diplo.png") no-repeat scroll -398px -11px rgba(0, 0, 0, 0);
+    height: 140px;
+    left: 467px;
+    position: absolute;
+    top: 156px;
+    width: 45px;
+    z-index: 1001;
+    cursor: pointer;
+}
+#linguiste{
+	background: url("../images/perso/Counsellor.png") no-repeat scroll 0px 0px rgba(0, 0, 0, 0);
+    cursor: pointer;
+    height: 219px;
+    left: 829px;
+    position: absolute;
+    top: 276px;
+    width: 87px;
+    z-index: 1001;
+}
+#linguiste.linguiste_couloir2 {
+    left: 623px;
+    top: 281px;
+}
+#karaguhl{
+	background: url("../images/perso/nu.png") no-repeat scroll -21px -128px transparent;
+    height: 73px;
+    left: 718px;
+    position: absolute;
+    top: 478px;
+    width: 61px;
+    z-index: 1001;
+	cursor:pointer;
+}
+#carteEtoile{
+	cursor: pointer;
+    height: 192px;
+    left: 352px;
+    position: relative;
+    top: 73px;
+    width: 282px;
+}
+#vers_diplomate{
+	cursor: pointer;
+    height: 167px;
+    left: 860px;
+    position: relative;
+    top: 0px;
+    width: 156px;
+}
+.aloa{
+    background-image: url("../images/perso/inquisiteur.gif");
+    background-repeat: no-repeat;
+    bottom: 383px;
+    cursor: pointer;
+    height: 274px;
+    position: relative;
+    width: 96px;
+    z-index: 1600;
+}
+#tarhani{
+	background: url("../images/perso/tarhani.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    cursor: pointer;
+    height: 270px;
+    left: 271px;
+    position: absolute;
+    top: 298px;
+    width: 118px;
+    z-index: 1001;
+}
+.nayla {
+    background: url("../images/perso/nayla.gif") no-repeat scroll 0px 0px transparent;
+    height: 272px;
+    left: 718px;
+    position: absolute;
+    top: 297px;
+    width: 99px;
+    z-index: 1001;
+	cursor:pointer;
+}
+.naylaIndex {
+    background: url("../images/perso/naylaIndex.gif") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    height: 223px;
+    left: 908px;
+    position: absolute;
+    top: 358px;
+    width: 82px;
+    z-index: 1001;
+	cursor:pointer;
+}
+.fremenInscrit {
+    background: url("../images/perso/fremen1.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    cursor: pointer;
+    height: 270px;
+    left: 829px;
+    position: absolute;
+    top: 276px;
+    width: 118px;
+    z-index: 1001;
+}
+.librarianLost {
+    background: url("../images/perso/librarian.png") no-repeat scroll 0px 0px transparent;
+    height: 266px;
+    left: 818px;
+    position: absolute;
+    top: 293px;
+    width: 108px;
+    z-index: 1001;
+	cursor:pointer;
+}
+#fremen2 {
+    background: url("../images/perso/nu.png") no-repeat scroll -21px -128px transparent;
+    height: 73px;
+    left: 20px;
+    position: absolute;
+    top: 478px;
+    width: 61px;
+    z-index: 1001;
+	cursor:pointer;
+}
+#contact {
+    background: url("../images/perso/nu.png") no-repeat scroll -21px -128px transparent;
+    height: 73px;
+    left: 718px;
+    position: absolute;
+    top: 478px;
+    width: 61px;
+    z-index: 1001;
+	cursor:pointer;
+}
+#siona{
+    background: url("../images/perso/nu.png") no-repeat scroll -21px -128px transparent;
+    height: 73px;
+    left: 718px;
+    position: absolute;
+    top: 478px;
+    width: 61px;
+    z-index: 1001;
+	cursor:pointer;
+}
+#hwitaka {
+    background: url("../images/perso/nu.png") no-repeat scroll -21px -128px transparent;
+    height: 73px;
+    left: 718px;
+    position: absolute;
+    top: 478px;
+    width: 61px;
+    z-index: 1001;
+	cursor:pointer;
+}
+#vendeur_1 {
+    background: url("../images/perso/marchand.gif") no-repeat scroll 0px 0px rgba(0, 0, 0, 0);
+    height: 193px;
+    left: 458px;
+    position: absolute;
+    top: 189px;
+    width: 188px;
+    z-index: 1001;
+	cursor:pointer;
+}
+#barman {
+    background: url("../images/perso/barman.png") no-repeat scroll 0px 0px rgba(0, 0, 0, 0);
+    cursor: pointer;
+    height: 133px;
+    left: 876px;
+    position: absolute;
+    top: 296px;
+    width: 118px;
+    z-index: 1001;
+}
+#fremen1 {
+    background: url("../images/perso/fremen1.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    cursor: pointer;
+    height: 270px;
+    left: 244px;
+    position: absolute;
+    top: 276px;
+    width: 118px;
+    z-index: 1001;
+}
+#client1 {
+    background: url("../images/perso/drunk_dune_jeu.png") no-repeat scroll 0px 0px rgba(0, 0, 0, 0);
+    height: 109px;
+    left: 310px;
+    position: absolute;
+    top: 327px;
+    width: 120px;
+    z-index: 1001;
+	cursor:pointer;
+}
+#client_2{
+    background: url("../images/perso/civilian_dune_jeu.png") no-repeat scroll 0px 0px rgba(0, 0, 0, 0);
+    cursor: pointer;
+    height: 265px;
+    left: 689px;
+    position: absolute;
+    top: 303px;
+    width: 124px;
+    z-index: 1001;
+}
+#client1.client1_couloir {
+    background: url("../images/perso/perso-bar-debout.png") no-repeat scroll 0 0px rgba(0, 0, 0, 0);
+    height: 261px;
+    left: 560px;
+    position: absolute;
+    top: 281px;
+    width: 200px;
+    z-index: 900;
+}
+.fond_vaisseau{
+	background: url("../images/vaisseau/spark01.png") repeat scroll 0 0 rgba(0, 0, 0, 0);
+    height: 73px;
+    left: 442px;
+    position: absolute;
+    top: 384px;
+    width: 76px;
+    z-index: 1001;
+}
+.ship{
+	cursor:pointer;
+}
+.fond_vaisseau2{
+	background: url("../images/vaisseau/spark02.png") repeat scroll 0 0 rgba(0, 0, 0, 0);
+    height: 73px;
+    left: 442px;
+    position: absolute;
+    top: 400px;
+    width: 76px;
+    z-index: 1001;
+}
+.sprite_nuage{
+	background: url(../images/barfond/arriere-cour-open.png);
+    height: 99px;
+    left: 844px;
+    position: absolute;
+    top: 329px;
+    width: 149px;
+    z-index: 1001;
+}
+.hide{
+	display:none;
+}
+.buttCarte{
+	position: absolute;
+    bottom: 50px;
+    left: 255px;
+    z-index: 99999;
+}
+#assignation, #talk, #talk2{
+	width: 539px;
+	height: 305px;
+}
+#mesTexto p:hover a{
+	color: #ff6800;
+}
+#bulleExplication{
+	width: 647px;
+	height: 168px;
+}
+#reponseExplication{
+	width: 535px;
+	height: 150px;
+}
+
+.leto_ii {
+	background: url("../images/perso/LetoII.png") no-repeat scroll 0px 0px transparent;
+    height: 455px;
+    left: 310px;
+    position: absolute;
+    top: 35px;
+    width: 299px;
+}
+.leto_ii_siaynoq {
+	background: url("../images/perso/LetoII.png") no-repeat scroll 0px 0px transparent;
+    height: 455px;
+    left: 310px;
+    position: absolute;
+    top: 112px;
+    width: 299px;
+	cursor:pointer;
+}
+
+.sayyaoto, .sayyaoto_bibliotheque, .sayyaoto_commune {
+    background: url("../images/perso/librarian.png") no-repeat scroll -21px -128px transparent;
+    height: 266px;
+    left: 818px;
+    position: absolute;
+    top: 293px;
+    width: 108px;
+    z-index: 1001;
+	cursor:pointer;
+}
+
+.garde_couloir_1_couloir {
+    background: url("../images/perso/garde.gif") no-repeat scroll 0 0px rgba(0, 0, 0, 0);
+    cursor: pointer;
+    height: 272px;
+    left: 615px;
+    position: absolute;
+    top: 272px;
+    width: 99px;
+    z-index: 1001;
+}
+.rahuyta_diplomate{/*rahuyta n'est pas utilisé*/
+	background: url("../images/perso/diplomate.png") no-repeat scroll 5px -1px transparent;
+    height: 144px;
+    left: 769px;
+    position: absolute;
+    top: 343px;
+    width: 61px;
+    z-index: 1001;
+	cursor:pointer;
+}
+.sayyaoto_couloir{
+	left: 618px;
+}
+
+.representant_guesserit{
+	background: url("../images/perso/gesserit.gif") no-repeat scroll 0px 0px rgba(0, 0, 0, 0);
+    cursor: pointer;
+    height: 270px;
+    left: 368px;
+    position: absolute;
+    top: 263px;
+    width: 94px;
+    z-index: 1001;
+}
+.representant_guesserit_chambre{
+	background: url("../images/perso/gesserit.gif") no-repeat scroll 3px 8px transparent;
+    cursor: pointer;
+    height: 270px;
+    left: 368px;
+    position: absolute;
+    top: 254px;
+    width: 94px;
+    z-index: 1001;
+}
+.soeur_1_representants, .soeur_1_bibliotheque{
+    left: 95px;
+    top: 298px;
+	background: url("../images/perso/gesserit_sister.gif") no-repeat scroll 0px 0px rgba(0, 0, 0, 0);
+    cursor: pointer;
+    height: 270px;
+    position: absolute;
+    width: 94px;
+    z-index: 1001;
+}
+.representant_guilde, .representant_guilde_chambre4{
+	background: url("../images/perso/representant-guilde.gif") no-repeat scroll 3px -79px transparent;
+     cursor: pointer;
+    height: 273px;
+    left: 583px;
+    position: absolute;
+    top: 277px;
+    width: 94px;
+    z-index: 998;
+}
+.representant_guilde{
+	left: 188px;
+}
+.representant_ix{
+	background: url("../images/perso/representant-ix.gif") no-repeat scroll -27px -231px transparent;
+    cursor: pointer;
+    height: 273px;
+    left: 271px;
+    position: absolute;
+    top: 275px;
+    width: 94px;
+    z-index: 998;
+}
+.representant_ix_chambre3{
+	background: url("../images/perso/representant-ix.gif") no-repeat scroll -27px -231px transparent;
+    cursor: pointer;
+    height: 273px;
+    left: 383px;
+    position: absolute;
+    top: 249px;
+    width: 94px;
+    z-index: 998;
+}
+.menace_guilde_commune{
+	background: url("../images/perso/worker.png") no-repeat scroll 0 0 transparent;
+    height: 270px;
+    left: 849px;
+    position: absolute;
+    top: 295px;
+    width: 153px;
+    z-index: 1001;
+    cursor: pointer;
+}
+#chambre3 .representant_ixText{
+	top: 76px;
+    left: 268px;
+}
+.representant_tleilax{
+	background: url("../images/perso/representant-bene-tleilax.gif") no-repeat scroll 0px 0px transparent;
+    cursor: pointer;
+    height: 273px;
+    left: 578px;
+    position: absolute;
+    top: 275px;
+    width: 94px;
+    z-index: 1500;
+}
+.representant_tleilax_chambre2{
+	background: url("../images/perso/representant-bene-tleilax.gif") no-repeat scroll 0px 0px transparent;
+    cursor: pointer;
+    height: 273px;
+    left: 333px;
+    position: absolute;
+    top: 275px;
+    width: 94px;
+    z-index: 998;
+}
+#texto, #texto2, #texto3, #texto4 {
+	border-radius: 10px 10px 10px 10px;
+	cursor:pointer;
+    height: 125px;
+    opacity: 0.9;
+    position: relative;
+    width: 402px;
+    z-index: 1004;
+	visibility:hidden;
+}
+#textoLink{
+	height: 100px
+}
+
+.naylaText{
+	left: 590px;
+    top: -375px;
+}
+.fremen2Texthabitat1{
+	left: 20px;
+    top: 200px;
+}
+.leto_iiText{
+	left: 488px;
+}
+.leto_iiText #triangle{
+	left: 0px;
+}
+.hwitakaTextvillage4{
+	left: 521px;
+    top: -151px;
+}
+.vendeur1Text{
+	left: 392px;
+    top: 30px;
+}
+.barmanText{
+	left: 608px;
+    top: -48px;
+}
+#texto.fremen1Text{
+	top: -103px;
+    left: 147px;
+}
+.client1Text{
+	left: 210px;
+    top: -7px;
+}
+#texto.client_2Text{
+	height: 152px;
+    left: 595px;
+    top: -76px;
+}
+.client1TextCouloir{
+	left: 275px;
+    top: 122px;
+}
+.garde_couloir_1TextCouloir{
+	left: 594px;
+    top: -307px;
+}
+.surplusTextVaisseau{
+	top: -85px;
+    left: 494px;
+}
+.commandantTextCarte{
+	bottom: 673px;
+    left: 594px;
+}
+.representant_guesseritText{
+	left: 257px;
+    top: -430px;
+}
+.representant_guesseritTextChambre{
+	left: 364px;
+    top: 54px;
+}
+.representant_guildeText{
+	left: 76px;
+    top: -403px;
+}
+.representant_guildeTextChambre{
+	left: 468px;
+    top: 106px;
+}
+#texto.soeur_1Text{
+    height: 118px;
+    left: 94px;
+    top: -622px;
+}
+#texto.soeur_1Text_biblio{
+	height: 118px;
+    left: 104px;
+    top: 100px;
+}
+.representant_ixText{
+	left: 157px;
+    top: -435px;
+}
+.menace_guildeText{
+	left: 607px;
+    top: -37px;
+}
+.representant_tleilaxText{
+	left: 455px;
+    top: -425px;
+}
+.representant_tleilaxTextChambre{
+	left: 220px;
+    top: 76px;
+}
+.sayyaotoText{
+	top: -141px;
+    left: 430px;
+}
+#texto.sayyaotoTextBibliotheque{
+	top: 85px;
+    left: 531px;
+}
+.sayyaotoTextCouloir{
+	left: 554px;
+    top: -78px;
+}
+.rahuytaDiplomate{
+	left: 430px;
+    top: 200px;
+}
+.aloaText{
+	left: 1px;
+    top: -401px;
+}
+.tarhaniTextEntree{
+	left: 173px;
+    top: -523px;
+}
+.tarhaniTextDesert1{
+	left: 178px;
+    top: -257px;
+}
+.indices{
+	cursor: pointer;
+    height: 100px;
+    width: 219px;
+    top: -95px;
+    position: relative;
+}
+.rahuytaTextDiplomate{
+	left: 320px;
+    top: 6px;
+}
+.linguisteTextcouloir3{
+	left: 505px;
+    top: -85px;
+}
+.karaguhlTexthabitat1{
+	left: 570px;
+    top: 261px;
+}
+.contactTextMarches{
+	left: 580px;
+    top: 133px;
+}
+.contactTextVillage3{
+	left: 580px;
+    top: 220px;
+}
+.sionaText{
+	left: 568px;
+    top: -132px;
+}
+
+.diamant{
+	background-image: url("../images/trone/diamant.gif");
+    background-repeat: no-repeat;
+    bottom: 882px;
+    cursor: pointer;
+    height: 61px;
+    left: 492px;
+    position: relative;
+    width: 74px;
+    z-index: 1000;
+}
+.diamant2{
+	background-image: url("../images/trone/diamant2.png");
+    background-repeat: no-repeat;
+    bottom: 673px;
+    height: 40px;
+    left: 492px;
+    position: relative;
+    width: 43px;
+    z-index: 1000;
+	cursor:pointer;
+}
+.foot{
+    position: relative;
+    text-align: center;
+}
+.ui-widget-content .corruptionAdd a{
+	color:red;
+}
+/**********/
+
+#porte_1{
+	height: 199px;
+    left: 617px;
+    position: relative;
+    top: 219px;
+    width: 100px;
+}
+#porte_2{
+    height: 322px;
+    left: 884px;
+    position: relative;
+    top: -48px;
+    width: 103px;
+}
+#porte_3{
+    bottom: 176px;
+    height: 510px;
+    left: 0px;
+    position: relative;
+    width: 220px;
+}
+#porte_4{
+    height: 181px;
+    left: 482px;
+    position: relative;
+    top: 335px;
+    width: 103px;
+}
+#porte_5{
+    height: 181px;
+    left: 225px;
+    position: relative;
+    top: 306px;
+    width: 103px;
+}
+#porte_6{
+    height: 181px;
+    left: 403px;
+    position: relative;
+    top: 125px;
+    width: 103px;
+}
+#porte_7{
+    height: 181px;
+    left: 572px;
+    position: relative;
+    top: -56px;
+    width: 103px;
+}
+#porte_8{
+    height: 181px;
+    left: 732px;
+    position: relative;
+    top: -237px;
+    width: 103px;
+}
+
+.porte_1_0{
+	background-image: url("../images/commun/porteFond.png");
+    background-position: 2px 0px;
+    background-repeat: no-repeat;
+}
+.porte_1_1{
+	background-image: url("../images/commun/porteFond.png");
+    background-position: 2px -800px;
+    background-repeat: no-repeat;
+	cursor:pointer;
+}
+
+.porte_2_0{
+	background-image: url("../images/commun/porteCote.png");
+    background-position: 3px 2px;
+    background-repeat: no-repeat;
+}
+.porte_2_1{
+	background-image: url("../images/commun/porteCote.png");
+    background-position: 3px -1279px;
+    background-repeat: no-repeat;
+	cursor:pointer;
+}
+
+.porte_9_0{
+	background: url("../images/commun/porteRideau.png");
+    background-repeat: no-repeat;
+}
+.porte_9_1{
+	background: url("../images/commun/porteRideauOuvert.png") ;
+    background-repeat: no-repeat;
+	cursor:pointer;
+}
+
+
+.texto_cuisine{
+	height: 36px;
+    position: relative;
+    width: 210px;
+	border-radius: 10px;
+	opacity:0.5;
+	z-index:10;
+}
+
+/*achats*/
+.achat_12{
+	bottom: 441px;
+    position: absolute;
+    left: 27px;
+}
+.achat_16{
+	bottom: 511px;
+    position: absolute;
+    left: 27px;
+}
+.achat_5{
+	bottom: 351px;
+    position: absolute;
+    left: 27px;
+}
+.achat_7{
+	bottom: 285px;
+    position: absolute;
+    left: 27px;
+}
+#magasinpalais a.achat, .imgmag{
+	float:left;
+}
+#magasinpalais .prixEpice{
+	width:150px;
+	margin-left: 67px;
+	font-family: "pixelFonte", Helvetica, sans-serif;
+	color: white;
+	font-size: 1.5em;
+}
+.achatVaisseau img{
+	top: 120px;
+	position: absolute;
+}
+.achatVaisseau .prixEpice{
+	padding-top: 45px;
+}
+.prixEpice img{
+	padding-right: 5px;
+}
+#GUILDEinfluence, #IXinfluence, #GUESSERITinfluence, #TLEILAXinfluence{
+	background-color:rgba(88, 141, 252, 0.5);
+}
+#GUILDEescorte, #IXescorte, #GUESSERITescorte, #TLEILAXescorte{
+	background-color:rgba(221, 59, 57, 0.5);
+}
+#GUILDEserviteur, #IXserviteur, #GUESSERITserviteur, #TLEILAXserviteur{
+	background-color:rgba(195, 255, 83, 0.5);
+}
+.servs{
+	background-color:rgba(195, 255, 83, 0.5);
+}
+.escs{
+	background-color:rgba(221, 59, 57, 0.5);
+}
+.infls{
+	background-color:rgba(88, 141, 252, 0.5);
+}
+.servs img, .infls img, .escs img{
+	opacity: 0.4;
+	text-align:center;
+	padding-left:10px;
+	padding-right:10px;
+}
+#tableauBord{
+	background:rgba(247, 206, 163, 0.5);
+	position: relative;
+    height: 592px;
+	border-radius: 17px;
+	left: 1px;
+}
+.ui-slider-vertical.ui-widget-content {
+    border: 1px solid #aaaaaa;
+    /* background: #734040 url(images/back_select.png) 50% 50% repeat-x; */
+    color: #222222;
+}

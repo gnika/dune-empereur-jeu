@@ -1,0 +1,23 @@
+<div id="auth" >
+  <h1> Identification </h1>
+  <?php echo $this->displayMessages(); ?>
+  <form name="loginForm" id="loginForm" method="post" action="<?php echo URL_MAIN_ABS ?>Produit/user/process" >
+        <table id="loginTable">
+            <tr>
+                <td colspan="2"><br /></td>
+            </tr>
+            <tr>
+                <td width="100"><label for="login_Req">Identifiant</label></td>
+                <td><input type="text" name="cu_username" id="cu_username" size="30"/></td>
+            </tr>
+            <tr>
+                <td><label for="pass_Req">Mot de passe</label></td>
+                <td><input type="password" name="cu_password" id="cu_password" size="30"/></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" id="submitLogin" value="valider" /></td>
+            </tr>
+        </table>
+  </form>
+  </div>

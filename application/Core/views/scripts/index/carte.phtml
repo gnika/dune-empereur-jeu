@@ -1,0 +1,208 @@
+<head><script src="js/underscore.js"></script></head>
+
+<div id='inThePlace'>
+<?php $imp=$this->myUser->getImpot();?>
+
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+	$("#onTalk").val(0);
+	$("#onMyTalk").val(0);
+	
+	/*map*/
+
+$('#map').zoommap({
+		// Width and Height of the Map
+		width: '500px',
+		height: '580px',
+			
+		//Misc Settings
+		blankImage: '/images/carte/blank.gif',
+		zoomDuration: 1000,
+		bulletWidthOffset: '10px',
+		bulletHeightOffset: '10px',
+		
+		//ids and classes
+		zoomClass: 'zoomable',
+		popupSelector: 'div.popup',
+		popupCloseSelector: 'a.close',
+		
+		//Return to Parent Map Link
+		showReturnLink: true,
+		returnId: 'returnlink',
+		returnText: 'Zoom -1',
+		
+		//Initial Region to be shown
+		map: {
+			id: 'campus',
+			image: '/images/carte/campus.jpg',
+			data: url_site+'Core/index/cartedata',
+			maps: [
+			{
+				id: 'quads',
+				parent: 'campus',
+				image: '/images/carte/quads.png',
+				data: url_site+'Core/index/cartezoom1data',
+				width: '200px',
+				height: '232px',
+				top: '18px',
+				left: '176px'
+			}
+			]
+		}
+	});
+	/*end map*/
+	
+	
+	jQuery.fn.arretParleGue = function() {
+		$(this).oneTime(300,function() {
+			$(this).css({backgroundPosition:'0px 0px'});
+		}).oneTime(600,function() {
+			$(this).css({backgroundPosition:'-100px 0px'});
+		}).oneTime(900,function() {
+			$(this).css({backgroundPosition:'-200px 0px'});
+		}).oneTime(1200,function() {
+			$(this).css({backgroundPosition:'-100px 0px'});
+		});
+	};
+	jQuery.fn.mouvArretCom = function(){
+		$(this).arretParleGue();
+		$(this).everyTime(1200,function(){
+			$(this).arretParleGue();
+		});
+	}
+
+	jQuery.fn.parleGue = function() {
+		$(this).oneTime(300,function() {
+			$(this).css({backgroundPosition:'0px -270px'});
+		}).oneTime(600,function() {
+			$(this).css({backgroundPosition:'-100px -270px'});
+		}).oneTime(900,function() {
+			$(this).css({backgroundPosition:'-200px -270px'});
+		}).oneTime(1200,function() {
+			$(this).css({backgroundPosition:'-100px -270px'});
+		});
+	};
+	jQuery.fn.mouvMarcheCom = function(){
+		$(this).parleGue();
+		$(this).everyTime(1200,function(){
+			$(this).parleGue();
+		});
+	}
+	
+	var arret = 0;
+
+	$("#commandant").click(function() {
+		if($("#onTalk").val()==0 && $("#onMyTalk").val()==0){
+			$("#texto").removeClass().addClass('commandantTextCarte');
+			if (arret == 0 || arrestation==1) {
+				$("#texto").show();
+				$("#onTalk").val(1);
+				$("#commandant").stopTime().mouvMarcheCom();
+
+				var request = $.ajax({
+					url: url_site+"Core/index/ajaxquote", 
+					type: "POST",
+					data: { idDiv: 'commandant', idPerso: 9, talk: 'mouvArretCom', stopTalk: 'mouvMarcheCom' },			
+				}); 
+				request.done(function(msg) { 
+				$("#texto").html(msg); 
+				});
+				 
+			}else{
+				arret = 0;
+				$("#commandant").stopTime().mouvArretCom();
+				$("#texto").invisible();
+			}
+		}
+	});
+
+$("#retour_map").click(function() {
+	if($('#onTalk').val()==0){
+		$('#onTalk').val(1);	
+		if(<?php echo $imp;?>>=5)
+			var dstination='trone';else dstination='hangar';
+		var request = $.ajax({
+		url: url_site+'Core/index/'+dstination,
+		type: "POST"							
+		}); 
+		request.done(function(msg) {
+						$("#inThePlace").fadeOut(1000);
+						setTimeout(function(){
+						  $("#inThePlace").hide();
+						  $("#inThePlace").html(msg); 
+						$("#inThePlace").fadeIn(1000);
+						}, 1000);
+						
+					});
+	}
+});
+
+
+
+});
+ 
+if($("#commandant").length)
+	$("#commandant").mouvArretCom();
+
+$("#mesTexto").html('<img src="images/plan/carte_plan.png" />'); 
+$("#plan").val('carte_plan');
+</script>
+	
+	<style>
+		canvas{
+		}
+	</style>
+</head>
+
+<?php
+if($this->myUser->getHeure()>=67)$stylePiece='nuit';else $stylePiece='';
+$stylePiece='';
+$nbPlanete=0;
+$epiceJour=0;
+foreach($this->myPlanetes as $star){
+	if($star['cau_etat']==1){
+		$epiceJour+=$star['ca_epice_jour'];
+		$nbPlanete++;
+	}
+}
+
+?>
+<div id="<?php echo $this->salle;?>" class='<?php echo $stylePiece;?>'>
+	<div id="perso"></div>
+	<div id="map"></div>
+	<img class="buttCarte" id="buttCarte" alt="cliquez-moi" title="cliquez-moi" src="/images/carte/ok_button.png"/>
+	<div id='forceTab'>
+		<table id='force'>
+			<tr><th colspan='2'>RAPPORT DE FORCE</th></tr>
+			<tr>
+				<td>Vous possédez :</td><td><?php echo $nbPlanete;?> planètes</td><td><?php echo $epiceJour;?> épice/jour</td>
+			</tr>
+			<tr>
+				<td></td><td colspan=2><span id='nbT'><?php echo $this->myUser->getTroupe();?></span> Troupes </td>
+			</tr>
+			<tr>
+				<td>équipe d'exploration disponible</td><td><?php for($i=0;$i< ($this->myUser->getExploration()-$this->encoursExploration);$i++){echo '<img src="'.URL_MAIN_ABS.'images/vaisseau/explorateur.png" /> ';}?></td>
+			</tr>
+			<tr>
+				<td><?php echo ' <img class="ship" title="Vaisseau" alt="Vaisseau" src="'.URL_MAIN_ABS.'images/vaisseau/ship.png" /> ';?></td><td <?php if($this->encoursAttaque) echo ' class="encoursAttaque"';?>><?php echo $this->myUser->getVaisseau();?></td>
+			</tr><?php if($this->myUser->getValeurTroupe() >0){ ?>
+			<tr>
+				<td>Troupes</td><td><?php echo $this->myUser->getTroupe();echo ' <img src="'.URL_MAIN_ABS.'images/vaisseau/troupe.png" /> ';?></td>
+			</tr>
+			<?php } ?>
+		</table>
+	</div>
+	<input type="text" id="inputValue" value="#LETO II" />
+	<div id='retour_map'></div>
+
+	<div id="texto"></div>
+	<?php foreach($this->persoDansSalle as $clef => $perso){
+		echo '<div class="'.$clef.'_carte" id="'.$clef.'"></div>';
+	}
+	
+	?>
+</div>
+<div id="canvas_position"></div>
+</div>

@@ -1,0 +1,373 @@
+<div id='tableauBord'>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+<script type="text/javascript">
+$(document).ready(function() {
+	// $('#contentGame').css('height', '589px');//hack de gros porc
+	$("#onTalk").val(0);
+	$("#onMyTalk").val(0);
+	$("#retour_cuisine").click(function() {
+		if($('#onTalk').val()==0){
+		$('#onTalk').val(1);
+		var request = $.ajax({
+		url: url_site+'Core/index/trone',
+		type: "POST"							
+		}); 
+		request.done(function(msg) {
+						$("#inThePlace").fadeOut(1000);
+						setTimeout(function(){
+						  	// $('#contentGame').css('height', '590px');//hack de gros porc
+						  $("#inThePlace").hide();
+						  $("#inThePlace").html(msg); 
+						$("#inThePlace").fadeIn(1000);
+						}, 1000);
+						
+					});
+	}
+	});
+	
+
+$(function() {
+$( document ).tooltip();
+});
+
+	
+})
+$("#mesTexto").html('<img src="images/plan/interface_plan.png" />'); 
+$("#plan").val('interface_plan');
+</script>
+<style>
+
+td{
+	border:1px solid;
+}
+td.droppable {
+	width:80%;
+	height:50px;
+}
+.epiceAsk{
+	width:20%;
+}
+
+.draggable {
+    width: 50px;
+    height: 50px;
+	float:left;
+}
+
+.min, .light, .normal, .extra, .enorme {
+    
+    position: relative;
+    left: 26px;
+}
+.min{
+	bottom: 27px;
+}
+.light{
+	bottom: 79px;
+}
+.normal{
+	bottom: 129px;
+}
+.extra{
+	bottom: 182px;
+}
+.enorme{
+	bottom: 233px;
+}
+#slider-vertical-containt{
+	padding: 15px 5px 10px;
+}
+#accordion li[aria-controls="IX"] a, #accordion li[aria-controls="TLEILAX"] a, #accordion li[aria-controls="GUILDE"] a, #accordion li[aria-controls="GUESSERIT"] a{
+	color: #FFFFFF;
+	font-weight:bold;
+}
+li[aria-controls="IX"] a{
+	background-color: rgb(88, 42, 114);
+}
+li[aria-controls="TLEILAX"] a{
+	background-color: rgb(39, 117, 83);
+}
+li[aria-controls="GUILDE"] a{
+	background-color: rgb(164, 98, 0);
+}
+li[aria-controls="GUESSERIT"] a{
+	background-color: rgb(39, 116, 177);
+}
+#accordion .ui-state-active[aria-controls="IX"] a{
+	background-color: rgba(88, 42, 114, 0.6);
+}
+#accordion .ui-state-active[aria-controls="TLEILAX"] a{
+	background-color: rgba(39, 117, 83, 0.6);
+}
+#accordion .ui-state-active[aria-controls="GUILDE"] a{
+	background-color: rgba(164, 98, 0, 0.6);
+}
+#accordion .ui-state-active[aria-controls="GUESSERIT"] a{
+	background-color: rgba(39, 116, 177, 0.6);
+}
+</style>
+<script>
+$("td.droppable").droppable({
+    accept: function (elm) {
+        var $this = $(this);
+        if ($this.data("question-id") == elm.data("question-id"))
+            return true;
+        return false;
+    },
+    drop: function(e,ui) {
+        console.log(e, ui);
+		var cell = $(this).attr('id');
+		var request = $.ajax({ 
+				url: "<?php echo URL_MAIN_ABS . 'Core/ajax/ajaxusermaj';?>", 
+				type: "POST",
+				data: { idCell: cell}		
+			});
+		request.done(function(msg) {
+				$("#"+cell).html(msg);
+				});
+		ui.draggable.fadeOut( 500 );
+        // globalElement.detach().appendTo($(this));
+    }
+});
+
+$("div.draggable").draggable({
+    revert: "invalid",
+	snap: 'div.droppable',
+	snapMode: "inner",
+	snapTolerance: 100
+});
+
+$(function() {
+
+var ids = jQuery('#sliIx, #sliTl, #sliBEN, #sliGU');
+    jQuery.each(ids, function() {
+		$( "#"+this.id ).slider({
+			orientation: "vertical",
+			range: "min",
+			min: 20,
+			max: 100,
+			value: (this.id=='sliIx')?<?php echo $this->suggIx;?>:(this.id=='sliTl')?<?php echo $this->suggTl;?>:(this.id=='sliBEN')?<?php echo $this->suggBe;?>:(this.id=='sliGU')?<?php echo $this->suggGu;?>:0,
+			step: 20,
+			slide: function( event, ui ) {
+				var request = $.ajax({
+					url: "<?php echo URL_MAIN_ABS . 'Core/ajax/ajaxusersugg';?>", 
+					type: "POST",
+					data: { idSlider: this.id, valueSlid: ui.value}		
+				});
+			}
+		});
+    });
+
+});
+ $(function() {
+$( "#accordion" ).tabs();
+});
+</script>
+<div id="accordion">
+<ul>
+<li><a href="#IX">IX</a></li>
+<li><a href="#TLEILAX">BENE TLEILAX</a></li>
+<li><a href="#GUILDE">GUILDE</a></li>
+<li><a href="#GUESSERIT">BENE GESSERIT</a></li>
+</ul>
+<table id='IX' style='border:solid;' border='2'>
+	<tr>
+		<td class='infls'><img src="<?php echo URL_MAIN_ABS.'images/skill/influence.png';?>" /></td>
+		<td id='IXinfluence' class="droppable" data-question-id="1">&nbsp;
+			<?php
+				for($i=0;$i<$this->iIx;$i++){
+					echo '<img title="influence" alt="influence" src="'.URL_MAIN_ABS.'images/skill/influence.png" />';
+				}
+			?>
+		</td>
+		<td class='epiceAsk' rowspan='3'>
+			<div id='slider-vertical-containt'>
+			<div id="sliIx" style="height: 150px;"></div></div>
+			<div class='min corruptionAdd'  style=""><a href="#" title="Votre corruption augmente. Plus vous avez de corruption, moins vous gagnez de renomée lors de la Cérémonie du partage">0 - 0</a></div>
+			<div class='light'>100 - 500</div>
+			<div class='normal'>500 - 1000</div>
+			<div class='extra'>1000 - 1500</div>
+			<div class='enorme'>1500 - 2000</div>
+		</td>
+		<td rowspan=3><div class='perso ixPerso'></div></td>
+	</tr>
+	<tr>
+		<td class='servs'><img src="<?php echo URL_MAIN_ABS.'images/skill/serviteur.png';?>" /></td>
+		<td id='IXserviteur' class="droppable" data-question-id="2">&nbsp;
+			<?php
+				for($i=0;$i<$this->sIx;$i++){
+					echo '<img title="serviteur" alt="serviteur" src="'.URL_MAIN_ABS.'images/skill/serviteur.png" />';
+				}
+			?>
+		</td>
+	</tr>
+	<tr>
+		<td class='escs'><img src="<?php echo URL_MAIN_ABS.'images/skill/escorte.png';?>" /></td>
+		<td id='IXescorte' class="droppable" data-question-id="3">&nbsp;
+			<?php
+				for($i=0;$i<$this->eIx;$i++){
+					echo '<img title="escorte" alt="escorte" src="'.URL_MAIN_ABS.'images/skill/escorte.png" />';
+				}
+			?>
+		</td>
+	</tr>
+
+</table>
+<table id='TLEILAX' style='border:solid;' border='2'>
+	<tr>
+		<td class='infls'><img src="<?php echo URL_MAIN_ABS.'images/skill/influence.png';?>" /></td>
+		<td id='TLEILAXinfluence' class="droppable" data-question-id="1">&nbsp;
+			<?php
+				for($i=0;$i<$this->iTl;$i++){
+					echo '<img title="influence" alt="influence" src="'.URL_MAIN_ABS.'images/skill/influence.png" />';
+				}
+			?>
+		</td>
+		<td class='epiceAsk' rowspan='3'>
+			<div id='slider-vertical-containt'><div id="sliTl" style="height: 150px;"></div></div>
+			<div class='min corruptionAdd' ><a href="#" title="Votre corruption augmente. Plus vous avez de corruption, moins vous gagnez d'estime lors de la Cérémonie du partage">0 - 0</a></div>
+			<div class='light'>100 - 500</div>
+			<div class='normal'>500 - 1000</div>
+			<div class='extra'>1000 - 1500</div>
+			<div class='enorme'>1500 - 2000</div>
+		</td>
+		<td rowspan=3><div class='perso tleilaxPerso'></div></td>
+	</tr>
+	<tr>
+		<td class='servs'><img src="<?php echo URL_MAIN_ABS.'images/skill/serviteur.png';?>" /></td>
+		<td id='TLEILAXserviteur' class="droppable" data-question-id="2">&nbsp;
+			<?php
+				for($i=0;$i<$this->sTl;$i++){
+					echo '<img title="serviteur" alt="serviteur" src="'.URL_MAIN_ABS.'images/skill/serviteur.png" />';
+				}
+			?>
+		</td>
+	</tr>
+	<tr>
+		<td class='escs'><img src="<?php echo URL_MAIN_ABS.'images/skill/escorte.png';?>" /></td>
+		<td id='TLEILAXescorte' class="droppable" data-question-id="3">&nbsp;
+			<?php
+				for($i=0;$i<$this->eTl;$i++){
+					echo '<img title="escorte" alt="escorte" src="'.URL_MAIN_ABS.'images/skill/escorte.png" />';
+				}
+			?>
+		</td>
+	</tr>
+
+</table>
+<table id='GUILDE' style='border:solid;' border='2'>
+	<tr>
+		<td class='infls'><img src="<?php echo URL_MAIN_ABS.'images/skill/influence.png';?>" /></td>
+		<td id='GUILDEinfluence' class="droppable" data-question-id="1">&nbsp;
+			<?php
+				for($i=0;$i<$this->iGu;$i++){
+					echo '<img title="influence" alt="influence" src="'.URL_MAIN_ABS.'images/skill/influence.png" />';
+				}
+			?>
+		</td>
+		<td class='epiceAsk' rowspan='3'>
+			<div id='slider-vertical-containt'><div id="sliGU" style="height: 150px;"></div></div>
+			<div class='min corruptionAdd' ><a href="#" title="Votre corruption augmente. Plus vous avez de corruption, moins vous gagnez d'estime lors de la Cérémonie du partage">0 - 0</a></div>
+			<div class='light'>100 - 500</div>
+			<div class='normal'>500 - 1000</div>
+			<div class='extra'>1000 - 1500</div>
+			<div class='enorme'>1500 - 2000</div>
+		</td>
+		<td rowspan=3><div class='perso guildePerso'></div></td>
+	</tr>
+	<tr>
+		<td class='servs'><img src="<?php echo URL_MAIN_ABS.'images/skill/serviteur.png';?>" /></td>
+		<td id='GUILDEserviteur' class="droppable" data-question-id="2">&nbsp;
+			<?php
+				for($i=0;$i<$this->sGu;$i++){
+					echo '<img title="serviteur" alt="serviteur" src="'.URL_MAIN_ABS.'images/skill/serviteur.png" />';
+				}
+			?>
+		</td>
+	</tr>
+	<tr>
+		<td class='escs'><img src="<?php echo URL_MAIN_ABS.'images/skill/escorte.png';?>" /></td>
+		<td id='GUILDEescorte' class="droppable" data-question-id="3">&nbsp;
+			<?php
+				for($i=0;$i<$this->eGu;$i++){
+					echo '<img title="escorte" alt="escorte" src="'.URL_MAIN_ABS.'images/skill/escorte.png" />';
+				}
+			?>
+		</td>
+	</tr>
+
+</table>
+<table id='GUESSERIT' style='border:solid;' border='2'>
+	<tr>
+		<td class='infls'><img src="<?php echo URL_MAIN_ABS.'images/skill/influence.png';?>" /></td>
+		<td id='GUESSERITinfluence' class="droppable" data-question-id="1">&nbsp;
+			<?php
+				for($i=0;$i<$this->iBe;$i++){
+					echo '<img title="influence" alt="influence" src="'.URL_MAIN_ABS.'images/skill/influence.png" />';
+				}
+			?>
+		</td>
+		<td class='epiceAsk' rowspan='3'>
+			<div id='slider-vertical-containt'><div id="sliBEN" style="height: 150px;"></div></div>
+			<div class='min corruptionAdd' ><a href="#" title="Votre corruption augmente. Plus vous avez de corruption, moins vous gagnez d'estime lors de la Cérémonie du partage">0 - 0</a></div>
+			<div class='light'>100 - 500</div>
+			<div class='normal'>500 - 1000</div>
+			<div class='extra'>1000 - 1500</div>
+			<div class='enorme'>1500 - 2000</div>
+		</td>
+		<td rowspan=3><div class='perso gesseritPerso'></div></td>
+	</tr>
+	<tr>
+		<td class='servs'><img src="<?php echo URL_MAIN_ABS.'images/skill/serviteur.png';?>" /></td>
+		<td id='GUESSERITserviteur' class="droppable" data-question-id="2">&nbsp;
+			<?php
+				for($i=0;$i<$this->sBe;$i++){
+					echo '<img title="serviteur" alt="serviteur" src="'.URL_MAIN_ABS.'images/skill/serviteur.png" />';
+				}
+			?>
+		</td>
+	</tr>
+	<tr>
+		<td class='escs'><img src="<?php echo URL_MAIN_ABS.'images/skill/escorte.png';?>" /></td>
+		<td id='GUESSERITescorte' class="droppable" data-question-id="3">&nbsp;
+			<?php
+				for($i=0;$i<$this->eBe;$i++){
+					echo '<img title="escorte" alt="escorte" src="'.URL_MAIN_ABS.'images/skill/escorte.png" />';
+				}
+			?>
+		</td>
+	</tr>
+
+</table>
+</div>
+<div style="clear: both;"></div><br/>
+<div style="font-family:'pixelFonte';font-weight: normal;color:#7c2c7c;padding-left: 19px;padding-bottom: 5px;">
+Glissez les Points d'influence <img style='width: 2%;' src="<?php echo URL_MAIN_ABS.'images/skill/influence.png';?>" />,
+ Serviteurs <img  style='width: 2%;' src="<?php echo URL_MAIN_ABS.'images/skill/serviteur.png';?>" />
+ et Escortes <img  style='width: 2%;' src="<?php echo URL_MAIN_ABS.'images/skill/escorte.png';?>" />
+ mises à votre disposition à partir de votre réserve vers les zones correspondantes. Pensez à satisfaire le plus possible toutes les maisons !
+</div>
+
+<div style="clear: both;"></div>
+<h3>&nbsp;</h3>
+<div class="reserve">
+<?php
+for($i=0;$i<$this->inf;$i++){
+?>
+<div class="draggable" data-question-id="1"><img  src="<?php echo URL_MAIN_ABS.'images/skill/influence.png';?>" /></div>
+<?php }
+for($i=0;$i<$this->ser;$i++){
+?>
+<div class="draggable " data-question-id="2"><img  src="<?php echo URL_MAIN_ABS.'images/skill/serviteur.png';?>" /></div>
+<?php
+}
+for($i=0;$i<$this->esc;$i++){
+?>
+<div class="draggable " data-question-id="3"><img  src="<?php echo URL_MAIN_ABS.'images/skill/escorte.png';?>" /></div>
+<?php
+}
+?>
+</div>
+
+<div id='retour_cuisine'></div>
+</div>

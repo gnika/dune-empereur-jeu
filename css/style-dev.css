@@ -1,0 +1,550 @@
+
+/*
+Design by Free CSS Templates
+http://www.freecsstemplates.org
+Released for free under a Creative Commons Attribution 2.5 License
+*/
+@charset "utf-8";
+/**
+ * @author Jean-Baptiste MONIN
+ * @lastmodified Nov 2009
+ * @media screen
+ * @site http://www.cleo-consulting.fr
+ */
+
+/*
+ * Redéclarations générales
+ */
+html,*{ 
+  margin: 0; 
+  padding: 0;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	background: #FFFFFF url(../images/img01.jpg) repeat-x left top;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #787878;
+}
+
+h1, h2, h3 {
+	margin: 0 0 6px 0;
+	padding: 0;
+	font-weight: normal;
+	color: #32639A;
+}
+
+h1 {
+	font-size: 2em;
+}
+
+h2 {
+	font-size: 2.4em;
+}
+
+h3 {
+	font-size: 1.6em;
+}
+
+body.maintenance {  
+  background-image : none;
+}
+ 
+/*
+* Liens
+*/
+a:active { 
+  outline:none; 
+}
+:focus {
+  -moz-outline-style:none;
+}   
+a,a:link,a:visited{ 
+  color: #536884; 
+  text-decoration:underline;
+}
+a:hover { 
+  text-decoration:none;
+}
+
+/*
+* Balises diverses, comportement par défaut
+ */
+abbr, acronym { 
+  cursor:help; border-bottom: 1px dotted #808080;
+}
+
+img{ 
+  border : none;
+}
+
+p { 
+  margin: 0;
+}
+
+table,tr,td{ 
+  border: none; 
+  text-align: left;
+}
+
+ul { 
+  margin: 0; 
+  padding:0;
+}
+
+
+/*
+* Formulaires 
+*/
+label,input,option,textarea,select,button{ 
+  font-size: 11px;
+}
+
+option{ 
+  padding-left: 10px;
+}
+
+/**
+ * classes générales
+ */
+
+.clear { 
+  clear : both;
+}
+.pos{ 
+  color :#3c7939;
+}
+.warn{ 
+  color :#ff8400;
+}
+.neg{ 
+  color: #c40900;
+}
+.small{ 
+  font-size: .85em;
+}
+.xsmall{ 
+  font-size: .75em;
+}
+.strong{
+  font-weight: bold;
+}
+.nodisplay{ 
+  display: none;
+} 
+
+
+p.error { 
+  font: bold italic 0.9em/1em Arial, Helvetica, sans-serif; 
+  color :#770107; 
+  background-color : #feedf3; 
+  border : 1px solid #cc6d6d; 
+  padding : 10px;  
+  margin: 0 0 14px 0; 
+  -moz-border-radius: 5px; 
+  -khtml-border-radius: 5px; 
+  -webkit-border-radius: 5px; 
+  border-radius: 5px;
+}
+
+p.success { 
+  font: bold italic 0.9em/1em Arial, Helvetica, sans-serif; 
+  color :#3c7939; 
+  background-color : #fcfebb;
+  border : 1px solid #c3c750;   
+  padding : 10px;  
+  margin: 0 0 14px 0; 
+  -moz-border-radius: 5px; 
+  -khtml-border-radius: 5px; 
+  -webkit-border-radius: 5px; 
+  border-radius: 5px;
+}
+
+p.warning { 
+  font: bold italic 0.9em/1em Arial, Helvetica, sans-serif; 
+  color :#ff8400; 
+  background-color : #f4ede2; 
+  border : 1px solid #e37602;  
+  padding : 10px;  
+  margin: 0 0 14px 0; 
+  -moz-border-radius: 5px; 
+  -khtml-border-radius: 5px; 
+  -webkit-border-radius: 5px; 
+  border-radius: 5px;
+}
+
+#wrapper {
+	width: 960px;
+	margin: 0 auto;
+	padding: 0;
+}
+
+/* Header */
+
+#header {
+	width: 940px;
+	height: 148px;
+	margin: 0 auto;
+	background: url(../images/img04.jpg) no-repeat left 20px;
+}
+
+/* Logo */
+
+#logo {
+	float: left;
+	margin: 0;
+	padding-top: 30px;
+	color: #000000;
+}
+
+#logo h1, #logo p {
+	margin: 0;
+	padding: 0;
+}
+
+#logo h1 {
+	float: left;
+	padding-left: 80px;
+	letter-spacing: -1px;
+	text-transform: lowercase;
+	font-size: 3.8em;
+}
+
+#logo p {
+	float: left;
+	margin: 0;
+	padding: 26px 0 0 10px;
+	font: normal 14px Georgia, "Times New Roman", Times, serif;
+	font-style: italic;
+	color: #FFFFFF;
+} 
+
+#logo a {
+	border: none;
+	background: none;
+	text-decoration: none;
+	color: #FFFFFF;
+}
+
+
+
+/* Menu */
+
+#menu {
+	width: 940px;
+	height: 49px;
+	margin: 0 auto;
+	padding: 0;
+}
+
+#menu ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	line-height: normal;
+}
+
+#menu li {
+	float: left;
+}
+
+#menu a {
+	display: block;
+	width: 155px;
+	height: 33px;
+	padding-top: 16px;
+	text-decoration: none;
+	text-align: center;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	font-weight: bold;
+	color: #FFFFFF;
+	border: none;
+}
+
+#menu a:hover, #menu .current_page_item a {
+	background: #659CEF url(../images/img03.jpg) repeat-x left bottom;
+	text-decoration: none;
+}
+
+#menu .current_page_item a {
+	background: #FBFBFC url(../images/img02.jpg) repeat-x left bottom;
+	padding-left: 0;
+	color: #30476A;
+}
+
+/* Page */
+
+#page {
+	width: 940px;
+	margin: 0 auto;
+	padding: 0;
+}
+
+#page-bgtop {
+	padding: 20px px;
+}
+
+#page-bgbtm {
+}
+
+/* Content */
+
+#content {
+	float: left;
+	width: 620px;
+	padding: 30px 0px 0px 0px;
+}
+
+#infojoueur{ 
+}
+
+.post {
+	margin-bottom: 15px;
+}
+
+.post-bgtop {
+}
+
+.post-bgbtm {
+}
+
+.post .title {
+	margin-bottom: 10px;
+	padding: 12px 0 0 0px;
+	letter-spacing: -.5px;
+	color: #000000;
+}
+
+.post .title a {
+	color: #32639A;
+	border: none;
+}
+
+.post .meta {
+	height: 30px;
+	background: #D8E7FE;
+	margin: 0px;
+	padding: 0px 0px 0px 0px;
+	text-align: left;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	font-weight: bold;
+}
+
+.post .meta .date {
+	float: left;
+	height: 24px;
+	padding: 3px 15px;
+	color: #4A81DE;
+}
+
+.post .meta .posted {
+	float: right;
+	height: 24px;
+	padding: 3px 15px;
+	background: #A8CF64;
+	color: #FFFFFF;
+}
+
+.post .meta a {
+	color: #FFFFFF;
+}
+
+.post .entry {
+	padding: 0px 0px 20px 0px;
+	padding-bottom: 20px;
+	text-align: justify;
+}
+
+.links {
+	padding-top: 20px;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+/* Sidebar */
+
+#sidebar {
+	float: right;
+	width: 280px;
+	padding: 0px;
+	color: #787878;
+	background: #FFFFFF;
+}
+
+#sidebar ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+#sidebar li {
+	margin: 0;
+	padding: 0;
+	border-left: 1px solid #E2E2E2;
+}
+
+#sidebar li ul {
+	margin: 0px 0px;
+	padding-bottom: 30px;
+}
+
+#sidebar li li {
+	line-height: 35px;
+	border-bottom: 1px dashed #D1D1D1;
+	margin: 0px 30px;
+	border-left: none;
+}
+
+#sidebar li li span {
+	display: block;
+	margin-top: -20px;
+	padding: 0;
+	font-size: 11px;
+	font-style: italic;
+}
+
+#sidebar h2 {
+	height: 38px;
+	padding-left: 30px;
+	letter-spacing: -.5px;
+	font-size: 1.8em;
+}
+
+#sidebar p {
+	margin: 0 0px;
+	padding: 0px 30px 20px 30px;
+	text-align: justify;
+}
+
+#sidebar a {
+	border: none;
+}
+
+#sidebar a:hover {
+	text-decoration: underline;
+	color: #8A8A8A;
+}
+
+/* Calendar */
+
+#calendar {
+}
+
+#calendar_wrap {
+	padding: 20px;
+}
+
+#calendar table {
+	width: 100%;
+}
+
+#calendar tbody td {
+	text-align: center;
+}
+
+#calendar #next {
+	text-align: right;
+}
+
+/* Search */
+
+#search {
+	float: right;
+	width: 280px;
+	height: 180px;
+	padding: 20px 0px 0px 0px;
+	background: #A8CF64;
+	border-bottom: 4px solid #FFFFFF;
+}
+
+#search form#loginForm {
+	height: 100px;
+	margin: 0;
+	padding: 10px 0 0 20px;
+    clear: both;
+    width: 120px;
+}
+
+p.loginFormLink{
+  font-size: 10px;
+}
+
+p.loginFormLink a {
+  text-decoration: none;
+  color: #fff;
+}
+
+p.loginFormLink a:hover {
+  text-decoration: underline;
+  color: #fff;
+}
+
+#search fieldset {
+	margin: 0;
+	padding: 0;
+	border: none;
+}
+
+#search-text {
+	width: 170px;
+	padding: 6px 5px 2px 5px;
+	border: none;
+	background: #FFFFFF;
+	text-transform: lowercase;
+	font: normal 11px Arial, Helvetica, sans-serif;
+	color: #5D781D;
+}
+
+#search-submit {
+	width: 50px;
+	height: 23px;
+	border: 1px solid #89B056;
+	background: none;
+	font-weight: bold;
+	font-size: 10px;
+	color: #FFFFFF;
+}
+
+/* Footer */
+
+#footer {
+	height: 50px;
+	margin: 0 auto;
+	padding: 0px 0 15px 0;
+	background: #D8E7FE;
+	border-top: 1px solid #D3DEF0;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+#footer p {
+	margin: 0;
+	padding-top: 20px;
+	line-height: normal;
+	font-size: 10px;
+	text-transform: uppercase;
+	text-align: center;
+	color: #A0A0A0;
+}
+
+#footer a {
+	color: #5389E0;
+}
+
+
+#error h2{ height: 30px; color:#2A5877; font: bold 18px  verdana, sans-serif; padding: 6px 0 0 0; }
+#error h3{ height: 30px; color:#333; font: bold 16px  verdana, sans-serif; padding: 6px 0 0 0; }
+#error h4{ height: 30px; color:#808080; font: bold 14px  verdana, sans-serif; padding: 6px 0 0 0; }
+#error pre{ font-size: 11px; color: #333; padding: 10px; width: 880px; border: 1px solid #c0c0c0; background-color: #fff; overflow: auto; }
+ 
+/*************************************************DEBUG*****************************************************/
+#sqlProfiler { width : 920px; margin : 20px auto 0 auto; border: 1px solid #cbdadd;  text-align: left; padding : 10px 20px; background-color: #ececec; }
+#sqlProfiler  p{ font: 10px/16px Arial, Helvetica, sans-serif; color: #3f3f3f;}
+#sqlProfiler  li{ font: 10px/16px Arial, Helvetica, sans-serif; color: #3f3f3f;}
+#appProfiler { font: 10px/16px Arial, Helvetica, sans-serif; color: #3f3f3f;  width : 960px; margin : 20px auto 0 auto; border: 1px solid #cbdadd;  text-align: left; padding : 10px 20px; background-color: #ececec; }
+#appProfiler tr.head td{  border-bottom: 1px solid #808080;  text-align: left; padding : 4px 0; font-weight: bold }
+#clientProfiler { font: 10px/16px Arial, Helvetica, sans-serif; color: #3f3f3f;  width : 960px; margin : -15px auto 10px auto; border: 1px solid #cbdadd;  text-align: left; padding : 10px 20px; background-color: #ececec; }
+#zversion { font: 10px/16px Arial, Helvetica, sans-serif; color: #3f3f3f;  width : 940px; margin : -30px auto 10px auto; border: 1px solid #cbdadd;  text-align: left; padding : 10px 10px; background-color: #ececec; }

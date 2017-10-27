@@ -1,0 +1,187 @@
+<div id="commentjouer">
+<h1>Dune the 'point n click' game: Mechanisms</h1>
+<p>In order to progress in the world of <strong>Dune, the point and click game</strong>, you have to know how to move from room to room, dialog with the characters(NPCs) or assign resources to the different Houses, etc...</p>
+<h2>Dune : Talk to NPCs</h2>
+<p>If you want to interact in the world of Dune, the game, you'll need to communicate with NPCs.'</p>
+
+<p>As majordomo of the God Emperor LETO II, you'll have to ask questions and to accomplish the different quests you'll be proposed. You have been conditioned for this task, you, Moneo, administrative manager of the God Emperor LETO II </p>
+<br/>
+ <p><a class="commentJouer" <?php echo $cl;?> href='<?php echo URL_MAIN_ABS . $this->rewrite('Customer/index/commentjouer'); ?>'>Synopsis</a></p><br/>
+ <p><a class="commentJouer" <?php echo $cl;?> href='<?php echo URL_MAIN_ABS . $this->rewrite('Customer/index/personnages'); ?>'>The different NPCs of the palace</a></p><br/>
+ <p><a class="commentJouer" <?php echo $cl;?> href='<?php echo URL_MAIN_ABS . $this->rewrite('Customer/index/conquete'); ?>'>Conquer to succeed</a></p><br/><br/>
+
+<h3>Talk to a character</h3>
+
+<p>In order to communicate with one of the characters of LETO II's palace, you just have to click on him</p>
+<p>To continue the dialog, click on the text bubble above this character</p>
+<img src="/images/explications/dialogue.gif" alt="Dune Empereur-dieu: tuto" title="Dune Empereur-dieu: tuto" />
+<p>You can engage in a discussion just by selecting an answer in the bottom of the screen </p>
+<img src="/images/explications/reponse.gif" alt="Dune Empereur-dieu: tuto" title="Dune Empereur-dieu: tuto" />
+<p>When there's no more answer to click on, and the dialog bubble is closed, you're free to move again</p>
+<p class='warning'>
+Never Quit/Refresh the page when in a conversation !
+</p>
+<h2>Dune : Moving in the palace of the God Emperor LETO II</h2>
+<p>You can move through the different rooms of the God-Emperor LETO II's palace, just by clicking on the red carpet in the bottom-center of the room</p>
+<INSERTION/>
+<p>You can't move during the ceremony of sharing, nor when talking to someone</p>
+<h2>Dune : Politic in the palace of LETO II</h2>
+<p>You'll be given the task to assign 3 types of resources to the different Houses : Escorts, Influence, and Servants</p>
+<p>This can be done by going to the Control Room at the right of the Throne Room</p>
+<p>There you will be able to select one of the 4 major Houses to give them the needed resources</p>
+<img src="/images/explications/selection.gif" alt="Dune Empereur-dieu: tuto" title="Dune Empereur-dieu: tuto" />
+<p>Once the House selected, you'll have 2 choices</p><br/>
+<h3>ASSIGN INFLUENCE</h3>
+<p>In the God Emperor's palace, the Houses must divide resources between themselves</p>
+<p>You are in charge of this task. To do this, you just have to drag and drop the item into the corresponding area. The more a House has Influence, the more its Confidence gauge grows</p>
+<img src="/images/explications/assigne.gif" alt="Dune Empereur-dieu: tuto" title="Dune Empereur-dieu: tuto" /><br/><br/>
+<h3>ASSIGN SPICE</h3>
+<p>During the Ceremony of Sharing, the God Emperor, with your help, distributes the spice to the Houses.
+ The quantity of spice that a House can get is determined by you before the Ceremonies.</p>
+
+ <img src="/images/explications/quantite.gif" alt="Dune Empereur-dieu: tuto" title="Dune Empereur-dieu: tuto" />
+  <p>WARNING: If a House is not given spice during a Ceremony, your level of corruption grows, as your level of reputation lessens</p>
+<br/>
+<h3>Now you, MONEO, are ready to serve your God Emperor LETO II !</h3></br></br></br>
+
+</div>
+<a class='basebutton butt butt2' href='<?php echo URL_MAIN_ABS . $this->rewrite('Customer/index/commentjouer'); ?>'>Game basics</a>
+<a class='tutobutton butt butt2' href='<?php echo URL_MAIN_ABS . $this->rewrite('Customer/index/univers'); ?>'>Learn more</a>
+<a class='presentationbutton butt butt2' href='<?php echo URL_MAIN_ABS . $this->rewrite('Customer/index/remerciements'); ?>'>Credits</a>
+<a class='retourbutton butt butt2' href='<?php echo URL_MAIN_ABS . $this->rewrite('Core/index/index'); ?>'><img class="first" src="/images/index/Accueil-bor_33.png" alt="dune jeu" title="dune jeu"/> PLAY <img src="/images/index/Accueil-bor_36.png" alt="dune jeu" title="dune jeu"/></a>
+
+
+<script>
+
+jQuery.fn.arretTalk = function() {
+		$(this).oneTime(3000,function() {
+			$(this).attr('class', 'assign1');
+		}).oneTime(250,function() {
+			$(this).attr('class', 'assign2');
+		}).oneTime(500,function() {
+			$(this).attr('class', 'assign3');
+		}).oneTime(750,function() {
+			$(this).attr('class', 'assign4');
+		}).oneTime(1000,function() {
+			$(this).attr('class', 'assign5');
+		}).oneTime(1250,function() {
+			$(this).attr('class', 'assign6');
+		}).oneTime(1500,function() {
+			$(this).attr('class', 'assign7');
+		}).oneTime(1750,function() {
+			$(this).attr('class', 'assign8');
+		}).oneTime(2000,function() {
+			$(this).attr('class', 'assign9');
+		}).oneTime(2250,function() {
+			$(this).attr('class', 'assign10');
+		}).oneTime(2500,function() {
+			$(this).attr('class', 'assign11');
+		}).oneTime(2750,function() {
+			$(this).attr('class', 'assign12');
+		})
+		;
+	};
+
+jQuery.fn.mouvArretTalk = function(){
+	$(this).arretTalk();
+	$(this).everyTime(3000,function(){
+		$(this).arretTalk();
+	});
+}
+jQuery.fn.bulle = function() {
+		$(this).oneTime(3000,function() {
+			$(this).attr('class', 'bull1');
+		}).oneTime(250,function() {
+			$(this).attr('class', 'bull2');
+		}).oneTime(500,function() {
+			$(this).attr('class', 'bull3');
+		}).oneTime(750,function() {
+			$(this).attr('class', 'bull4');
+		}).oneTime(1000,function() {
+			$(this).attr('class', 'bull5');
+		}).oneTime(1250,function() {
+			$(this).attr('class', 'bull6');
+		}).oneTime(1500,function() {
+			$(this).attr('class', 'bull7');
+		}).oneTime(1750,function() {
+			$(this).attr('class', 'bull8');
+		}).oneTime(2000,function() {
+			$(this).attr('class', 'bull9');
+		}).oneTime(2250,function() {
+			$(this).attr('class', 'bull10');
+		}).oneTime(2500,function() {
+			$(this).attr('class', 'bull11');
+		}).oneTime(2750,function() {
+			$(this).attr('class', 'bull12');
+		}).oneTime(3000,function() {
+			$(this).attr('class', 'bull13');
+		}).oneTime(3250,function() {
+			$(this).attr('class', 'bull14');
+		})
+		;
+	};
+
+jQuery.fn.mouvbulle = function(){
+	$(this).bulle();
+	$(this).everyTime(3500,function(){
+		$(this).bulle();
+	});
+}
+
+
+jQuery.fn.Talk = function() {
+		$(this).oneTime(1750,function() {
+			$(this).attr('class', 'talk1');
+		}).oneTime(250,function() {
+			$(this).attr('class', 'talk2');
+		}).oneTime(500,function() {
+			$(this).attr('class', 'talk3');
+		}).oneTime(750,function() {
+			$(this).attr('class', 'talk4');
+		}).oneTime(1000,function() {
+			$(this).attr('class', 'talk5');
+		}).oneTime(1250,function() {
+			$(this).attr('class', 'talk6');
+		})
+		;
+	};
+
+jQuery.fn.mouvTalk = function(){
+	$(this).Talk();
+	$(this).everyTime(1750,function(){
+		$(this).Talk();
+	});
+}
+jQuery.fn.Rep = function() {
+		$(this).oneTime(1750,function() {
+			$(this).attr('class', 'reponseEx1');
+		}).oneTime(250,function() {
+			$(this).attr('class', 'reponseEx2');
+		}).oneTime(500,function() {
+			$(this).attr('class', 'reponseEx3');
+		}).oneTime(750,function() {
+			$(this).attr('class', 'reponseEx4');
+		}).oneTime(1000,function() {
+			$(this).attr('class', 'reponseEx5');
+		}).oneTime(1250,function() {
+			$(this).attr('class', 'reponseEx6');
+		})
+		;
+	};
+
+jQuery.fn.mouvRep = function(){
+	$(this).Rep();
+	$(this).everyTime(1750,function(){
+		$(this).Rep();
+	});
+}
+
+$("#assignation").mouvArretTalk();
+$("#talk").mouvTalk();
+$("#bulleExplication").mouvbulle();
+$("#reponseExplication").mouvRep();
+$(window).load(function() {
+$('#connect a').css('visibility', 'hidden');
+$('#ressources, #mesTexto, #infojoueur').hide();
+})
+</script>

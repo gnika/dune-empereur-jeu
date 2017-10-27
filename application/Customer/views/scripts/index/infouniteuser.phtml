@@ -1,0 +1,28 @@
+<?php
+    $attaque=0;
+    $defense=0;
+    echo '<p>Vous possedez :</p>';
+    if(count($this->infounite)!=0)
+    {
+        foreach($this->infounite as $result)
+        {   $attaque+=$result['uu_quantite']*$result['pu_attaque'];
+            $defense+=$result['uu_quantite']*$result['pu_defense'];
+            if($result['uu_quantite']!=0)
+            echo '<p>'.$result['uu_quantite']. ' '.$result['pu_titre'].' <img src="'.URL_MAIN_ABS.'images/unite/' . $result['pu_image'] . '"></p>';
+        }
+
+
+        echo '<p>unites en formation :</p>';
+        foreach($this->infounite as $result)
+        {
+            if($result['uu_en_cours']!=0)
+            echo '<p>'.$result['uu_en_cours']. ' '.$result['pu_titre'].'  <img src="'.URL_MAIN_ABS.'images/unite/' . $result['pu_image'] . '"> prets dans '.($result['uu_duree']-time()).' secondes</p>';
+        }
+        
+       echo '<p>Votre attaque militaire est de '.$attaque .'pts d\'attaque</p>';
+       echo '<p>Votre defense militaire est de '.$defense .'pts de defense</p>';
+    }
+    else
+    echo 'vous ne possedez pas encore d\'unite';
+
+?>

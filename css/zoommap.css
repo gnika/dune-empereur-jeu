@@ -1,0 +1,68 @@
+#map { position: relative; width: 700px; height: 470px; overflow: hidden; bottom:38px;}
+#returnlink { 
+display: block;
+position: absolute;
+bottom: 0;
+right: 0;
+color:#7c2c7c;
+font-family: "pixelFonte",Helvetica,sans-serif;
+background-color:#FFFFFF;
+font-weight:normal;
+font-size:14px;
+padding: 3px;}
+
+#map a.bullet {
+	background-image: url("../images/carte/bullets.png");
+    background-repeat: no-repeat;
+    display: block;
+    height: 47px;
+    position: absolute;
+    width: 48px;
+    z-index: 2;
+}
+
+#map a.blue {
+    background-position: 0 -48px;
+}
+
+#map a.yellow {
+    background-position: -188px -2px;
+}
+#map a.purple {
+    background-position: -94px -49px;
+}
+#map a.green {
+    background-position: -96px 0;
+}
+#map a.red {
+    background-position: -188px -47px;
+}
+
+
+#map img.zoomable { }
+
+#map div.popup{ display: none; position: absolute; width: 200px; top: 100px; left: 150px; background: white; z-index: 3; padding: 10px; border: 2px solid black; }
+#map div.popup a.close{ display: block; position: absolute; bottom: 0; right: 0; }
+#inputValue{
+	    position: absolute;
+    bottom: 51px;
+    left: 15%;
+    width: 8em;
+    max-width: 80%;
+    background: none;
+    border: none;
+    outline: none;
+    border-bottom: 2px solid #fff;
+    color: #fff;
+    font-size: 2.2em;
+    text-align: center;
+    z-index: 999;
+    opacity: .25;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    -webkit-transition: opacity .3s;
+    transition: opacity .3s;
+}
+.loin{
+	display: none!important;
+}

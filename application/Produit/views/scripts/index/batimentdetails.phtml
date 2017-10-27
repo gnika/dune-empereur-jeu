@@ -1,0 +1,21 @@
+<h2>Batiment</h2>
+
+<div id="pageContent">
+<?php
+if($this->pageData['batiment']->getUnique()==1)
+$unique='OUI';
+else
+$unique='NON';
+echo '<p> image : <img src="'.URL_MAIN_ABS.'images/batiment/' . $this->pageData['batiment']->getImage() . '"></p>';
+echo '<p> or : ' . $this->pageData['batiment']->getPrix() . '</p>';
+echo '<p> bois : ' . $this->pageData['batiment']->getBois() . '</p>';
+echo '<p> population : ' . $this->pageData['batiment']->getPopulation() . '</p>';
+echo '<p> mana : ' . $this->pageData['batiment']->getMana() . '</p>';
+echo '<p> description : ' . $this->pageData['batiment']->getDescription() . '</p>';
+echo '<p> attaque : ' . $this->pageData['batiment']->getAttaque() . '</p>';
+echo '<p> defense : ' . $this->pageData['batiment']->getDefense() . '</p>';
+echo '<p> magie : ' . $this->pageData['batiment']->getMagie() . '</p>';
+echo '<p> batiment unique : ' . $unique.'</p>';
+
+?><?php echo $this->form;?>
+          </div>

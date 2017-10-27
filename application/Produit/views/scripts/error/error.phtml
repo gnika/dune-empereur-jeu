@@ -1,0 +1,10 @@
+<div id="error">
+    <h2>ERREUR</h2>
+    <h3> Type : <?php echo $this->errorCode; ?> - <?php echo $this->errorMessage ?></h3>
+    <?php if( Zend_registry::get('debugLevel') == 'dev' ) : ?>
+    <h4>Détail de l'erreur : </h4>
+    <pre>
+    <?php echo $this->exception->exception; ?>
+    </pre>
+    <?php endif; ?>
+</div>

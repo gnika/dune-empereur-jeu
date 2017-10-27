@@ -1,0 +1,164 @@
+
+<?php /*echo $this->formatDate( date('Y-m-d') ) ?><p><a href="<?php echo $this->rewrite('Core/index/index') ?>">Accueil</a></p>*/?>
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+	$("#onTalk").val(0);
+	$("#onMyTalk").val(0);
+	aniX = 0;
+	aniY = 0;
+	
+	jQuery.fn.arretGch = function() {
+		$(this).oneTime(200,function() {
+			$(this).css({backgroundPosition:'-23px -28px'});
+		}).oneTime(400,function() {
+			$(this).css({backgroundPosition:'-123px -28px'});
+		}).oneTime(600,function() {
+			$(this).css({backgroundPosition:'-223px -28px'});
+		}).oneTime(800,function() {
+			$(this).css({backgroundPosition:'-123px -28px'});
+		});
+	};
+	
+	jQuery.fn.mouvArretGch = function(){
+		$(this).arretGch();
+		$(this).everyTime(800,function(){
+			$(this).arretGch();
+		});
+	}
+	jQuery.fn.marcheGch = function() {
+		$(this).oneTime(200,function() {
+			$(this).css({backgroundPosition:'-23px -228px'});
+		}).oneTime(400,function() {
+			$(this).css({backgroundPosition:'-123px -228px'});
+		}).oneTime(600,function() {
+			$(this).css({backgroundPosition:'-223px -228px'});
+		}).oneTime(800,function() {
+			$(this).css({backgroundPosition:'-323px -228px'});
+		});
+	};
+	jQuery.fn.mouvMarcheGch = function(){
+		$(this).marcheGch();
+		$(this).everyTime(800,function(){
+			$(this).marcheGch();
+		});
+	}
+	///
+	var arret = 0;
+
+	$("#siona").click(function() {
+		if($("#onTalk").val()==0 && $("#onMyTalk").val()==0){
+			$("#texto").removeClass().addClass('sionaText');
+			if (arret == 0 || arrestation==1) {
+				$("#texto").show();
+				$("#onTalk").val(1);
+				$("#siona").stopTime().marcheGch();
+
+				var request = $.ajax({
+				url: url_site+"Core/index/ajaxquote", 
+				type: "POST",
+				data: { idDiv: 'siona', idPerso: '25', talk: 'mouvArretGch', stopTalk: 'marcheGch' },			
+				
+				}); 
+				request.done(function(msg) {
+				$("#texto").html(msg); 
+				});
+				 
+			}else{
+				arret = 0;
+				$("#siona").stopTime().mouvArretGch();
+				$("#texto").invisible();
+			}
+		}
+	});
+
+$(".vers_desert1").click(function() {
+	if($('#onTalk').val()==0){
+		$('#onTalk').val(1);	
+		var request = $.ajax({
+		url: url_site+'Core/index/desert1',
+		type: "POST"							
+		}); 
+		request.done(function(msg) {
+						$("#inThePlace").fadeOut(1000);
+						setTimeout(function(){
+						  $("#inThePlace").hide();
+						  $("#inThePlace").html(msg); 
+						$("#inThePlace").fadeIn(1000);
+						}, 1000);
+						
+					});
+	}
+});
+$(".vers_desert2").click(function() {
+	if($('#onTalk').val()==0){
+		$('#onTalk').val(1);	
+		var request = $.ajax({
+		url: url_site+'Core/index/desert2',
+		type: "POST"							
+		}); 
+		request.done(function(msg) {
+						$("#inThePlace").fadeOut(1000);
+						setTimeout(function(){
+						  $("#inThePlace").hide();
+						  $("#inThePlace").html(msg); 
+						$("#inThePlace").fadeIn(1000);
+						}, 1000);
+						
+					});
+	}
+});
+$(".vers_desert3").click(function() {
+	if($('#onTalk').val()==0){
+		$('#onTalk').val(1);	
+		var request = $.ajax({
+		url: url_site+'Core/index/desert3',
+		type: "POST"							
+		}); 
+		request.done(function(msg) {
+						$("#inThePlace").fadeOut(1000);
+						setTimeout(function(){
+						  $("#inThePlace").hide();
+						  $("#inThePlace").html(msg); 
+						$("#inThePlace").fadeIn(1000);
+						}, 1000);
+						
+					});
+	}
+});
+
+
+});
+ 
+if($("#siona").length)
+	$("#siona").mouvArretGch();
+
+
+
+</script>
+</head>
+
+<?php
+if($this->myUser->getHeure()>=67)$stylePiece='nuit';else $stylePiece='';
+$stylePiece='';
+$nb=rand(0,6);
+?>
+<div id="<?php echo $this->salle;?>" style='background:url("../images/desert/desert<?php echo $nb;?>.jpg") no-repeat scroll 0 0 rgba(0, 0, 0, 0)' class='<?php echo $stylePiece;?>'>
+	<div id="perso"></div><p>&nbsp;</p>
+	<div class='vers_desert1' style='z-index:1000'></div>
+	<div class='vers_desert2' style='z-index:1000'></div>
+	<div class='vers_desert3' style='z-index:1000'></div>	
+	<?php
+	
+	foreach($this->porteDansSalle as $porte){
+		echo '<div id="porte_'.$porte['por_id'].'" class="porte_'.$porte['por_id_type'].'_'.$porte['poru_etat'].'"></div>';
+	}	?>
+	<div id="texto"></div>
+	<?php foreach($this->persoDansSalle as $clef => $perso){
+		echo '<div class="'.$clef.'_desert2" id="'.$clef.'"></div>';
+	}
+	?>
+</div>
+
+

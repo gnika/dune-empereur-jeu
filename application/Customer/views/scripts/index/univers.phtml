@@ -1,0 +1,60 @@
+<div id="commentjouer">
+<h1>Dune le jeu Point and click: Pourquoi et comment ?</h1>
+
+<h2>Présentation générale</h2>
+<p>Codeur web depuis bientôt 10 ans en autodidacte, et geek depuis plus de 25 ans, j'ai tardivement découvert les suites du livre original <strong>DUNE</strong> de <strong>Frank Herbert</strong></p>
+<p>J'ai bien entendu dévoré tous les livres et j'ai même relu 3 fois plusieurs opus entiers</p>
+<div id="picture">
+		<img src="/images/moi.jpg" alt="c'est moi :)" title="c'est moi :)" width="150px" height="250px"/>
+	</div>
+
+	<p>Ayant toujours été fasciné par l'univers de Dune et des jeux vidéos oldies, ce <strong>Dune jeu Point and click</strong> est un hommage aux jeux d'aventures des années 1990.
+De la typo des textes aux décors pixellisées en passant par les musiques oldies, tout nous replonge au coeur de cette époque perdue.</p>
+<p>Il m'a fallu plusieurs mois pour penser/architecturer/coder ce jeu unique en son genre. J'y ai passé des nuits entières en buvant des litres de café, mais le résultat est là aujourd'hui</p>
+<p>Vous pouvez me contacter sur mon adresse mail <a href="mailto:moneo.house.atreides@gmail.com">moneo.house.atreides@gmail.com</a> pour me dire ce que vous en pensez. Ou même pour me dire bonjour. Ca fait toujours plaisir</p>
+<div class="clear"></div>
+<h2>Références</h2>
+<p>
+<img src="/images/dune-8.gif" alt="Dune jeu point and click" title="source dune jeu point and click" width="150px" height="150px" />
+<img src="/images/dune-8.jpg" alt="Dune jeu point and click" title="source dune jeu point and click" width="150px" height="150px" />
+<img src="/images/monkey.jpg" alt="Dune jeu point and click" title="source dune jeu point and click" width="150px" height="150px" />
+<img src="/images/Master_of_Orion_II_Boxart.png" alt="Dune jeu point and click" title="source dune jeu point and click" width="150px" height="150px" />
+<img src="/images/lands of lore.jpg" alt="Dune jeu point and click" title="source dune jeu point and click" width="150px" height="150px" />
+</p>
+<h2>Technologies utilisées</h2>
+<p>Ce site a la particularité d'avoir été développé en PHP grâce au framework Zend couplé à Mysql. Les animations des personnages ont été réalisées en combinant le CSS et le jQuery </p>
+<p>Chaque déplacement de pièce en pièce est effectué tout simplement grâce à l'Ajax, ainsi que le temps qui passe en bas à droite du site qui fait lui aussi appel à cette technologie </p>
+<p>Différents plugin jQuery et jQuery-ui suffisent à réaliser la barre de temps, d'objets et de confiance, ainsi que le drag n drop de la salle de bord qui est lui aussi réalisé en jQuery  </p>
+<p>Tout les plugins (ou presque) ont été hackés pour correspondre exactement à mes besoins -par exemple appel d'une page en ajax à chaque changement d'heure de la barre du temps </p>
+<p>Mais on trouve facilement son bonheur en codant un minimum et en se creusant beaucoup la tête</p>
+<h2>Dialogues entre les personnages</h2>
+<p>Chaque personnage du jeu possède un ID qui est lié à plusieurs quêtes. En choisissant les bonnes réponses, ou en utilisant des objets, le joueur mets à jour l'ID des quêtes</p>
+<p>Ainsi, lorsque le personnage doit parler, une requête SQL est d'abord faite qui regarde d'abord quel ID de quête est lié à l'utilisateur, le statut de la quête du joueur, et ainsi, proposera des choix de questions
+ à l'utilisateur qui correspondront à l'endroit ou il se trouve dans la quête... c'est magique ! </p>
+ <p>Cette opération est ainsi répétée à chaque clic sur les personnages ou sur les différents choix de réponses cliqués par l'utilisateur</p>
+<br/>
+<h2>Outils utilisés</h2>
+<p>Pour réaliser ce <strong>jeu point and click</strong> il m'a fallu... pas grand chose !</p>
+<p>dans l'ordre: </p>
+<ul>
+<li>Un windows</li>
+<li>Un filezilla</li>
+<li>Un apache</li>
+<li>Un phpMyAdmin</li>
+<li>Un Notepad ++</li>
+<li>Beaucoup de motivation !</li>
+</ul>
+
+<p>Ca suffit pour réaliser ce <strong>dune jeu</strong> <strong>point and click</strong> :D</p></br>
+<h3>Le jeu Dune point and click n'a plus aucun secret pour vous !</h3></br></br></br>
+
+</div>
+<a class='basebutton butt' href='<?php echo URL_MAIN_ABS . $this->rewrite('Customer/index/commentjouer'); ?>'>Quelques bases du jeu</a>
+<a class='tutobutton butt' href='<?php echo URL_MAIN_ABS . $this->rewrite('Customer/index/apercu'); ?>'>Tutoriel en images</a>
+<a class='presentationbutton butt' href='<?php echo URL_MAIN_ABS . $this->rewrite('Customer/index/remerciements'); ?>'>Remerciements</a>
+<a class='retourbutton butt univers' href='<?php echo URL_MAIN_ABS . $this->rewrite('Core/index/index'); ?>'><img class="first" src="/images/index/Accueil-bor_33.png" alt="dune jeu" title="dune jeu"/> JOUER <img src="/images/index/Accueil-bor_36.png" alt="dune jeu" title="dune jeu"/></a>
+
+<script>$(window).load(function() {
+$('#connect a').css('visibility', 'hidden');
+$('#ressources, #mesTexto, #infojoueur').hide();
+})</script>

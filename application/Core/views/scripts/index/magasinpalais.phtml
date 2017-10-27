@@ -1,0 +1,161 @@
+
+<?php $imp=$this->myUser->getImpot();?>
+<script type="text/javascript">
+
+$(document).ready(function() {
+	$("#onTalk").val(0);
+	$("#onMyTalk").val(0);
+	///
+	var arret = 0;
+	jQuery.fn.arretTalk = function() {
+		$(this).oneTime(1200,function() {
+			$(this).css({backgroundPosition:'5px 0px'});
+		}).oneTime(300,function() {
+			$(this).css({backgroundPosition:'-196px 0px'});
+		}).oneTime(600,function() {
+			$(this).css({backgroundPosition:'-394px 0px'});
+		}).oneTime(900,function() {
+			$(this).css({backgroundPosition:'-196px 0px'});
+		});
+	};
+	
+	jQuery.fn.mouvArretTalk = function(){
+		$(this).arretTalk();
+		$(this).everyTime(1200,function(){
+			$(this).arretTalk();
+		});
+	}
+	jQuery.fn.marcheTalk = function() {
+		$(this).oneTime(1200,function() {
+			$(this).css({backgroundPosition:'0px -545px '});
+		}).oneTime(300,function() {
+			$(this).css({backgroundPosition:'-196px -545px '});
+		}).oneTime(600,function() {
+			$(this).css({backgroundPosition:'-394px -545px '});
+		}).oneTime(900,function() {
+			$(this).css({backgroundPosition:'-196px -545px '});
+		});
+	};
+	jQuery.fn.mouvMarcheTalk = function(){
+		$(this).marcheTalk();
+		$(this).everyTime(1200,function(){
+			$(this).marcheTalk();
+		});
+	}
+	
+	$("#vendeur_1").click(function() {
+		if($("#onTalk").val()==0 && $("#onMyTalk").val()==0){
+			$("#texto").removeClass().addClass('vendeur1Text');
+			if (arret == 0 || arrestation==1) {
+				$("#texto").show();
+				$("#onTalk").val(1);
+				$("#vendeur_1").stopTime().mouvMarcheTalk();
+
+				var request = $.ajax({
+				url: url_site+"Core/index/ajaxquote", 
+				type: "POST",
+				data: { idDiv: 'vendeur_1', idPerso: '16', talk: 'mouvArretTalk', stopTalk: 'mouvMarcheTalk' },			
+				
+				}); 
+				request.done(function(msg) { 
+				$("#texto").html(msg); 
+				});
+				 
+			}else{
+				arret = 0;
+				$("#vendeur_1").stopTime().mouvArretTalk();
+				$("#texto").invisible();
+			}
+		}
+	});
+
+$("#retour_magasin").click(function() {
+	if($('#onTalk').val()==0){
+		$('#onTalk').val(1);	
+		if(<?php echo $imp;?>>=5)
+			var dstination='trone';else dstination='couloir2';
+		var request = $.ajax({
+		url: url_site+'Core/index/'+dstination,
+		type: "POST"							
+		}); 
+		request.done(function(msg) {
+						$("#inThePlace").fadeOut(1000);
+						setTimeout(function(){
+						  $("#inThePlace").hide();
+						  $("#inThePlace").html(msg); 
+						$("#inThePlace").fadeIn(1000);
+						}, 1000);
+						
+					});
+	}
+});
+
+
+});
+ 
+if($("#vendeur_1").length)
+	$("#vendeur_1").mouvArretTalk();
+
+/*$("span.prixEpice").html(function(i, h) { 
+	return h.replace(/(.)/g, '<img src="images/chiffres/$1$1.png" />'); 
+});*/
+function ajaxAchat(nb, idOb) {
+	if($('#noMultiple').val()==0){
+		$('#noMultiple').val(1);
+		
+			var request = $.ajax({
+			url: url_site+'Core/ajax/achatobjet',
+			type: "POST",
+			data: { nbAchete: nb, idObParam: idOb }
+			}); 
+			request.done(function(msg) {
+				messagesDisplay();
+				afficheSpice();
+				afficheObject();
+				if(msg=='done')
+					$('.achat_'+idOb).hide();
+			});
+		}
+		setTimeout(function(){
+		$("#noMultiple").val(0);
+	}, 5000);
+}
+
+$("#mesTexto").html('<img src="images/plan/surplus_plan.png" />'); 
+$("#plan").val('surplus_plan');
+</script>
+</head>
+
+<?php
+if($this->myUser->getHeure()>=67)$stylePiece='nuit';else $stylePiece='';
+$stylePiece='';
+?>
+<div id="<?php echo $this->salle;?>" class='<?php echo $stylePiece;?>'>
+	<div id="perso"></div><p>&nbsp;</p>
+	<div id='retour_magasin' style='z-index:1000'></div>
+	<?php
+	
+	foreach($this->porteDansSalle as $porte){
+		echo '<div id="porte_'.$porte['por_id'].'" class="porte_'.$porte['por_id_type'].'_'.$porte['poru_etat'].'"></div>';
+	}	?>
+	<div id="texto"></div>
+	<?php foreach($this->persoDansSalle as $clef => $perso){
+		echo '<div class="'.$clef.'_magasin1" id="'.$clef.'"></div>';
+	}if($this->tournevis==1){
+	?>
+	<div onclick="ajaxAchat(350, 5);" class="achat_5"><a class='achat' value='1' href='' onclick='return false;'><img class='imgmag' title="Tournevis laser" src="images/objet/tournevis.png" /> <span class='prixEpice'><img src="/images/epice.png" alt="epice dune jeu Frank Herbert" title="epice dune jeu"> 350</span></a></div>
+	<?php }else echo '<div class="achat_5">&nbsp;</div>';echo '<div class="clear"></div>';
+	if($this->reacteur==1){
+	?>
+	<div onclick="ajaxAchat(10000, 7);" class="achat_7"><a class='achat' value='1' href='' onclick='return false;'><img class='imgmag' title="Réacteur Ixien" src="images/objet/reacteur.png" /> <span class='prixEpice'><img src="/images/epice.png" alt="epice dune jeu Frank Herbert" title="epice dune jeu">10000</span></a></div>
+	<?php }else echo '<div class="achat_7">&nbsp;</div>';echo '<div class="clear"></div>'; ?>
+	<div onclick="ajaxAchat(8000, 12);" class="achat_12"><a class='achat' value='1' href='' onclick='return false;'><img class='imgmag' title="Laser de fabriquation Ixienne" src="images/objet/laser.gif" /> <span class='prixEpice'><img src="/images/epice.png" alt="epice dune jeu Frank Herbert" title="epice dune jeu">8000</span></a></div>
+	<?php
+	if($this->boussole==1){
+	?><div class="clear"></div>
+	<div onclick="ajaxAchat(100000, 16);" class="achat_16"><a class='achat' value='1' href='' onclick='return false;'><img class='imgmag' title="Boussole du désert" src="images/objet/boussole.png" /> <span class='prixEpice'><img src="/images/epice.png" alt="epice dune jeu Frank Herbert" title="epice dune jeu">100000</span></a></div>
+	<?php }else echo '<div class="achat_16">&nbsp;</div>';echo '<div class="clear"></div>';
+	?>
+</div>
+
+

@@ -1,0 +1,21 @@
+form#contactForm label {
+  font: 12px "Trebuchet MS", verdana, arial, sans-serif;
+}
+
+form#contactForm label .required {
+  font: bold 12px "Trebuchet MS", verdana, arial, sans-serif;
+}
+
+form#contactForm dd {
+  margin: 0 0 15px 0;
+}
+
+form#contactForm {
+  border: 1px solid #efefef;
+  padding: 20px;
+}
+
+textarea#message{
+  width: 580px;
+  height: 180px;
+}

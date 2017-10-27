@@ -1,0 +1,286 @@
+<?php $jour=$this->myUser->getJour(); if($this->myUser->getId()!='')$class='connect';else $class='';
+?>
+<div id='inThePlace'>
+<div id='salle_trone' class="<?php echo $class;?>">
+<div id="fb-root"></div>
+<span class='flags'><a><img title='français' alt='français' src="/images/flagf.png" /></a> <a href="<?php echo URL_MAIN_ABS . $this->rewrite('Core/index/index/lang/en'); ?>"><img title='english' alt='english' src="/images/flage.png" /></a></span>
+<h1>Dune the point and click </h1>
+<h2>Moneo in the service of the God Emperor</h2>
+<h3><i>A point and click adventure based on the wide world of Dune. Your goal : A great Reputation !</i></h3>
+<article>
+<?php
+if($this->inscrit==1){
+	?>
+	<p class='success'>
+		We just sent you an email with a confirmation link. Please click on this link to activate your account.
+	</p>
+	<?php
+
+}
+ ?>
+	<p class="presentation">Every 5 days the Ceremony of sharing takes place on <strong>Arrakis</strong> : Distribute spice to the 4 major Houses and earn Reputation Points !</p>
+<?php
+$this->displayMessages();
+?>
+	<p class='warning_index'>
+	Never quit/refresh a page when in a conversation !
+	</p>
+
+<h3>Make your way in the world of Dune, 3000 years after the coming of Atreïdes on Arrakis, as Moneo, faithful servant of the God Emperor LETO II</h3>
+<?php if($jour==0 && $this->myUser->getId()!='') echo '<h3>Click on "Start" to begin the game : the Ceremony of sharing is awaiting you !</h3>';?>
+<?php
+if($this->form!='')$cl="style='top:17px;'";else $cl='';
+ ?>
+ <div class="buttons_index">
+ <a class="" <?php echo $cl;?> href='<?php echo URL_MAIN_ABS . $this->rewrite('Customer/index/commentjouer'); ?>'><img src="images/tmpl/bases.png" onmouseover="this.src='images/tmpl/bases_hover.png'" onmouseout="this.src='images/tmpl/bases.png'" /></a>
+
+ <a class="" <?php echo $cl;?> href='<?php echo URL_MAIN_ABS . $this->rewrite('Customer/index/apercu'); ?>'><img src="images/tmpl/tuto.png" onmouseover="this.src='images/tmpl/tuto_hover.png'" onmouseout="this.src='images/tmpl/tuto.png'" /></a>
+
+ <a class="" <?php echo $cl;?> href='<?php echo URL_MAIN_ABS . $this->rewrite('Customer/index/univers'); ?>'><img src="images/tmpl/savoir.png" onmouseover="this.src='images/tmpl/savoir_hover.png'" onmouseout="this.src='images/tmpl/savoir.png'" /></a>
+ </div>
+  <?php
+ if($this->myUser->getId()!='')
+	echo '<br/><div style="width: 100%;"><p><button class="start">Start</button></p></div><br/>';
+ ?>
+
+ <?php
+// echo '<div id="connect">'.$this->form;
+
+echo '<div id="connect">';
+
+if($this->myUser->getId()==''){
+?>
+
+<form id="loginForm" enctype="application/x-www-form-urlencoded" action="Customer/auth/dologin" method="post">
+ <div class="form_index">
+
+	<input type="text" name="username" id="username" value="" class="" placeholder="Identifiant" />
+
+
+
+	<input placeholder="Mot de passe" type="password" name="password" id="password" value="" class="input__field input__field--minoru" />
+
+
+
+
+<input type="submit" name="login" id="login" value=" Connexion " class="formsubmit" />
+
+<input type="hidden" name="source" value="index.html" id="source" />
+</div>
+</form>
+
+
+
+
+
+
+
+<div class="g-signin2 duneGoogle" data-onsuccess="onSignIn"></div>
+<div class="fb-login-button" data-max-rows="1" onlogin="checkLoginState();" data-size="medium" data-show-faces="false" data-auto-logout-link="false"></div>
+
+<script>
+
+/*google +*/
+
+function onSignIn(googleUser) {
+
+	var auth2 = gapi.auth2.getAuthInstance();
+	auth2.signOut().then(function () {
+      console.log('User signed out.');
+    });
+
+  var profile = googleUser.getBasicProfile();
+  // console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+  // console.log('Name: ' + profile.getName());
+  // console.log('Image URL: ' + profile.getImageUrl());
+  // console.log('Email: ' + profile.getEmail());
+   var request = $.ajax({
+					url: url_site+'Customer/auth/loginfacebook',
+					type: "POST",
+					data : 'email=' + profile.getEmail() + '&login=' + profile.getName()
+				});
+				request.done(function(msg) {
+					if(msg=='good')
+						location.reload();
+					if(msg=='new')
+						window.location.href = window.location.href + "?inscrit=1";
+				});
+}
+/* fin de google +*/
+  // This is called with the results from from FB.getLoginStatus().
+  function statusChangeCallback(response) {
+    console.log('statusChangeCallback');
+    console.log(response);
+    // The response object is returned with a status field that lets the
+    // app know the current login status of the person.
+    // Full docs on the response object can be found in the documentation
+    // for FB.getLoginStatus().
+    if (response.status === 'connected') {
+      // Logged into your app and Facebook.
+      testAPI();
+    } else if (response.status === 'not_authorized') {
+      // The person is logged into Facebook, but not your app.
+      document.getElementById('status').innerHTML = 'Please log ' +
+        'into this app.';
+    } else {
+      // The person is not logged into Facebook, so we're not sure if
+      // they are logged into this app or not.
+      document.getElementById('status').innerHTML = 'Please log ' +
+        'into Facebook.';
+    }
+  }
+
+  // This function is called when someone finishes with the Login
+  // Button.  See the onlogin handler attached to it in the sample
+  // code below.
+  function checkLoginState() {
+    FB.getLoginStatus(function(response) {
+      statusChangeCallback(response);
+    });
+  }
+
+
+  // Now that we've initialized the JavaScript SDK, we call
+  // FB.getLoginStatus().  This function gets the state of the
+  // person visiting this page and can return one of three states to
+  // the callback you provide.  They can be:
+  //
+  // 1. Logged into your app ('connected')
+  // 2. Logged into Facebook, but not your app ('not_authorized')
+  // 3. Not logged into Facebook and can't tell if they are logged into
+  //    your app or not.
+  //
+  // These three cases are handled in the callback function.
+
+
+
+
+
+  // Here we run a very simple test of the Graph API after login is
+  // successful.  See statusChangeCallback() for when this call is made.
+  function testAPI() {
+    console.log('Welcome!  Fetching your information.... ');
+    FB.api('/me', { fields: 'name, email' }, function(response) {
+      console.log('Successful login for: ' + response.name);
+      console.log('Successful login for: ' + response.email);
+	  var request = $.ajax({
+					url: url_site+'Customer/auth/loginfacebook',
+					type: "POST",
+					data : 'email=' + response.email + '&login=' + response.name
+				});
+				request.done(function(msg) {
+					if(msg=='good')
+						location.reload();
+					if(msg=='new')
+						window.location.href = window.location.href + "?inscrit=1";
+				});
+
+    });
+
+
+
+  }
+</script>
+
+<?php
+/*
+<!--FACEEEEEEEEEEEEEEEEEEEEEEBOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOK-->
+VOIR https://developers.facebook.com/docs/facebook-login/web/login-button
+*/
+?>
+<!--FIN FACEBOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOK-->
+<br/>
+<?php
+}
+if($this->form!='' && $this->inscrit!=1){
+?>
+<p class="loginFormLink" ><img class="first" src="/images/index/Accueil-bor_33.png" alt="dune jeu" title="dune jeu"/><a href="<?php echo URL_MAIN_ABS . $this->rewrite('Customer/auth/auth') ?>" >S'inscrire pour jouer ! </a>
+ - <a class="lostPass" href="<?php echo URL_MAIN_ABS . $this->rewrite('Customer/auth/lostpassword') ?>">Mot de passe oublié ?</a><img src="/images/index/Accueil-bor_36.png" alt="dune jeu" title="dune jeu"/></p>
+<div id="status"></div>
+ <?php
+
+
+ }else{
+	 if($this->inscrit!=1){
+		?>
+		<div class='retry'><span class='oneRetry'>If you want to reset your game </span><button class="tryAgain">click here</button></div>
+		<?php
+	 }
+} ?>
+</div>
+
+</div>
+<div class="naylaIndex"></div>
+</article><?php
+
+$nomSalle=$this->nomSalle;
+?>
+<script>
+	if($('.error').length>0)$('.warning').hide();
+	$(".start, .naylaIndex").click(function() {
+		if($('.start').length>0){
+			if($('#onTalk').val()==0){
+				$('#onTalk').val(1);
+				var request = $.ajax({
+					url: url_site+'Core/index/<?php echo $nomSalle;?>/#!<?php echo $nomSalle;?>',
+					type: "GET"
+				});
+				request.done(function(msg) {
+							$("#inThePlace").fadeOut(1000);
+							setTimeout(function(){
+							  $("#inThePlace").hide();
+							  $("#inThePlace").html(msg);
+							$("#inThePlace").fadeIn(1000);
+							}, 1000);
+
+						});
+			}
+		}
+
+
+});
+	$(".tryAgain").click(function() {
+		if(window.confirm("Do you really want to reset your account ?")){
+			if($('#onTalk').val()==0){
+				$('#onTalk').val(1);
+				var request = $.ajax({
+					url: url_site+'Customer/auth/tryagain',
+					type: "GET"
+				});
+				request.done(function(msg) {
+							$('#onTalk').val(0);
+							$(".retry").fadeOut(1000);
+							setTimeout(function(){
+							  $(".retry").hide();
+							  $(".retry").html('You just reset your account.');
+							$(".retry").fadeIn(1000);
+							}, 1000);
+
+						});
+			}
+		}
+
+
+});
+jQuery.fn.arretTalk = function() {
+		$(this).oneTime(1200,function() {
+			$(this).css({backgroundPosition:'0px 0px'});
+		}).oneTime(300,function() {
+			$(this).css({backgroundPosition:'-82px 0px'});
+		}).oneTime(600,function() {
+			$(this).css({backgroundPosition:'-164px 0px'});
+		}).oneTime(900,function() {
+			$(this).css({backgroundPosition:'-82px 0px'});
+		});
+	};
+
+jQuery.fn.mouvArretTalk = function(){
+	$(this).arretTalk();
+	$(this).everyTime(1200,function(){
+		$(this).arretTalk();
+	});
+}
+
+$(".naylaIndex").mouvArretTalk();
+</script>
+</div>

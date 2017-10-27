@@ -1,0 +1,33 @@
+<h3><?php echo $this->myStar->ca_nom;?></h3>
+<div class="popupcontent">
+	<?php
+	echo '<p>'.$this->myStar->ca_description.'</p>';
+	if(!$this->myStar->cau_ca_id){
+		echo'<br/><p><a href="" onclick="envoiVaisseau('.$this->myStar->ca_id.', 3);return false;">Attaquer la planète</a></p>';
+		echo'<br/><p><a href="" onclick="envoiVaisseau('.$this->myStar->ca_id.', 4);return false;">Explorer la planète</a></p>';
+		echo'<br/><p><a href="" onclick="envoiDiplomate('.$this->myStar->ca_id.');return false;">Envoyer un diplomate Atréides</a></p>';
+	}
+	elseif($this->myStar->cau_diplomate==1) {
+		echo '<br><p>En attente du débriefing du diplomate Atréides</p>';
+	}
+	elseif($this->myStar->cau_etat==2) {
+		echo '<br><p>Un diplomate Atréides intervient sur cette planète </p>';
+	}
+	elseif($this->myStar->cau_etat==0) {
+		echo'<br/><p>'.$this->myStar->ca_flotte.' vaisseaux protègent la planète</p>';
+		echo'<br/><p>niveau social de la planète : '.$this->myStar->ca_civ.'</p>';
+		echo'<br/><p><a href="" onclick="envoiVaisseau('.$this->myStar->ca_id.', 3);return false;">Attaquer la planète</a></p>';
+		echo'<br/><p><a href="" onclick="envoiDiplomate('.$this->myStar->ca_id.');return false;">Envoyer un diplomate Atréides</a></p>';
+	}elseif($this->myStar->cau_etat==1) {
+		echo '<p>Vous possédez '.$this->myStar->cau_troupe.' troupes sur cette planète</p><p>'.$this->myStar->ca_epice_jour.' épice / jours</p>';
+		echo'<br/><p><a href="" onclick="envoiTroupe('.$this->myStar->ca_id.');return false;">Défendre la planète</a></p>';
+	}elseif($this->myStar->cau_etat==3) {
+		echo '<img src="'.URL_MAIN_ABS.'images/commun/warning.png" /><p>Votre flotte attaque cette planète !</p>';
+	}elseif($this->myStar->cau_etat==4) {
+		echo '<p><img src="'.URL_MAIN_ABS.'images/commun/warning.png" /></p><p>Un vaisseau d\'exploration intervient sur cette planète !</p>';
+	}
+	
+	?>
+	<br/><br/>
+</div>
+<a class="close" href="javascript:void(0)">Close</a>

@@ -1,0 +1,100 @@
+<div id='inThePlace'>
+<script type="text/javascript">
+
+$(document).ready(function() {
+	$("#onTalk").val(0);
+	$("#onMyTalk").val(0);
+	
+$("#journal .warning").click(function() {
+	var request = $.ajax({
+		url: url_site+'Core/index/journaldelete',
+		type: "POST"							
+		}); 
+		request.done(function(msg) {
+						$("#journal .warning").fadeOut(1000);
+						setTimeout(function(){
+						  // $("#journal .warning").hide(); 
+					});
+		});
+});
+	
+$("#retour_journal").click(function() {
+	if($('#onTalk').val()==0){
+		$('#onTalk').val(1);	
+		var request = $.ajax({
+		url: url_site+'Core/index/<?php echo $this->nomSalleU;?>',
+		type: "POST"							
+		}); 
+		request.done(function(msg) {
+						$("#inThePlace").fadeOut(1000);
+						setTimeout(function(){
+						  $("#inThePlace").hide();
+						  $("#inThePlace").html(msg); 
+						$("#inThePlace").fadeIn(1000);
+						}, 1000);
+						
+					});
+	}
+});
+
+
+});
+
+
+
+</script>
+</head>
+<div id="<?php echo $this->salle;?>">
+	<div class='rapport'>
+<?php
+
+$json = json_decode($this->getJournal,true);
+echo '<h3>Journal de bord</h3>';
+if(count($json['recompense'])>0){
+  $i=0;
+	foreach($json['recompense'] as $jj){
+		$jj = str_replace('<br><br>', '<br>', $jj);
+		if (($i % 2) == 0) $classe="pairJ";else $classe='impairJ';
+		echo '<div class="'.$classe.'">'.$jj.'</div>';
+		$i++;
+	}
+}
+else 
+	echo 'Aucun retour pour le moment';
+
+$nbPlanete=0;
+$epiceJour=0;
+foreach($this->myPlanetes as $star){
+	if($star['cau_etat']==1){
+		$epiceJour+=$star['ca_epice_jour'];
+		$nbPlanete++;
+	}
+}
+?>
+</div>
+<div class="displayCorruption">
+<?php if($this->myUser->getCorruption()>0){
+	?>
+		<p>Votre corruption s'élève à <?php echo $this->myUser->getCorruption();?></p>
+		<p>Vous perdez <?php echo round($this->myUser->getCorruption()/10);?> renommée par Cérémonie de partage</p>
+	<?php
+}else{
+	?>
+		<p>Vous n'avez pas été corrompu</p>
+	<?php
+}
+?></div><br/>
+	<div id='forceTab'>
+		<div>RAPPORT DE FORCE</div>
+<div>Vous possédez <?php echo $nbPlanete;?> planètes. Gain : <?php echo $epiceJour;?> épice par jour</div>
+<div>Vous possédez <span id='nbT'><?php echo $this->myUser->getTroupe();?></span> Troupes à envoyer sur les planètes</div>
+<div<?php if($this->encoursAttaque) echo ' class="encoursAttaque"';?>>Vaisseaux d'attaque disponibles : <?php echo $this->myUser->getVaisseau();?> <?php echo '<img class="ship" title="Vaisseau" alt="Vaisseau" src="'.URL_MAIN_ABS.'images/vaisseau/ship.png" />';?></div>
+<div<?php if($this->encoursExploration) echo ' class="encoursAttaque"';?>>Vaisseaux d'exploration disponibles : <?php for($i=0;$i< ($this->myUser->getExploration()-$this->encoursExploration);$i++){echo '<img src="'.URL_MAIN_ABS.'images/vaisseau/explorateur.png" /> ';}?></div>
+<div><?php if($this->myUser->getValeurTroupe() >0){?> Troupes <?php echo $this->myUser->getTroupe();echo ' <img src="'.URL_MAIN_ABS.'images/vaisseau/troupe.png" /> ';} ?></div>
+
+	</div>
+	
+	<div id='retour_journal' style='z-index:1000'></div>
+</div>
+
+</div>

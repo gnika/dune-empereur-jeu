@@ -1,0 +1,61 @@
+
+body {
+    margin: 0;
+}
+#masque {
+    border: 1px solid #EEEEEE;
+    height: 300px;
+    margin: 50px auto;
+    overflow: hidden;
+    position: relative;
+    width: 1000px;
+}
+#container {
+    background:  #92D2ED;
+    height: 300px;
+    position: absolute;
+    width: 659px;
+}
+#sol {
+    background: url("../images/sol.png") repeat-x scroll 0 0 transparent;
+    bottom: 0;
+    height: 36px;
+    position: absolute;
+    width: 2000px;
+    z-index: 50;
+}
+#perso {
+    background: url("../images/nu.png") no-repeat scroll -21px -128px transparent;
+    height: 73px;
+    left: 460px;
+    position: absolute;
+    top: 195px;
+    width: 61px;
+    z-index: 40;
+}
+
+#perso2 {
+    background: url("../images/nu.png") no-repeat scroll -21px -128px transparent;
+    height: 73px;
+    left: 560px;
+    position: absolute;
+    top: 195px;
+    width: 61px;
+    z-index: 40;
+}
+#texto {
+	height: 36px;
+    position: relative;
+    width: 500px;
+    top: 130px;
+    left: 422px;
+	border-radius: 10px;
+	opacity:0.5;
+}
+#mesTexto {
+	height: 150px;
+    left: 9px;
+    position: absolute;
+    top: 113px;
+    width: 360px;
+}

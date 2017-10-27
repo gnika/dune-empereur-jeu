@@ -1,0 +1,22 @@
+<div id='sortie_objet'>RETOUR</div><?php 
+$objets=$this->myObjects;
+foreach($objets as $obj){
+	echo ' <img style="cursor:pointer" alt="'.$obj['obj_nom'].'" title="'.$obj['obj_nom'].'" src="'.URL_MAIN_ABS.'images/objet/'.$obj['obj_image'].'" onclick="'.$obj['obj_dbl'].'" />';
+}
+?>
+<script>
+	$("#sortie_objet").click(function() {
+	if ($('#buttonRessources, #infojoueur, #information, #buttonObjet, #mesTexto, .foot').css('display') != 'none'){
+		$('#sortie_objet').css({'display': 'block'});
+		$('#buttonRessources, #infojoueur, #information, #buttonObjet, #mesTexto, .foot').css({'display': 'none'});
+	}
+	else{
+		$('#sortie_objet').css({'display': 'none'});
+		setTimeout(function(){
+		  $('#buttonRessources, #infojoueur, #information, #buttonObjet, #mesTexto, .foot').css({'display': 'block'})
+		}, 500);
+		
+	}
+	$( "#mesObjets" ).toggle( "drop" );
+});
+</script>

@@ -1,0 +1,221 @@
+<script type="text/javascript" src="js/paper-full.min.js" />
+<div id='inThePlace'>
+<?php $imp=$this->myUser->getImpot();?>
+<script type="text/javascript">
+
+$(document).ready(function() {
+	$("#onTalk").val(0);
+	$("#onMyTalk").val(0);
+	aniX = 0;
+	aniY = 0;
+
+	jQuery.fn.diploTalk = function() {
+		$(this).oneTime(200,function() {
+			$(this).css({backgroundPosition:'-200px -1px'});
+		}).oneTime(400,function() {
+			$(this).css({backgroundPosition:'-265px -1px'});
+		}).oneTime(600,function() {
+			$(this).css({backgroundPosition:'-340px -1px'});
+		}).oneTime(800,function() {
+			$(this).css({backgroundPosition:'-265px -1px'});
+		});
+	};
+	jQuery.fn.noDiploTalk = function(){
+		$(this).diploTalk();
+		$(this).everyTime(800,function(){
+			$(this).diploTalk();
+		});
+	}
+	
+	///
+	jQuery.fn.diploTalkPerso = function() {//quand il parle
+		$(this).oneTime(200,function() {
+			$(this).css({backgroundPosition:'-398px -147px'});
+		}).oneTime(400,function() {
+			$(this).css({backgroundPosition:'-448px -147px'});
+		}).oneTime(600,function() {
+			$(this).css({backgroundPosition:'-498px -147px'});
+		}).oneTime(800,function() {
+			$(this).css({backgroundPosition:'-448px -147px'});
+		});
+	};
+	
+	jQuery.fn.funDiploTalkPerso = function(){//quand il parle
+		$(this).diploTalkPerso();
+		$(this).everyTime(800,function(){
+			$(this).diploTalkPerso();
+		});
+	}
+	jQuery.fn.diploNoTalkPerso = function() {//quand il ne parle pas
+		$(this).oneTime(200,function() {
+			$(this).css({backgroundPosition:'-398px -11px'});
+		}).oneTime(400,function() {
+			$(this).css({backgroundPosition:'-448px -11px'});
+		}).oneTime(600,function() {
+			$(this).css({backgroundPosition:'-498px -11px'});
+		}).oneTime(800,function() {
+			$(this).css({backgroundPosition:'-448px -11px'});
+		});
+	};
+	jQuery.fn.noDiploTalkPerso = function(){//quand il ne parle pas
+		$(this).diploNoTalkPerso();
+		$(this).everyTime(800,function(){
+			$(this).diploNoTalkPerso();
+		});
+	}
+	
+	var arret = 0;
+
+	$("#rahuyta").click(function() {
+		if($("#onTalk").val()==0 && $("#onMyTalk").val()==0){
+			$("#texto").removeClass().addClass('rahuytaTextDiplomate');
+			if (arret == 0 || arrestation==1) {
+				$("#texto").show();
+				$("#onTalk").val(1);
+				$("#rahuyta").stopTime().funDiploTalkPerso();
+
+				var request = $.ajax({
+				url: url_site+"Core/index/ajaxquote", 
+				type: "POST",
+				data: { idDiv: 'rahuyta', idPerso: '11', talk: 'noDiploTalkPerso', stopTalk: 'funDiploTalkPerso' },			
+				
+				}); 
+				request.done(function(msg) { 
+				$("#texto").html(msg); 
+				});
+				 
+			}else{
+				arret = 0;
+				$("#rahuyta").stopTime().noDiploTalkPerso();
+				$("#texto").invisible();
+			}
+		}
+	});
+
+$("#retour_diplomate").click(function() {
+	if($('#onTalk').val()==0){
+		$('#onTalk').val(1);	
+		if(<?php echo $imp;?>>=5)
+			var dstination='trone';else dstination='hangar';
+		var request = $.ajax({
+		url: url_site+'Core/index/'+dstination,
+		type: "POST"							
+		}); 
+		request.done(function(msg) {
+						$("#inThePlace").fadeOut(1000);
+						setTimeout(function(){
+						  $("#inThePlace").hide();
+						  $("#inThePlace").html(msg); 
+						$("#inThePlace").fadeIn(1000);
+						}, 1000);
+						
+					});
+	}
+});
+
+});
+ 
+ jQuery.fn.diplo = function() {
+		$(this).oneTime(200,function() {
+			$(this).css({backgroundPosition:'0px 0px'});
+		}).oneTime(400,function() {
+			$(this).css({backgroundPosition:'0px  -51px'});
+		}).oneTime(600,function() {
+			$(this).css({backgroundPosition:'0px -102px'});
+		}).oneTime(800,function() {
+			$(this).css({backgroundPosition:'0px -51px'});
+		});
+	};
+ jQuery.fn.DiploBack = function(){//quand il ne parle pas
+		$(this).diplo();
+		$(this).everyTime(800,function(){
+			$(this).diplo();
+		});
+} 
+
+jQuery.fn.diploNo = function() {
+		$(this).oneTime(200,function() {
+			$(this).css({backgroundPosition:'0px  -250px'});
+		}).oneTime(400,function() {
+			$(this).css({backgroundPosition:'0px  -150px'});
+		}).oneTime(600,function() {
+			$(this).css({backgroundPosition:'0px -200px'});
+		}).oneTime(800,function() {
+			$(this).css({backgroundPosition:'0px -150px'});
+		});
+	};
+ jQuery.fn.DiploBackNop = function(){//quand il ne parle pas
+		$(this).diploNo();
+		$(this).everyTime(800,function(){
+			$(this).diploNo();
+		});
+}
+	
+if($(".diploHolo").length)
+	$(".diploHolo").DiploBack();
+if($(".nopDiplo").length)
+	$(".nopDiplo").DiploBackNop();
+
+if($(".diploHolo").length)
+	$("#rahuyta").noDiploTalkPerso();
+
+$("#mesTexto").html('<img src="images/plan/diplomatie_plan.png" />'); 
+$("#plan").val('diplomatie_plan');
+
+</script>
+</head>
+
+<?php
+// print_r($this->debrief);
+if($this->myUser->getHeure()>=67)$stylePiece='nuit';else $stylePiece='';
+$stylePiece='';
+?>
+<div id="<?php echo $this->salle;?>" class='<?php echo $stylePiece;?>'>
+	<div id='retour_diplomate' style='z-index:1000'></div>
+	<?php if($this->debrief != '') echo '<div id="rahuyta"></div>';?>
+	<div id="diploHolo" <?php if($this->debrief != '') echo 'class="diploHolo"';else  echo 'class="nopDiplo"';?>></div>
+
+	<div id="texto"></div>
+	<canvas id="canvas" diplomate></canvas>
+</div>
+</div>
+<script type="text/paperscript" canvas="canvas">
+        var lineGroup = new Group();
+        var lineCount = 100;
+        for (var i = 0; i < lineCount; i++) {
+            var linePath = new Path.Line([0, 0], [0, 0]);
+            lineGroup.addChild(linePath);
+        }
+        lineGroup.strokeColor = 'red';
+
+        var path1 = new Path('M63.39307,265.71387c10.8667,6.96631 26.4707,12.26025 43.18896,12.26025c24.79932,0 39.28857,-13.09619 39.28857,-32.04346c0,-17.27588 -10.03125,-27.58545 -35.38721,-37.05908c-30.65088,-11.146 -49.59814,-27.30713 -49.59814,-53.49902c0,-29.25732 24.2417,-50.9917 60.74365,-50.9917c18.94727,0 33.1582,4.4585 41.23877,9.19531L156.18018,133.35986c-5.85156,-3.62256 -18.39014,-8.9165 -35.38721,-8.9165c-25.63525,0 -35.3877,15.3252 -35.3877,28.14258c0,17.5542 11.42432,26.19238 37.33789,36.22314c31.76514,12.26025 47.64795,27.58545 47.64795,55.1709c0,28.979 -21.17676,54.33496 -65.48096,54.33496c-18.11133,0 -37.89502,-5.57275 -47.92578,-12.26025z');
+        path1.position = view.center;
+
+        var path2 = path1.clone();
+        path1.scale(1.5);
+        path2.scale(2);
+
+        var length1 = path1.length;
+        var length2 = path2.length;
+        function onFrame(event) {
+            var vector = new Point({
+                angle: -event.count % 360,
+                length: 100
+            });
+            path1.rotate(-0.5);
+            path1.position = view.center - vector;
+
+            path2.rotate(-0.5);
+            path2.position = view.center + vector.normalize(50);
+
+            for (var i = 0; i < lineCount; i++) {
+                var path = lineGroup.children[i];
+                var l1 = (length1 / lineCount * (i + event.count / 10)) % length1;
+                var l2 = (length2 / lineCount * (i + event.count / 10)) % length2;
+                path.firstSegment.point = path1.getPointAt(l1),
+                path.lastSegment.point = path2.getPointAt(l2);
+            }
+        }
+    </script>
+	
+	

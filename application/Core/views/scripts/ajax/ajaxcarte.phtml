@@ -1,0 +1,192 @@
+<?php 
+	$planete=$this->planete;
+	$action=$this->quid;
+	$diplomate=$this->diplomate;
+	$troupe=$this->troupe;
+
+	
+?>
+<div id='textoIn'>
+	<?php  
+	if($diplomate){
+		$text='L\'envoi d\'un diplomate coûte au royaume 500 unités d\'épices. Etes vous sûr de vouloir payer ?
+		<br/><p><div class="diplomateYes"><a onclick="return false" href="">Envoyer un diplomate !</a></div> <div class="diplomateNo"><a onclick="return false" href="">après tout, peut-être pas...</a></div></p>		';//creer le scenarii de crise
+	}
+	elseif($troupe){
+		if($planete->cau_envoi!=0)
+			$text='Un commando est déjà en cours de route sur cette planète///Pourquoi ne pas attendre qu\'il arrive ?';
+		elseif($this->myUser->getTroupe() < 50)
+			$text='Vous ne possédez pas assez de troupes pour en envoyer///Pourquoi ne pas en recruter ?';
+		else{
+			$text= 'combien de troupes voulez-vous envoyer ?<br/>
+			<p><div><a onclick="return false" class="envoi50" id="envoi50" href="">50</a>
+			<a onclick="return false" class="envoi100" id="envoi100" href="">100</a>
+			<a onclick="return false" class="envoi250" id="envoi250" href="">250</a>
+			<a onclick="return false" class="envoi500" id="envoi500" href="">500</a></div>';
+			?><script>$('#textoLink').hide();</script><?php 
+		}
+	}elseif($action==3){
+		$text= 'Voulez vous envoyer la flotte attaquer la planète '.$planete->ca_nom.' ?<br/><br/><p><div class="attaqueYes"><a onclick="return false" href="">Envoyez la flotte !</a></div> <div class="attaqueNo"><a onclick="return false" href="">après tout, peut-être pas...</a></div></p>';
+		?><script>$('#textoLink').hide();</script><?php 
+	}
+	elseif($action==4)
+		$text= 'Voulez vous envoyer un vaisseau de reconnaissance sur la planète '.$planete->ca_nom.' ?<br/><p><div id="explorerYes" class="explorerYes"><a onclick="return false" href="">Envoyez la flotte !</a></div> <div class="explorerNo"><a onclick="return false" href="">après tout, peut-être pas...</a></div></p>';
+
+	$pieces = explode("///", $text);
+	echo $pieces[0];
+?>
+</div>
+<?php if(count($pieces)>1) { ?>
+		<a href='' onclick='return false;' id='textoLink'>suite ... </a> 
+	<?php  
+	} ?>
+	<input type='hidden' id='stepDial' value='0'/>
+	<?php  if(count($pieces)>1){
+	?>
+		<input type='hidden' id='closeWindow' value='0'/>
+	<?php  }else{ ?>
+		<input type='hidden' id='closeWindow' value='1'/>
+	<?php  } ?>
+	<input type='hidden' id='maxDial' value='<?php  echo count($pieces);?>'/>
+
+<!--/*//////////////-->
+
+	<SCRIPT language="Javascript">
+		$("#texto").show();
+		$("#texto").removeClass().addClass('commandantTextCarte');
+		$("#commandant").stopTime().mouvMarcheCom();
+		$("#texto").css('background-color', '#FFFFFF');
+		$("#texto").visible();
+		
+		$("#textoLink").click(function() {
+			var idClique=this.id;
+			if(idClique=='textoLink'){var tab = <?php  echo json_encode($pieces); ?>;var inTex='textoIn';var stepDial='stepDial';var maxDial='maxDial';var closeWindow='closeWindow';}
+			
+			$("#"+inTex).empty();
+			var newVal=$("#"+stepDial).val();
+			if(newVal < $("#"+maxDial).val()){
+				newVal=parseInt(newVal)+1;
+				$("#"+stepDial).val(newVal);
+				
+				$("#"+inTex).html(tab[newVal]);
+			}
+			
+			if(newVal+1==$("#"+maxDial).val()){
+				$("#"+idClique).hide();
+				$("#"+closeWindow).val(1);
+			}
+		})
+		
+		$('.envoi50, .envoi250, .envoi100, .envoi500').click(function(){
+			var nbTroupe=0;
+			var days='1 jour';
+			<?php  if($planete->ca_zoom >0){ ?> days='2 jours';<?php  } ?>
+			if(this.id=='envoi50')nbTroupe=50;else if(this.id=='envoi100')nbTroupe=100;else if(this.id=='envoi250')nbTroupe=250;else if(this.id=='envoi500')nbTroupe=500;
+			var request = $.ajax({
+			url: url_site+'Core/ajax/ajaxcarteenvoitroupe',
+			type: "POST",
+				data: { nb: nbTroupe, id: <?php  echo $planete->ca_id;?> },
+			}); 
+			request.done(function(msg) {
+					if(msg==1)
+						var txt='<div id="fermezmoi">Un commando est déjà en cours de route sur <?php  echo $planete->ca_nom;?></div>';
+					else if(msg==2){
+						var txt='<div id="fermezmoi">Nous envoyons de suite un commando pour défendre <?php  echo $planete->ca_nom;?> ! ils sera sur place dans '+days+'</div>';
+						vaisseauDisplay();
+					}
+					else if(msg==3)
+						var txt='<div id="fermezmoi">Nous ne pouvons pas envoyer de suite un commando pour défendre <?php  echo $planete->ca_nom;?></div>';
+					else if(msg==4)
+						var txt='<div id="fermezmoi">Nous ne possédons pas assez de troupes pour en envoyer autant sur <?php  echo $planete->ca_nom;?></div>';	
+						
+					$("#textoIn").empty();
+					$("#textoIn").html(txt);
+				});
+				$("#closeWindow").val(0);
+		})
+		
+		$(".attaqueYes, .explorerYes").click(function() {
+			if(this.id=='explorerYes')
+				var action=4;
+			else
+				action=3;
+		
+			var txt ='';
+			var days='1 jour';
+			<?php  if($planete->ca_zoom >0){ ?> days='2 jours';<?php  } ?>
+			var request = $.ajax({ 
+					url: url_site+'Core/ajax/envoiflotte',
+					type: "POST",
+					data: {idPlanete: <?php  echo $planete->ca_id;?>, actionId: action}
+				}); 
+				request.done(function(msg) {
+					
+					if(msg!='' && msg==3){
+						var txt='<div id="fermezmoi">Notre flotte est déjà en cours d\'expédition</di>';
+					}
+					else if(msg!='' && msg==4){
+						var txt='<div id="fermezmoi">Nous ne possédons pas assez de vaisseau d\'exploration</di>';
+					}
+					else if(msg!='' && msg==5){
+						var txt='<div id="fermezmoi">Une opération est déjà en cours sur <?php  echo $planete->ca_nom;?></di>';
+					}
+					else if(action==3){//animation de vaisseau à prévoir
+						var txt='<div id="fermezmoi">Nos vaisseaux sont lancés! ils seront sur <?php  echo $planete->ca_nom;?> dans '+days+'</di>';
+						vaisseauDisplay();
+					}
+					else{//animation de vaisseau à prévoir
+						var txt='<div id="fermezmoi">Le vaisseau de reconnaissance est parti! ils sera sur <?php  echo $planete->ca_nom;?> dans '+days+'</di>';
+						vaisseauDisplay();
+					}
+						
+					$("#textoIn").empty();
+					$("#textoIn").html(txt);
+				});
+			$("#closeWindow").val(0);
+		})
+
+		
+		$(".diplomateYes").click(function() {
+		
+			var days='1 jour';
+			<?php  if($planete->ca_zoom >0){ ?> days='2 jours';<?php  } ?>
+			var request = $.ajax({ 
+					url: url_site+'Core/ajax/envoidiplomate',
+					type: "POST",
+					data: {idPlanete: <?php  echo $planete->ca_id;?>}
+				}); 
+				request.done(function(msg) {
+					if(msg==1)
+						var txt='<div id="fermezmoi">Notre diplomate est en route. Il sera sur <?php  echo $planete->ca_nom;?> dans '+days+'</di>';
+					else if(msg==2)
+						var txt='<div id="fermezmoi">Un diplomate est déjà en cours de mission ou attends votre débriefing</di>';
+					else if(msg==3)
+						var txt='<div id="fermezmoi">Une opération militaire est déjà en cours sur <?php  echo $planete->ca_nom;?></di>';
+						
+					$("#textoIn").empty();
+					$("#textoIn").html(txt);
+					afficheSpice();
+				});
+			$("#closeWindow").val(0);
+		})
+		
+		$(".attaqueNo, .diplomateNo, .explorerNo").click(function() {
+			$("#closeWindow").val(1);
+		})
+		
+		$("#textoIn").click(function() {
+			if($("#fermezmoi").length)
+				$("#closeWindow").val(1);
+			if($("#closeWindow").val()==1){
+				$("#commandant").stopTime().mouvArretCom();
+				$("#texto").invisible();
+				$("#textoIn").hide();
+				$("#onTalk").val(0);
+				$("#onMyTalk").val(0);
+				$("#onAutoTalk").val(1);
+				
+			}
+			
+		})
+		
+	</SCRIPT>

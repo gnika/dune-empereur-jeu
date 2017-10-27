@@ -1,0 +1,77 @@
+<div id="inscription"><h1>Dune le jeu Point and click: Inscription rapide</h1>
+
+<h2>Pour jouer à Dune le jeu Point and click, vous devez vous inscrire (Très simple et très rapide)</h2>
+
+<p style="color: #025FA1;">Les données du jeu <strong>Dune jeu point and click</strong> sont sauvegardées dans votre compte</p>
+<p></p>
+<?php //echo $this->form;
+$this->displayMessages();
+ ?>
+<form id="contactForm" enctype="application/x-www-form-urlencoded" action="" method="post">
+
+<p>
+<span class="input input--minoru">
+	<label for="login" class="input__label input__label--minoru">
+		Identifiant
+	</label>
+	<input type="text" name="login" id="login" value="" class="input__field input__field--minoru" />
+</span>
+<br/>
+<span class="input input--minoru">
+	<label for="email" class="input__label input__label--minoru">
+		Email
+	</label>
+	<input type="text" name="email" id="email" value="" class="input__field input__field--minoru" />
+</span>
+</p>
+<p>
+<span class="input input--minoru">
+	<label for="password" class="input__label input__label--minoru">
+		Mot de passe
+	</label>
+	<input type="password" name="password" id="password" value="" class="input__field input__field--minoru" />
+					
+</span><br/>
+<span class="input input--minoru">
+	<label for="repassword" class="input__label input__label--minoru">
+	Retapez le Mot de passe
+	</label>
+	<input type="password" name="repassword" id="repassword" value="" class="input__field input__field--minoru" />
+					
+</span>
+</p>
+<span class="input input--minoru last">
+<input type="submit" name="send" id="send" value="Valider mon inscription" />
+</span>
+<input type="hidden" name="hidden1" value="" id="hidden1" />
+<input type="hidden" name="hidden2" value="" id="hidden2" />
+<input type="hidden" name="hidden3" value="" id="hidden3" />
+</form>
+
+  <!--<h5>L'administrateur du site se réserve le droit de bannir tout utilisateur qui pertuberait par quelque maniere que ce soit (pudeur, provocation, cheater...) le bon fonctionnement du jeu.</h5>-->
+
+<a class="retourAccueil inscription" href='/index.html'>RETOUR</a>
+<div class="fremenInscrit"></div>
+</div>
+<script>
+jQuery.fn.arretTalk = function() {
+		$(this).oneTime(1200,function() {
+			$(this).css({backgroundPosition:'-140px 0'});
+		}).oneTime(300,function() {
+			$(this).css({backgroundPosition:'0 0'});
+		}).oneTime(600,function() {
+			$(this).css({backgroundPosition:'-140px 0'});
+		}).oneTime(900,function() {
+			$(this).css({backgroundPosition:'-280px 0'});
+		});
+	};
+	
+	jQuery.fn.mouvArretTalk = function(){
+		$(this).arretTalk();
+		$(this).everyTime(1200,function(){
+			$(this).arretTalk();
+		});
+	}
+	
+$(".fremenInscrit").mouvArretTalk();
+</script>

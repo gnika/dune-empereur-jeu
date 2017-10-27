@@ -1,0 +1,35 @@
+<h2>Identification</h2>
+<?php if($_GET['inscrit']==1){
+	echo '<h3>Vous êtes inscrit ! connectez vous pour commencer l\'aventure !</h3>';
+}?>
+<?php echo $this->form; ?>
+
+
+<!--
+<form id="loginForm" enctype="application/x-www-form-urlencoded" action="http://dune-empereur-jeu.fr/Customer/auth/dologin" method="post">
+
+<span class="input input--minoru">
+					<input type="text" name="username" id="username" value="" class="input__field input__field--minoru" />
+					<label for="username" class="input__label input__label--minoru">
+						<span class="input__label-content input__label-content--minoru">Votre identifiant</span>
+					</label>
+</span>
+
+<span class="input input--minoru">
+					<input type="password" name="password" id="password" value="" class="input__field input__field--minoru" />
+					<label for="password" class="input__label input__label--minoru">
+						<span class="input__label-content input__label-content--minoru">Votre mot de passe</span>
+					</label>
+</span>
+
+<dt id="source-label">&nbsp;</dt>
+<dd id="source-element">
+<input type="hidden" name="source" value="http://dune-empereur-jeu.fr/index.html" id="source" /></dd>
+
+<input type="submit" name="login" id="login" value=" Connexion " class="formsubmit" /></form>
+-->
+
+
+
+<p class="loginFormLink" ><a href="<?php echo URL_MAIN_ABS . $this->rewrite('Customer/auth/auth') ?>" style='font-size:13px;' >Pas encore Inscrit ? C'est pas là ! (inscription sans envoi de mail)</a><!-- - <a  href="<?php echo URL_MAIN_ABS . $this->rewrite('Customer/auth/lostpassword') ?>">Mot de passe oublié ?</a>--></p>
+<?php die();

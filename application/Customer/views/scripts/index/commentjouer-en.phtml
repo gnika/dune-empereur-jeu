@@ -1,0 +1,60 @@
+<div id="commentjouer">
+<h1>Dune jeu point and click : Situation politique</h1>
+<p>The imperiuum has been governed for 3500 years by the tyrant LETO II, powerful half-man half-sandworm monarch, capable of prescient vision </p>
+<p>The whole empire depends only on a single rare and pecious resource : <b>SPICE</b>, and the God Emperor is the only person able to produce it on <strong>DUNE</strong> -also known as <strong>ARRAKIS</strong></p>
+<p>In order to balance the imperiuum and keep it in submission, he distributes this precious gift sparingly to the 4 major Houses :
+<ul>
+<li><a href='<?php echo URL_MAIN_ABS . $this->rewrite('Customer/index/guilde'); ?>'>La GUILDE SPATIALE</a></li>
+<li><a href='<?php echo URL_MAIN_ABS . $this->rewrite('Customer/index/gesserit'); ?>'>Le BENE GESSERIT</a></li>
+<li><a href='<?php echo URL_MAIN_ABS . $this->rewrite('Customer/index/ix'); ?>'>IX</a></li>
+<li><a href='<?php echo URL_MAIN_ABS . $this->rewrite('Customer/index/tleilax'); ?>'>Le BENE TLEILAX</a></li>
+</ul>
+</p>
+<p>This sharing takes place every 5 days during the Ceremony of Sharing.<br/> WHEREVER YOU ARE, you'll be redirected every 5 days to the throne room, where the ceremony is happening.
+</p>
+<br/>
+ <p><a class="commentJouer" <?php echo $cl;?> href='<?php echo URL_MAIN_ABS . $this->rewrite('Customer/index/apercu'); ?>'>Tutorial</a></p><br/>
+ <p><a class="commentJouer" <?php echo $cl;?> href='<?php echo URL_MAIN_ABS . $this->rewrite('Customer/index/personnages'); ?>'>The characters of the palace</a></p><br/><br/>
+<h3>1 - Ceremony of Sharing</h3>
+<p>
+As the majordomo of the God Emperor LETO II, you are responsible of the spice sharing.
+You can (must) decide how many spice to assign to which House.</p>
+<p> The more you give spice, the more you acquire <b>REPUTATION</b>.If a House isn't given spice during a ceremony because of a lack of resources, your corruption level grows.
+Corruption affects the level of Reputation you earn during the ceremonies</p>
+<br/>
+<h3>2 - How to acquire spice ?</h3>
+<p>You have to ways to earn spice</p> : <br/><br/>the first and simpler way is, <b><a href='<?php echo URL_MAIN_ABS . $this->rewrite('Customer/index/conquete'); ?>'>CONQUER PLANETS</a></b><br/>
+You can get a great amount of spice when conquering a planet - by war or not.
+ This also grants you a smaller amount of resources every day from this planet.
+<br/><br/>
+The second way is to accomplish <b>QUESTS</b> that you receive mostly by the representatives of the 4 major Houses of the Landstraad. The more you get quests finished, the more you get spice.
+ </p>
+<p class='warning'>You HAVE TO rapidly begin to conquer planets.</p>
+</br>
+<h3>3 - What do quests bring me ? ? </h3>
+<p>By accomplishing quests,you can earn different thing such as : Objects, SPICE, Servants, Influence and Escorts</p>
+<p><b>OBJECTS</b> are meant to help you resolve quests, or to give bonus effects. Click on one to use it.</p>
+<p><b>SERVANTS</b>, once assigned to a House, make this House's happiness grow. The more a House is happy, the more its representatives will talk to you</p>
+<p><b>INFLUENCE POINTS</b>, once assigned to a House, diminish the quantity of spice needed in each ceremony for this House</p>
+<p><b>ESCORTS</b>, once assigned to a House, protect this House from <b>MURDERS</b></p>
+
+<p class='warning'>You must assign escorts,influence and servants to the different Houses</p>
+<p>It's in fact rare to receive Influence,servants or escorts already assigned to a particular House. <br/>
+So you must assign this resources from your headquarters, where you also manage the quantity of spice to be given to the different Houses</p>
+<br/>
+<h3>4 - Les Assassinations</h3>
+<p>TENSE CONTEXT</p>
+<p>The different Houses in the palace have bad relationships between each other : each one wants to be the best in the eyes of the God Emperor and isn't afraid of lower the other Houses' reputation</p>
+<p>Randomly, one or two servants <b>ALREADY ASSIGNED</b> are killed in an assassination attempt directed by a rival House</p>
+<p>Servants are crucial pieces for good relationships with a House. ASSIGN ESCORTS where there are Servants and they will die in servants' place</p>
+<br/>
+<h3>You're now ready, you Moneo, to serve your great God Emperor LETO II !</h3></br></br></br>
+
+</div>
+
+<a class="retourAccueil2" href='<?php echo URL_MAIN_ABS . $this->rewrite('Customer/index/remerciements'); ?>'>Remerciements</a>
+<a class='retourAccueil2 second' href='<?php echo URL_MAIN_ABS . $this->rewrite('Core/index/index'); ?>'><img class="first" src="/images/index/Accueil-bor_33.png" alt="dune jeu" title="dune jeu"/> JOUER <img src="/images/index/Accueil-bor_36.png" alt="dune jeu" title="dune jeu"/></a>
+<script>$(window).load(function() {
+$('#connect a').css('visibility', 'hidden');
+$('#ressources, #mesTexto, #infojoueur').hide();
+})</script>

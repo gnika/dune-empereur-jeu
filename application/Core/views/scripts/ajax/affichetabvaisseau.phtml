@@ -1,0 +1,33 @@
+<?php
+$nbPlanete=0;
+$epiceJour=0;
+foreach($this->myPlanetes as $star){
+	if($star['cau_etat']==1){
+		$epiceJour+=$star['ca_epice_jour'];
+		$nbPlanete++;
+	}
+}
+?>
+<table id='force'>
+	<tr><th colspan='2'>RAPPORT DE FORCE</th></tr>
+	<tr>
+		<td>Vous possédez :</td><td><?php echo $nbPlanete;?> planètes</td><td><?php echo $epiceJour;?> épice/jour</td>
+	</tr>
+	<tr>
+		<td></td><td colspan=2><span id='nbT'><?php echo $this->myUser->getTroupe();?></span> Troupes </td>
+	</tr>
+	<tr>
+		<td>équipe d'exploration disponible</td><td><?php for($i=0;$i< ($this->myUser->getExploration()-$this->encoursExploration);$i++){echo '<img src="'.URL_MAIN_ABS.'images/vaisseau/explorateur.png" /> ';}?></td>
+	</tr>
+	<tr>
+		<td><?php echo ' <img class="ship" title="Vaisseau" alt="Vaisseau" src="'.URL_MAIN_ABS.'images/vaisseau/ship.png" /> ';?></td><td <?php if($this->encoursAttaque) echo ' class="encoursAttaque"';?>><?php echo $this->myUser->getVaisseau();?></td>
+	</tr>
+		<?php if($this->myUser->getValeurTroupe() >0){ ?>
+	<tr>
+		<td>Troupes</td><td><?php echo $this->myUser->getTroupe();echo ' <img src="'.URL_MAIN_ABS.'images/vaisseau/troupe.png" /> ';?></td>
+	</tr>
+	<?php } ?>
+</table>
+<?php
+die();
+?>

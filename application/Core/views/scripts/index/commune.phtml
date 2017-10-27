@@ -1,0 +1,342 @@
+
+<?php /*echo $this->formatDate( date('Y-m-d') ) ?><p><a href="<?php echo $this->rewrite('Core/index/index') ?>">Accueil</a></p>*/ $imp=$this->myUser->getImpot();?>
+<script type="text/javascript">
+
+$(document).ready(function() {
+	$("#onTalk").val(0);
+	$("#onMyTalk").val(0);
+	aniX = 0;
+	aniY = 0;
+	
+	jQuery.fn.arretParleIx = function() {
+		$(this).oneTime(1200,function() {
+			$(this).css({backgroundPosition:'-154px 0'});
+		}).oneTime(300,function() {
+			$(this).css({backgroundPosition:'-308px 0'});
+		}).oneTime(600,function() {
+			$(this).css({backgroundPosition:'-154px 0'});
+		}).oneTime(900,function() {
+			$(this).css({backgroundPosition:'0 0'});
+		});
+	};
+	jQuery.fn.mouvArretParleG = function(){
+		$(this).arretParleIx();
+		$(this).everyTime(1200,function(){
+			$(this).arretParleIx();
+		});
+	}
+
+	jQuery.fn.parleIx = function() {
+		$(this).oneTime(1200,function() {
+			$(this).css({backgroundPosition:'-154px -280px'});
+		}).oneTime(300,function() {
+			$(this).css({backgroundPosition:'-308px -280px'});
+		}).oneTime(600,function() {
+			$(this).css({backgroundPosition:'-154px -280px'});
+		}).oneTime(900,function() {
+			$(this).css({backgroundPosition:'0 -280px'});
+		});
+	};
+	jQuery.fn.mouvParleG = function(){
+		$(this).parleIx();
+		$(this).everyTime(1200,function(){
+			$(this).parleIx();
+		});
+	}
+	
+	///
+	
+	jQuery.fn.arretTalk = function() {
+		$(this).oneTime(1200,function() {
+			$(this).css({backgroundPosition:'-140px 0'});
+		}).oneTime(300,function() {
+			$(this).css({backgroundPosition:'0 0'});
+		}).oneTime(600,function() {
+			$(this).css({backgroundPosition:'-140px 0'});
+		}).oneTime(900,function() {
+			$(this).css({backgroundPosition:'-280px 0'});
+		});
+	};
+	
+	jQuery.fn.mouvArretTalk = function(){
+		$(this).arretTalk();
+		$(this).everyTime(1200,function(){
+			$(this).arretTalk();
+		});
+	}
+	jQuery.fn.marcheTalk = function() {
+		$(this).oneTime(1200,function() {
+			$(this).css({backgroundPosition:'0px -270px'});
+		}).oneTime(300,function() {
+			$(this).css({backgroundPosition:'-140px -270px'});
+		}).oneTime(600,function() {
+			$(this).css({backgroundPosition:'-280px -270px'});
+		}).oneTime(900,function() {
+			$(this).css({backgroundPosition:'-140px -270px'});
+		});
+	};
+	jQuery.fn.mouvMarcheTalk = function(){
+		$(this).marcheTalk();
+		$(this).everyTime(1200,function(){
+			$(this).marcheTalk();
+		});
+	}
+	
+	jQuery.fn.arretGch = function() {
+		$(this).oneTime(1200,function() {
+			$(this).css({backgroundPosition:'-140px 0'});
+		}).oneTime(300,function() {
+			$(this).css({backgroundPosition:'0 0'});
+		}).oneTime(600,function() {
+			$(this).css({backgroundPosition:'-140px 0'});
+		}).oneTime(900,function() {
+			$(this).css({backgroundPosition:'-280px 0'});
+		});
+	};
+	
+	jQuery.fn.mouvArretGch = function(){
+		$(this).arretGch();
+		$(this).everyTime(1200,function(){
+			$(this).arretGch();
+		});
+	}
+	jQuery.fn.marcheGch = function() {
+		$(this).oneTime(1200,function() {
+			$(this).css({backgroundPosition:'0px -270px'});
+		}).oneTime(300,function() {
+			$(this).css({backgroundPosition:'-140px -270px'});
+		}).oneTime(600,function() {
+			$(this).css({backgroundPosition:'-280px -270px'});
+		}).oneTime(900,function() {
+			$(this).css({backgroundPosition:'-140px -270px'});
+		});
+	};
+	jQuery.fn.mouvMarcheGch = function(){
+		$(this).marcheGch();
+		$(this).everyTime(1200,function(){
+			$(this).marcheGch();
+		});
+	}
+	
+	var arret = 0;
+	
+		$("#sayyaoto").click(function() {
+		if($("#onTalk").val()==0 && $("#onMyTalk").val()==0){
+			$("#texto").removeClass().addClass('sayyaotoTextCouloir');
+			if (arret == 0 || arrestation==1) {
+				$("#texto").show();
+				$("#onTalk").val(1);
+				$("#sayyaoto").stopTime().mouvMarcheGch();
+
+				var request = $.ajax({
+				url: url_site+"Core/index/ajaxquote", 
+				type: "POST",
+				data: { idDiv: 'sayyaoto', idPerso: '3', talk: 'mouvArretGch', stopTalk: 'mouvMarcheGch' },			
+				
+				}); 
+				request.done(function(msg) { 
+				$("#texto").html(msg); 
+				});
+				 
+			}else{
+				arret = 0;
+				$("#sayyaoto").stopTime().mouvArretGch();
+				$("#texto").invisible();
+			}
+		}
+	});
+	
+	$("#menace_guilde").click(function() {
+		if($("#onTalk").val()==0 && $("#onMyTalk").val()==0){
+			$("#texto").removeClass().addClass('menace_guildeText');
+			if (arret == 0 || arrestation==1) {
+				$("#texto").show();
+				$("#onTalk").val(1);
+				$("#menace_guilde").stopTime().mouvParleG();
+
+				var request = $.ajax({
+				url: url_site+"Core/index/ajaxquote", 
+				type: "POST",
+				data: { idDiv: 'menace_guilde', idPerso: '23', talk: 'mouvArretParleG', stopTalk: 'mouvParleG' },			
+				
+				}); 
+				request.done(function(msg) { 
+				$("#texto").html(msg); 
+				});
+				 
+			}else{
+				arret = 0;
+				$("#menace_guilde").stopTime().mouvArretParleG();
+				$("#texto").invisible();
+			}
+		}
+	});
+	
+	$("#fremen1").click(function() {
+		if($("#onTalk").val()==0 && $("#onMyTalk").val()==0){
+			$("#texto").removeClass().addClass('fremen1Text');
+			if (arret == 0 || arrestation==1) {
+				$("#texto").show();
+				$("#onTalk").val(1);
+				$("#fremen1").stopTime().mouvMarcheTalk();
+
+				var request = $.ajax({
+				url: url_site+"Core/index/ajaxquote", 
+				type: "POST",
+				data: { idDiv: 'fremen1', idPerso: '18', talk: 'mouvArretTalk', stopTalk: 'mouvMarcheTalk' },			
+				
+				}); 
+				request.done(function(msg) { 
+				$("#texto").html(msg); 
+				});
+				 
+			}else{
+				arret = 0;
+				$("#fremen1").stopTime().mouvArretTalk();
+				$("#texto").invisible();
+			}
+		}
+	});
+
+$("#retour_commune").click(function() {
+	if(<?php echo $this->nop;?>==1){
+		recompenseDisplay('Vous n\'avez pas encore l\'autorisation de vous rendre ici');
+	}else{
+	if($('#onTalk').val()==0){
+		$('#onTalk').val(1);	
+		if(<?php echo $imp;?>>=5)
+			var dstination='trone';else dstination='couloir3';
+		var request = $.ajax({
+		url: url_site+'Core/index/'+dstination,
+		type: "POST"							
+		}); 
+		request.done(function(msg) {
+						$("#inThePlace").fadeOut(1000);
+						setTimeout(function(){
+						  $("#inThePlace").hide();
+						  $("#inThePlace").html(msg); 
+						$("#inThePlace").fadeIn(1000);
+						}, 1000);
+						
+					});
+	}
+	}
+});
+
+$(".vers_couloir2").click(function() {
+	if($('#onTalk').val()==0){
+		$('#onTalk').val(1);
+		if(<?php echo $imp;?>>=5)
+			var dstination='trone';else dstination='couloir2';
+		var request = $.ajax({
+		url: url_site+'Core/index/'+dstination,
+		type: "POST",							
+		}); 
+		request.done(function(msg) {
+						$("#inThePlace").fadeOut(1000);
+						setTimeout(function(){
+						  $("#inThePlace").hide();
+						  $("#inThePlace").html(msg); 
+						$("#inThePlace").fadeIn(1000);
+						}, 1000);
+						
+					});
+	}
+});
+
+$(".vers_biblio").click(function() {
+	if(<?php echo $this->nop;?>==1){
+		recompenseDisplay('Vous n\'avez pas encore l\'autorisation de vous rendre ici');
+	}else{
+	if($('#onTalk').val()==0){
+		$('#onTalk').val(1);	
+		if(<?php echo $imp;?>>=5)
+			var dstination='trone';else dstination='bibliotheque';
+		var request = $.ajax({
+		url: url_site+'Core/index/'+dstination,
+		type: "POST"							
+		}); 
+		request.done(function(msg) {
+						$("#inThePlace").fadeOut(1000);
+						setTimeout(function(){
+						  $("#inThePlace").hide();
+						  $("#inThePlace").html(msg); 
+						$("#inThePlace").fadeIn(1000);
+						}, 1000);
+						
+					});
+	}
+	}
+});
+
+$(".vers_bar").click(function() {
+	if(<?php echo $this->nop;?>==1){
+		recompenseDisplay('Vous n\'avez pas encore l\'autorisation de vous rendre ici');
+	}else{
+	if($('#onTalk').val()==0){
+		$('#onTalk').val(1);	
+		if(<?php echo $imp;?>>=5)
+			var dstination='trone';else dstination='bar';
+		var request = $.ajax({
+		url: url_site+'Core/index/'+dstination,
+		type: "POST"							
+		}); 
+		request.done(function(msg) {
+						$("#inThePlace").fadeOut(1000);
+						setTimeout(function(){
+						  $("#inThePlace").hide();
+						  $("#inThePlace").html(msg); 
+						$("#inThePlace").fadeIn(1000);
+						}, 1000);
+						
+					});
+	}
+	}
+});
+
+});
+ 
+if($("#sayyaoto").length)
+	$("#sayyaoto").mouvArretGch();
+if($("#menace_guilde").length)
+	$("#menace_guilde").mouvArretParleG();
+
+if($("#fremen1").length)
+	$("#fremen1").mouvArretTalk();
+
+if(<?php echo $this->nop;?>==1)
+	$("#fremen1").remove();
+
+ var heureActu=$('.progBarText').html();
+if(heureActu=="12h30" || heureActu=="16h00" || heureActu=="10h00" || heureActu=="12h00"  || heureActu=="18h00"  || heureActu=="20h00" )
+	$("#menace_guilde").remove();
+
+	$("#mesTexto").html('<img src="images/plan/commune_plan.png" />'); 
+	$("#plan").val('commune_plan');
+</script>
+</head>
+
+<?php
+if($this->myUser->getHeure()>=67)$stylePiece='nuit';else $stylePiece='';
+$stylePiece='';
+?>
+<div id="<?php echo $this->salle;?>" class='<?php echo $stylePiece;?>'>
+	<div id="perso"></div><p>&nbsp;</p>
+	<div class="vers_couloir2"></div><p>&nbsp;</p>
+	<div id='retour_commune' style='z-index:1000'></div>
+	
+	<?php
+	
+	foreach($this->porteDansSalle as $porte){
+		echo '<div id="porte_'.$porte['por_id'].'" class="porte_'.$porte['por_id_type'].'_'.$porte['poru_etat'].'"></div>';
+	}	?>
+	<div id="texto"></div>
+	<?php foreach($this->persoDansSalle as $clef => $perso){
+		echo '<div class="'.$clef.'_commune" id="'.$clef.'"></div>';
+	}
+	?>
+	<div class='vers_biblio' style='z-index:1000'></div>
+	<div class='vers_bar' style='z-index:1000'></div>
+</div>
+
+

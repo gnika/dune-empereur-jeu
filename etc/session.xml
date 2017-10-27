@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<config xmlns:zf="http://framework.zend.com/xml/zend-config-xml/1.0/">
+    <prod>
+        <use_cookies>1</use_cookies>
+        <use_only_cookies>1</use_only_cookies>
+        <use_trans_sid>0</use_trans_sid>
+        <strict>0</strict>
+        <remember_me_seconds>0</remember_me_seconds>
+        <name>appSession</name>
+        <gc_divisor>1000</gc_divisor>
+        <gc_maxlifetime>600</gc_maxlifetime>
+        <gc_probability>1</gc_probability>
+    </prod>
+    <dev extends="prod">
+        <name>appSessionDev</name>
+        <gc_divisor>1000</gc_divisor>
+        <gc_maxlifetime>86400</gc_maxlifetime>
+    </dev>
+</config>

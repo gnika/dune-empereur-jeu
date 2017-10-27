@@ -1,0 +1,85 @@
+<?php
+$this->magieEnCours;
+$this->magieEnCoursEnnemy;
+$this->EnnemyBatiment;
+$this->myBatiment;
+$this->unitEnnemi;
+$this->uniteGuerre;
+
+$myAttaque=0;
+$myDefense=0;
+$myMagie=0;
+$myPillage=0;
+foreach($this->uniteGuerre as $result){
+        
+            $defenseUnite=$result['uu_quantite']*$result['pu_defense'];
+            $attaqueUnite=$result['uu_quantite']*$result['pu_attaque'];
+            $magieUnite=$result['uu_quantite']*$result['pu_magie'];
+            $pillageUnite=$result['uu_quantite']*$result['pu_pillage'];
+            $myAttaque+=$attaqueUnite;
+            $myDefense+=$defenseUnite;
+            $myMagie+=$magieUnite;
+            $myPillage+=$pillageUnite;
+           
+        }
+		
+foreach($this->myBatiment as $result){
+        
+            $defenseBatiment=$result['ub_quantite']*$result['pb_defense'];
+            $attaqueBatiment=$result['ub_quantite']*$result['pb_attaque'];
+            $magieBatiment=$result['ub_quantite']*$result['pb_magie'];
+            $pillageBatiment=$result['ub_quantite']*$result['pb_pillage'];
+            $myAttaque+=$attaqueBatiment;
+            $myDefense+=$defenseBatiment;
+            $myMagie+=$magieBatiment;
+            $myPillage+=$pillageBatiment;
+        }		
+		
+foreach($this->magieEnCours as $result){
+	$myPillage*=$result['pm_multi_pillage'];
+}
+        
+		
+$hisAttaque=0;
+$hisDefense=0;
+$hisMagie=0;
+$hisPillage=0;
+foreach($this->unitEnnemi as $result){
+        
+            $defenseUnite=$result['uu_quantite']*$result['pu_defense'];
+            $attaqueUnite=$result['uu_quantite']*$result['pu_attaque'];
+            $magieUnite=$result['uu_quantite']*$result['pu_magie'];
+            $pillageUnite=$result['uu_quantite']*$result['pu_pillage'];
+            $hisAttaque+=$attaqueUnite;
+            $hisDefense+=$defenseUnite;
+            $hisMagie+=$magieUnite;
+            $hisPillage+=$pillageUnite;
+           
+        }
+		
+foreach($this->EnnemyBatiment as $result){
+        
+            $defenseBatiment=$result['ub_quantite']*$result['pb_defense'];
+            $attaqueBatiment=$result['ub_quantite']*$result['pb_attaque'];
+            $magieBatiment=$result['ub_quantite']*$result['pb_magie'];
+            $pillageBatiment=$result['ub_quantite']*$result['pb_pillage'];
+            $hisAttaque+=$attaqueBatiment;
+            $hisDefense+=$defenseBatiment;
+            $hisMagie+=$magieBatiment;
+            $hisPillage+=$pillageBatiment;
+        }		
+		
+foreach($this->magieEnCoursEnnemy as $result){
+	$hisPillage*=$result['pm_multi_pillage'];
+}
+
+//victoire de l'agresseur
+if($hisDefense < $myAttaque)
+{
+	
+}
+else
+{
+
+}
+?>

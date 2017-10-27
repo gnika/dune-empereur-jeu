@@ -1,0 +1,15 @@
+<h2>Sortilege</h2>
+
+<div id="pageContent">
+<?php
+
+echo '<p> image : <img src="'.URL_MAIN_ABS.'images/magie/' . $this->pageData['magie']->getImage() . '"></p>';
+echo '<p> cout or : ' . $this->pageData['magie']->getPrix() . '</p>';
+echo '<p> cout mana : ' . $this->pageData['magie']->getMana() . '</p>';
+echo '<p> description : ' . $this->pageData['magie']->getDescription() . '</p>';
+echo '<p> duree du sort (en seconde) : ' . $this->pageData['magie']->getDuree() . '</p>';
+echo '<p> cout pt victoire : ' . $this->pageData['magie']->getVictoire() . '</p>';
+
+
+?><?php echo $this->form;?>
+          </div>

@@ -1,0 +1,40 @@
+<div id='inThePlace'>
+<script type="text/javascript">
+
+$(document).ready(function() {
+	$("#onTalk").val(0);
+	$("#onMyTalk").val(0);
+	
+
+$("#retour_indice").click(function() {
+	if($('#onTalk').val()==0){
+		$('#onTalk').val(1);	
+		var request = $.ajax({
+		url: url_site+'Core/index/<?php echo $this->nomSalleU;?>',
+		type: "POST"							
+		}); 
+		request.done(function(msg) {
+						$("#inThePlace").fadeOut(1000);
+						setTimeout(function(){
+						  $("#inThePlace").hide();
+						  $("#inThePlace").html(msg); 
+						$("#inThePlace").fadeIn(1000);
+						}, 1000);
+						
+					});
+	}
+});
+
+
+});
+
+
+
+</script>
+</head>
+
+<div id="<?php echo $this->salle;?>">
+	<div id='retour_indice' style='z-index:1000'></div>
+</div>
+
+</div>

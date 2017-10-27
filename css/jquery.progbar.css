@@ -1,0 +1,60 @@
+.progBar {
+    width : 188px;
+	margin-top: 10px;
+}
+
+.progBarBg{
+    border: 1px solid #c28039;
+    border-radius: 6px;
+    color: #fff;
+    height: 29px;
+    line-height: 40px;
+    overflow: hidden;
+    position: absolute;
+    right: 383px;
+    text-align: center;
+    top: 36px;
+    width: 100%;
+}
+
+.progBarColors {
+    height: 100%;
+    width: 0;
+    background : #f20;
+    position: absolute;
+    left:0;
+    top:0;
+	
+}
+
+.progBarBg .progBarColors{/*joachim retire bulles*/
+	background-image:url("fondjour.png");
+}
+
+.progBarBubbles {
+    background-image:url("bubbles.png");
+    background-position:0px 0px; 
+    background-repeat:no-repeat;
+}
+
+.progBarReflet {
+    background-image: url("reflection.png");
+    background-position: 0 1px;
+    background-repeat: repeat-x;
+    height: 100%;
+    width: 100%;
+}
+
+.progBarProgression {
+    position: absolute;
+    left:0;
+    top:0;
+    height: 100%;
+    width: 100%;
+}
+
+.progBarText {
+    position: absolute;
+    top: 45px;
+    right: 452px;
+}

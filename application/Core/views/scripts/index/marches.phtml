@@ -1,0 +1,149 @@
+
+<?php $imp=$this->myUser->getImpot();?>
+<script type="text/javascript">
+
+$(document).ready(function() {
+	$("#onTalk").val(0);
+	$("#onMyTalk").val(0);
+	aniX = 0;
+	aniY = 0;
+	
+	jQuery.fn.arretGch = function() {
+		$(this).oneTime(200,function() {
+			$(this).css({backgroundPosition:'-23px -28px'});
+		}).oneTime(400,function() {
+			$(this).css({backgroundPosition:'-123px -28px'});
+		}).oneTime(600,function() {
+			$(this).css({backgroundPosition:'-223px -28px'});
+		}).oneTime(800,function() {
+			$(this).css({backgroundPosition:'-123px -28px'});
+		});
+	};
+	
+	jQuery.fn.mouvArretGch = function(){
+		$(this).arretGch();
+		$(this).everyTime(800,function(){
+			$(this).arretGch();
+		});
+	}
+	jQuery.fn.marcheGch = function() {
+		$(this).oneTime(200,function() {
+			$(this).css({backgroundPosition:'-23px -228px'});
+		}).oneTime(400,function() {
+			$(this).css({backgroundPosition:'-123px -228px'});
+		}).oneTime(600,function() {
+			$(this).css({backgroundPosition:'-223px -228px'});
+		}).oneTime(800,function() {
+			$(this).css({backgroundPosition:'-323px -228px'});
+		});
+	};
+	jQuery.fn.mouvMarcheGch = function(){
+		$(this).marcheGch();
+		$(this).everyTime(800,function(){
+			$(this).marcheGch();
+		});
+	}
+	
+	///
+	var arret = 0;
+
+	$("#contact").click(function() {
+		if($("#onTalk").val()==0 && $("#onMyTalk").val()==0){
+			$("#texto").removeClass().addClass('contactTextMarches');
+			if (arret == 0 || arrestation==1) {
+				$("#texto").show();
+				$("#onTalk").val(1);
+				$("#contact").stopTime().mouvMarcheGch();
+
+				var request = $.ajax({
+				url: url_site+"Core/index/ajaxquote", 
+				type: "POST",
+				data: { idDiv: 'contact', idPerso: '24', talk: 'mouvArretGch', stopTalk: 'mouvMarcheGch' },			
+				
+				}); 
+				request.done(function(msg) { 
+				$("#texto").html(msg); 
+				});
+				 
+			}else{
+				arret = 0;
+				$("#contact").stopTime().mouvArretGch();
+				$("#texto").invisible();
+			}
+		}
+	});
+
+$("#retour_marches").click(function() {
+	if($('#onTalk').val()==0){
+		$('#onTalk').val(1);	
+		if(<?php echo $imp;?>>=5)
+			var dstination='trone';else dstination='village1';
+		var request = $.ajax({
+		url: url_site+'Core/index/'+dstination,
+		type: "POST"							
+		}); 
+		request.done(function(msg) {
+						$("#inThePlace").fadeOut(1000);
+						setTimeout(function(){
+						  $("#inThePlace").hide();
+						  $("#inThePlace").html(msg); 
+						$("#inThePlace").fadeIn(1000);
+						}, 1000);
+						
+					});
+	}
+});
+
+$(".vers_entree").click(function() {
+	if($('#onTalk').val()==0){
+		$('#onTalk').val(1);	
+		if(<?php echo $imp;?>>=5)
+			var dstination='trone';else dstination='entree';
+		var request = $.ajax({
+		url: url_site+'Core/index/'+dstination,
+		type: "POST"							
+		}); 
+		request.done(function(msg) {
+						$("#inThePlace").fadeOut(1000);
+						setTimeout(function(){
+						  $("#inThePlace").hide();
+						  $("#inThePlace").html(msg); 
+						$("#inThePlace").fadeIn(1000);
+						}, 1000);
+						
+					});
+	}
+});
+
+});
+ 
+if($("#contact").length)
+	$("#contact").mouvArretGch();
+
+
+
+</script>
+</head>
+
+<?php
+if($this->myUser->getHeure()>=67)$stylePiece='nuit';else $stylePiece='';
+$stylePiece='';
+?>
+<div id="<?php echo $this->salle;?>" class='<?php echo $stylePiece;?>'>
+	<div id="perso"></div><p>&nbsp;</p>
+	<div id='retour_marches' style='z-index:1000'></div>
+	<div class='vers_entree' style='z-index:1000'></div>
+
+	<?php
+	
+	foreach($this->porteDansSalle as $porte){
+		echo '<div id="porte_'.$porte['por_id'].'" class="porte_'.$porte['por_id_type'].'_'.$porte['poru_etat'].'"></div>';
+	}	?>
+	<div id="texto"></div>
+	<?php foreach($this->persoDansSalle as $clef => $perso){
+		echo '<div class="'.$clef.'_marches" id="'.$clef.'"></div>';
+	}
+	?>
+</div>
+
+

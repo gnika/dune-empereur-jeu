@@ -1,0 +1,32 @@
+<h4><a href="<?php echo URL_MAIN_ABS ?>Produit/basket/basketwidget">Confirmation achat des troupes</a></h4>   
+<?php echo $this->basket->getItemsCount() ?> unite(s) dans le panier
+
+<?php if ( $this->basket->getItems() ) :
+?><ul>
+<?php
+$or=0;
+$bois=0;
+$population=0;
+$mana=0;
+foreach( $this->basket->getItems() as $item ) : ?>
+<li><img src='<?php echo URL_MAIN_ABS; ?>images/unite/<?php echo $item['image'];?>'>
+<?php echo $item['name'] . ' x ' . $item['quantity']; ?></li>
+<?php 
+$or+=$item['quantity']*$item['unitPrice'];
+$bois=$item['quantity']*$item['unitBois'];
+$population=$item['quantity']*$item['unitPopulation'];
+$mana=$item['quantity']*$item['unitMana'];
+endforeach;
+?>
+</ul><br/>
+<p>COUT TOTAL :</p>
+<p>
+    <?php echo'OR : '.$or;?>
+    <?php echo'BOIS : '.$bois;?>
+    <?php echo'POPULATION : '.$population;?>
+    <?php echo'MANA : '.$mana;?>
+</p><br/>
+
+<p><a href="<?php echo URL_MAIN_ABS . 'Produit/basket/clearbasket' ?>?redir=<?php echo $_SERVER['REQUEST_URI'] ?>" >Vide le panier</a></p><br/>
+<p><?php echo $this->form;?></p>
+<?php endif;?>

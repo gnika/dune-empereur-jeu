@@ -1,0 +1,146 @@
+
+<?php $imp=$this->myUser->getImpot();?>
+<script type="text/javascript">
+
+$(document).ready(function() {
+	$("#onTalk").val(0);
+	$("#onMyTalk").val(0);
+	
+	jQuery.fn.arretGch = function() {
+		$(this).oneTime(1200,function() {
+			$(this).css({backgroundPosition:'-100px 0'});
+		}).oneTime(300,function() {
+			$(this).css({backgroundPosition:'0 0'});
+		}).oneTime(600,function() {
+			$(this).css({backgroundPosition:'-100px 0'});
+		}).oneTime(900,function() {
+			$(this).css({backgroundPosition:'-200px 0'});
+		});
+	};
+	
+	jQuery.fn.mouvArretGch = function(){
+		$(this).arretGch();
+		$(this).everyTime(1200,function(){
+			$(this).arretGch();
+		});
+	}
+	jQuery.fn.marcheGch = function() {
+		$(this).oneTime(1200,function() {
+			$(this).css({backgroundPosition:'0px -230px'});
+		}).oneTime(300,function() {
+			$(this).css({backgroundPosition:'-100px -230px'});
+		}).oneTime(600,function() {
+			$(this).css({backgroundPosition:'-200px -230px'});
+		}).oneTime(900,function() {
+			$(this).css({backgroundPosition:'-100px -230px'});
+		});
+	};
+	jQuery.fn.mouvMarcheGch = function(){
+		$(this).marcheGch();
+		$(this).everyTime(1200,function(){
+			$(this).marcheGch();
+		});
+	}
+	
+	var arret = 0;
+
+	$("#linguiste").click(function() {
+			if($("#onTalk").val()==0 && $("#onMyTalk").val()==0){
+				$("#texto").removeClass().addClass('linguisteTextcouloir3');
+				if (arret == 0 || arrestation==1) {
+					$("#texto").show();
+					$("#onTalk").val(1);
+					$("#linguiste").stopTime().mouvMarcheGch();
+
+					var request = $.ajax({
+					url: url_site+"Core/index/ajaxquote", 
+					type: "POST",
+					data: { idDiv: 'linguiste', idPerso: '21', talk: 'mouvArretGch', stopTalk: 'mouvMarcheGch' },			
+					
+					}); 
+					request.done(function(msg) { 
+					$("#texto").html(msg); 
+					});
+					 
+				}else{
+					arret = 0;
+					$("#linguiste").stopTime().mouvArretGch();
+					$("#texto").invisible();
+				}
+			}
+		});
+
+$("#retour_couloir3").click(function() {
+	if($('#onTalk').val()==0){
+		$('#onTalk').val(1);	
+		if(<?php echo $imp;?>>=5)
+			var dstination='trone';else dstination='entree';
+		var request = $.ajax({
+		url: url_site+'Core/index/'+dstination,
+		type: "POST"							
+		}); 
+		request.done(function(msg) {
+						$("#inThePlace").fadeOut(1000);
+						setTimeout(function(){
+						  $("#inThePlace").hide();
+						  $("#inThePlace").html(msg); 
+						$("#inThePlace").fadeIn(1000);
+						}, 1000);
+						
+					});
+	}
+});
+
+$(".vers_commune").click(function() {
+	if($('#onTalk').val()==0){
+		$('#onTalk').val(1);
+		if(<?php echo $imp;?>>=5)
+			var dstination='trone';else dstination='commune';
+		var request = $.ajax({
+		url: url_site+'Core/index/'+dstination,
+		type: "POST",							
+		}); 
+		request.done(function(msg) {
+						$("#inThePlace").fadeOut(1000);
+						setTimeout(function(){
+						  $("#inThePlace").hide();
+						  $("#inThePlace").html(msg); 
+						$("#inThePlace").fadeIn(1000);
+						}, 1000);
+						
+					});
+	}
+});
+
+});
+ 
+if($("#linguiste").length)
+	$("#linguiste").mouvArretGch();
+
+
+$("#mesTexto").html('<img src="images/plan/couloir3_plan.png" />'); 
+$("#plan").val('couloir3_plan');
+</script>
+</head>
+
+<?php
+if($this->myUser->getHeure()>=67)$stylePiece='nuit';else $stylePiece='';
+$stylePiece='';
+?>
+<div id="<?php echo $this->salle;?>" class='<?php echo $stylePiece;?>'>
+	<div class='vers_commune'>&nbsp;</div>
+	<div id="perso"></div><p>&nbsp;</p>
+	<div id='retour_couloir3' style='z-index:1000'></div>
+	<?php
+	
+	foreach($this->porteDansSalle as $porte){
+		echo '<div id="porte_'.$porte['por_id'].'" class="porte_'.$porte['por_id_type'].'_'.$porte['poru_etat'].'"></div>';
+	}	?>
+	<div id="texto"></div>
+	<?php foreach($this->persoDansSalle as $clef => $perso){
+		echo '<div class="'.$clef.'_couloir2" id="'.$clef.'"></div>';
+	}
+	?>
+</div>
+
+

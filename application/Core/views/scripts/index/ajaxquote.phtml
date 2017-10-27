@@ -1,0 +1,230 @@
+<?php 
+$language=new Zend_Session_Namespace('lang');
+$valReturn='';
+$valReturn2='';
+$talk=$_POST['talk'];
+$xy=$_POST['XY'];
+if(!$xy)
+	$xy=0;
+$stopTalk=$_POST['stopTalk'];
+$idPerso=$_POST['idPerso'];
+$idDiv=$_POST['idDiv'];
+$repns=$_POST['repns'];
+
+$quotes=new Core_Model_Mapper_Quote();
+$quote=new Core_Model_Quote();
+$quoteReponse=new Core_Model_Quote();
+
+if(isset($_POST['majourquest']) && $_POST['majourquest'] !=0){
+	$quotes->majQuete($_POST['majourquest'], $_POST['idResponseUserParam'], $_POST['idResponseIdExt']);
+	$fnc=$quotes->recompense($_POST['majourquest'], $_POST['idResponseUserParam'], $_POST['idResponseIdExt']);
+	if($fnc['function']!='')
+		eval($fnc['function']);
+	if($fnc['display'])//quand c'est moneo qui parle, pas sur que l'affichage de la recompense fonctionne
+		echo '<script>recompenseDisplay("'.$fnc['display'].'")</script>';
+}
+if($_POST['idMultiple'] != 0)
+		$quotes->majMultiple($_POST['idMultiple'], $_POST['nbMultiple']);
+		
+if($_POST['rec_multiParam'] != 0){
+	$mfnc=$quotes->multiRecompense($_POST['rec_multiParam'], $_POST['rec_nb_multiParam']);/*?><script>afficheGraphe()</script><?php */ }
+if($mfnc['function']!='')
+	eval($mfnc['function']);
+if($mfnc['display'])
+			echo '<script>recompenseDisplay("'.$mfnc['display'].'")</script>';
+
+if(isset($_POST['extIdResponseUnique']) && $_POST['extIdResponseUnique']!=0)
+	$quotes->putArretQuoteMoneo($_POST['extIdResponseUnique']);
+
+if($_POST['response']!=999){
+	if($repns)$_POST['response']=$repns;
+	if(!isset($_POST['response']))
+		$quoteRendu=$quotes->getQuoteByPerso($idPerso, $quote);
+	else 
+		$quoteRendu=$quotes->getQuoteById($_POST['response'], $quote);
+// echo $quoteRendu;die('ee');
+	
+	if($language->lang=='en')
+		$text=$quoteRendu['quo_quote_en'];
+	else
+		$text=$quoteRendu['quo_quote'];
+	//echo $quoteRendu['quo_fnctn'];
+	eval($quoteRendu['quo_fnctn']);
+
+	$maj=$quoteRendu['quo_maj_quete'];
+	if($maj){
+		$quotes->majQuete($maj, $quoteRendu['quo_maj_quete_perso'], $quoteRendu['quo_maj_quete_id_ext']);//debug
+		$fnc=$quotes->recompense($maj, $quoteRendu['quo_maj_quete_perso'], $quoteRendu['quo_maj_quete_id_ext']);
+		/*?><script>afficheGraphe()</script><?php*/
+		if($fnc['function']!='')
+			eval($fnc['function']);
+		if($fnc['display']&& !isset($stopDisplay))
+			echo '<script>recompenseDisplay("'.$fnc['display'].'")</script>';
+	}
+	if($quoteRendu['quo_id_multiple'] != 0)
+		$quotes->majMultiple($quoteRendu['quo_id_multiple'],$quoteRendu['quo_nb_multiple']);
+		
+	if($quoteRendu['quo_recompense_multi'] != 0){
+		$mfnc=$quotes->multiRecompense($quoteRendu['quo_recompense_multi'],$quoteRendu['quo_recompense_nb_multi']);/*?><script>afficheGraphe()</script><?php */ }
+	
+	if($mfnc['function']!='')
+		eval($mfnc['function']);
+	if($mfnc['display'])
+			echo '<script>recompenseDisplay("'.$mfnc['display'].'")</script>';
+	
+	if($quoteRendu['quo_reponse']!= -1)
+		$response=$quotes->getReponsePerso($idPerso);
+
+	if($response){
+		$val=1;
+		$choix=1;
+		foreach($response as $value){
+			$stop=0;
+			if($value['mon_fnctn']!='')
+				eval($value['mon_fnctn']);
+			if($stop==1)continue;
+			if(isset($value['ext_arret']) && $value['ext_arret']==1)
+				$extIdReponse=$value['ext_id'];
+			else
+				$extIdReponse=0;
+			
+			if($val%2) $classD="pair";else $classD="impair";
+			if($language->lang=='en')
+				$value['mon_quote']=addslashes($value['mon_quote_en']);
+			else
+				$value['mon_quote']=addslashes($value['mon_quote']);
+			if($value['mon_reponse']==-1){
+				$value['mon_reponse']=999;
+				
+				$valReturn2.='<p class="rp'.$value['mon_reponse'].' '.$classD.'"><a onclick="ajaxReturn(\\\''.$idDiv.'\\\', '.$value['mon_maj_quete'].', '.$value['mon_reponse'].', \\\''.$idPerso.'\\\',\\\''.$talk.'\\\', \\\''.$stopTalk.'\\\', \\\''.$value['mon_maj_quete_id_ext'].'\\\', \\\''.$value['mon_maj_quete_perso'].'\\\', \\\''.$extIdReponse.'\\\', \\\''.$value['mon_recompense_multi'].'\\\', \\\''.$value['mon_recompense_nb_multi'].'\\\');return false">'.$value['mon_quote'].'</a></p>';
+			}else
+				$valReturn.='<p class="rp'.$value['mon_reponse'].' '.$classD.'"><a onclick="ajaxReturn(\\\''.$idDiv.'\\\', '.$value['mon_maj_quete'].', '.$value['mon_reponse'].', \\\''.$idPerso.'\\\',\\\''.$talk.'\\\', \\\''.$stopTalk.'\\\', \\\''.$value['mon_maj_quete_id_ext'].'\\\', \\\''.$value['mon_maj_quete_perso'].'\\\', \\\''.$extIdReponse.'\\\', \\\''.$value['mon_recompense_multi'].'\\\', \\\''.$value['mon_recompense_nb_multi'].'\\\');return false">'.$value['mon_quote'].'</a></p>';
+
+			$val++;
+		}
+		$valReturn.=$valReturn2;
+	}else
+		$choix=0;
+		//print_r($text);
+	$pieces = explode("///", $text);
+// print_r($pieces);
+?><div id='textoLink'><div id='textoIn'>
+	<?php
+		echo $pieces[0];
+	?>
+	</div></div>
+	<div id='triangle'></div>
+	<?php /*if(count($pieces)>1) { ?>
+		<a href='' onclick='return false;' id='textoLink'>suite ... </a> 
+	<?php 
+	} */?>
+	<input type='hidden' id='stepDial' value='0'/>
+	<?php if(count($pieces)>1){
+	?>
+		<input type='hidden' id='closeWindow' value='0'/>
+	<?php }else{ ?>
+		<input type='hidden' id='closeWindow' value='1'/>
+	<?php } ?>
+	<input type='hidden' id='maxDial' value='<?php echo count($pieces);?>'/>
+
+
+	<SCRIPT language="Javascript">
+		$("#texto").visible();
+		var idPerso='<?php echo $idDiv;?>';
+		var talk='<?php echo $talk;?>';
+		$("#texto").css('background-color', '#FFFFFF');
+		$("#textoLink").click(function() {
+
+		
+			var tab = <?php echo json_encode($pieces); ?>;
+			$("#textoIn").empty();
+			var newVal=$("#stepDial").val();
+			if(newVal < $("#maxDial").val()){
+				newVal=parseInt(newVal)+1;
+				$("#stepDial").val(newVal);
+				
+				$("#textoIn").html(tab[newVal]);
+			}
+
+			if(newVal==$("#maxDial").val()-2)
+				$("#texto").addClass('lastBulle');
+			
+		
+			if(newVal+1==$("#maxDial").val()){
+				$("#textoLink").hide();
+				$("#closeWindow").val(1);
+				$("#texto").removeClass('lastBulle');
+				
+			}
+			
+		})	
+		
+		$("#texto").click(function() {//textoLink
+			
+			if($("#closeWindow").val()==1){
+				arrestation = 1;
+				
+				$("#"+idPerso).stopTime().<?php echo $talk.'()';?>;
+				if(<?php echo $choix;?>!=0 && $('#onAutoTalk').val()==0){
+					$("#onMyTalk").val(1);
+					$("#mesTexto").addClass('conversation');
+					$("#mesTexto").html('<?php echo $valReturn;?>');
+					<?php /*if($value['mon_reponse']==999){ ?>
+					alert('e');
+					<?php }*/ ?>
+				}else{
+					$("#onTalk").val(0);
+					$("#onMyTalk").val(0);
+					$("#mesTexto").empty();
+					$("#mesTexto").removeClass('conversation');
+					$('#yeuxMouve').val(0);
+					$('#onAutoTalk').val(0);
+					var plan=$("#plan").val();
+					$("#mesTexto").html('<img src="images/plan/'+plan+'.png" />'); 
+				}
+				$("#texto").invisible(); 
+			}
+		})
+		
+		function ajaxReturn(idDivRecu, magquest, clefId, idPersoReturn, stopTalkReturn, stopstopTalkReturn, idResponseExt, idResponseUser, extIdReponse, idMul, nbMul, rec_multi, rec_nb_multi){
+			if(clefId==999){
+				if('<?php echo $xy;?>'==1){
+					$('#yeuxMouve').val(0);
+				}
+				$("#mesTexto").removeClass('conversation');
+				$("#mesTexto").empty();
+				$("#onTalk").val(0);
+				$("#onMyTalk").val(0);
+				var plan=$("#plan").val();
+				$("#mesTexto").html('<img src="images/plan/'+plan+'.png" />'); 
+				var request2 = $.ajax({
+				url: "<?php echo URL_MAIN_ABS . 'Core/index/ajaxquote';?>", 
+				type: "POST",
+				data: {majourquest: magquest, idDiv: idDivRecu, response: clefId, idPerso: idPersoReturn, talk: stopTalkReturn, 
+				stopTalk: stopstopTalkReturn, idResponseIdExt: idResponseExt, extIdResponseUnique: extIdReponse, idResponseUserParam: idResponseUser, idMultiple: idMul,
+				nbMultiple: nbMul, rec_multiParam: rec_multi, rec_nb_multiParam: rec_nb_multi},			
+				});
+				
+				return false;
+				
+			}
+			arrestation = 1;
+			
+			$("#"+idPerso).stopTime()[stopstopTalkReturn]();
+			var request2 = $.ajax({
+			url: "<?php echo URL_MAIN_ABS . 'Core/index/ajaxquote';?>", 
+			type: "POST",
+			data: {majourquest: magquest, idDiv: idDivRecu, response: clefId, idPerso: idPersoReturn, talk: stopTalkReturn, 
+			stopTalk: stopstopTalkReturn, idResponseIdExt: idResponseExt, extIdResponseUnique: extIdReponse, idResponseUserParam: idResponseUser, idMultiple: idMul,
+			nbMultiple: nbMul, rec_multiParam: rec_multi, rec_nb_multiParam: rec_nb_multi},			
+			});
+			request2.done(function(msg) { 
+				$("#texto").html(msg); 
+				});
+			
+		}
+		
+		
+	</SCRIPT>
+	<?php
+}

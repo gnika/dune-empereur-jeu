@@ -1,0 +1,14 @@
+form#lostpasswordForm{
+  margin: 25px 0 0 0;
+}
+
+form#lostpasswordForm label.required{
+  font: bold 12px "Trebuchet MS", verdana, arial, sans-serif;
+  color: #333;
+}
+
+form#lostpasswordForm input#email{
+  font: bold 11px  verdana, arial, sans-serif;
+  width: 300px;
+  padding: 6px;
+}

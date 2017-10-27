@@ -1,0 +1,140 @@
+<?php $jour=$this->myUser->getJour();?>
+<div id='inThePlace'>
+<div id='salle_trone'>
+<span class='flags'><a href="<?php echo URL_MAIN_ABS . $this->rewrite('Core/index/index'); ?>"><img title='français' alt='français' src="/images/flagf.png" /></a> <a><img title='english' alt='english' src="/images/flage.png" /></a></span>
+<h1>Dune the adventure game</h1>
+<h2>Moneo serve the god-emperor</h2>
+<h3>Goal : Fame</h3>
+
+<?php
+if($this->inscrit==1){
+	?>
+	<p class='success'>
+		Please use you login / password
+	</p>
+	<?php
+}
+ ?>
+	<p>There goes the Sharing Ceremony every 5 days: adjust and dispense Spice between the 4 great Houses and earn Fame points</p>
+<?php
+$this->displayMessages();
+?>
+<p class='warning'>
+Do not quit/reload the page when a you're in a talk.
+</p>
+<h3>Evolve in Dune Universe, 3000 years after the advent of Paul Atreïdes on Arrakis in the skin of Moneo, true servant of the God-Emperor LETO II</h3>
+<?php if($jour==0 && $this->myUser->getId()!='') echo '<h3>To begin, click on "Start" : the Sharing Ceremony is waiting for you</h3>';?>
+<?php if($this->myUser->getId()!='')
+echo '<br/><button class="start">Start</button>';
+if($this->form!='')$cl="style='top:17px;'";else $cl='';
+ ?><a class="commentJouer" <?php echo $cl;?> href='<?php echo URL_MAIN_ABS . $this->rewrite('Customer/index/commentjouer/lang/en'); ?>'>Some game basis</a>
+<div class="naylaIndex"></div>
+ <?php
+// echo '<div id="connect">'.$this->form;
+echo '<div id="connect">';
+if($this->myUser->getId()==''){
+	?>
+<form id="loginForm" enctype="application/x-www-form-urlencoded" action="Customer/auth/dologin" method="post">
+
+<span class="input input--minoru">
+					<input type="text" name="username" id="username" value="" class="input__field input__field--minoru" />
+					<label for="username" class="input__label input__label--minoru">
+						<span class="input__label-content input__label-content--minoru">Your login</span>
+					</label>
+</span>
+
+<span class="input input--minoru">
+					<input type="password" name="password" id="password" value="" class="input__field input__field--minoru" />
+					<label for="password" class="input__label input__label--minoru">
+						<span class="input__label-content input__label-content--minoru">Your password</span>
+					</label>
+</span>
+
+<span class="input input--minoru last">
+<input type="submit" name="login" id="login" value=" Connexion " class="formsubmit" />
+</span>
+<input type="hidden" name="source" value="index-en.html" id="source" />
+</form>
+<?php
+}
+if($this->form!='' && $this->inscrit!=1){
+?>
+<p class="loginFormLink" ><a href="<?php echo URL_MAIN_ABS . $this->rewrite('Customer/auth/auth') ?>" style='font-size:13px;' >Not yet registered ? There you go ! (Subscription without mail request)</a><!-- - <a  href="<?php echo URL_MAIN_ABS . $this->rewrite('Customer/auth/lostpassword') ?>">Fogotten password?</a>--></p>
+<?php }else{
+	?>
+	<span class='retry'><span class='oneRetry'>to start again from the beginning </span><button class="tryAgain">click here</button></span>
+	<?php
+} ?>
+</div>
+</div><?php
+
+$nomSalle=$this->nomSalle;
+?>
+<script>
+	if($('.error').length>0)$('.warning').hide();
+	$(".start").click(function() {
+		if($('#onTalk').val()==0){
+			$('#onTalk').val(1);
+			var request = $.ajax({ 
+				url: url_site+'Core/index/<?php echo $nomSalle;?>', 
+				type: "GET"						
+			}); 
+			request.done(function(msg) {
+						$("#inThePlace").fadeOut(1000);
+						setTimeout(function(){
+						  $("#inThePlace").hide();
+						  $("#inThePlace").html(msg); 
+						$("#inThePlace").fadeIn(1000);
+						}, 1000);
+						
+					});
+		}
+		
+	
+});
+$(".tryAgain").click(function() {
+		if(window.confirm("do you really want to start all over again ?")){
+			if($('#onTalk').val()==0){
+				$('#onTalk').val(1);
+				var request = $.ajax({ 
+					url: url_site+'Customer/auth/tryagain',
+					type: "GET"						
+				});
+				request.done(function(msg) {
+							$('#onTalk').val(0);
+							$(".retry").fadeOut(1000);
+							setTimeout(function(){
+							  $(".retry").hide();
+							  $(".retry").html('You can now start a new game !'); 
+							$(".retry").fadeIn(1000);
+							}, 1000);
+							
+						});
+			}
+		}
+		
+	
+});
+jQuery.fn.arretTalk = function() {
+		$(this).oneTime(1000,function() {
+			$(this).css({backgroundPosition:'0px 0px'});
+		}).oneTime(250,function() {
+			$(this).css({backgroundPosition:'-91px 0px'});
+		}).oneTime(500,function() {
+			$(this).css({backgroundPosition:'-182px 0px'});
+		}).oneTime(750,function() {
+			$(this).css({backgroundPosition:'-91px 0px'});
+		});
+	};
+	
+jQuery.fn.mouvArretTalk = function(){
+	$(this).arretTalk();
+	$(this).everyTime(1000,function(){
+		$(this).arretTalk();
+	});
+}
+	
+$(".naylaIndex").mouvArretTalk();
+
+</script>
+</div>

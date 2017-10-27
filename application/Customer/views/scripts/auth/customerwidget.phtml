@@ -1,0 +1,6 @@
+<?php if( $this->auth->getIdentity()->cuu_id){ ?>
+<div id='deconnect'><p><a onclick='return verifTalk();' href="<?php echo URL_MAIN_ABS . 'Customer/auth/logout?redir=' . urlencode($_SERVER['REQUEST_URI']); ?>" >
+<img src="/images/power-button-icon.png" title="se déconnecter" alt="se déconnecter"/></a></p></div>
+
+<?php }
+?>

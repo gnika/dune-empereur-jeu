@@ -1,0 +1,182 @@
+
+<?php /*echo $this->formatDate( date('Y-m-d') ) ?><p><a href="<?php echo $this->rewrite('Core/index/index') ?>">Accueil</a></p>*/?>
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+	$("#onTalk").val(0);
+	$("#onMyTalk").val(0);
+	aniX = 0;
+	aniY = 0;
+	
+jQuery.fn.arretGch = function() {
+		$(this).oneTime(1200,function() {
+			$(this).css({backgroundPosition:'-140px 0'});
+		}).oneTime(300,function() {
+			$(this).css({backgroundPosition:'0 0'});
+		}).oneTime(600,function() {
+			$(this).css({backgroundPosition:'-140px 0'});
+		}).oneTime(900,function() {
+			$(this).css({backgroundPosition:'-280px 0'});
+		});
+	};
+	
+	jQuery.fn.mouvArretGch = function(){
+		$(this).arretGch();
+		$(this).everyTime(1200,function(){
+			$(this).arretGch();
+		});
+	}
+	jQuery.fn.marcheGch = function() {
+		$(this).oneTime(1200,function() {
+			$(this).css({backgroundPosition:'0px -275px'});
+		}).oneTime(300,function() {
+			$(this).css({backgroundPosition:'-140px -275px'});
+		}).oneTime(600,function() {
+			$(this).css({backgroundPosition:'-280px -275px'});
+		}).oneTime(900,function() {
+			$(this).css({backgroundPosition:'-140px -275px'});
+		});
+	};
+	jQuery.fn.mouvMarcheGch = function(){
+		$(this).marcheGch();
+		$(this).everyTime(1200,function(){
+			$(this).marcheGch();
+		});
+	}
+	
+	///
+	var arret = 0;
+
+	$("#tarhani").click(function() {
+		if($("#onTalk").val()==0 && $("#onMyTalk").val()==0){
+			$("#texto").removeClass().addClass('tarhaniTextDesert1');
+			if (arret == 0 || arrestation==1) {
+				$("#texto").show();
+				$("#onTalk").val(1);
+				$("#tarhani").stopTime().mouvMarcheGch();
+
+				var request = $.ajax({
+				url: url_site+"Core/index/ajaxquote", 
+				type: "POST",
+				data: { idDiv: 'tarhani', idPerso: '19', talk: 'mouvArretGch', stopTalk: 'mouvMarcheGch' },			
+				
+				}); 
+				request.done(function(msg) { 
+				$("#texto").html(msg); 
+				});
+				 
+			}else{
+				arret = 0;
+				$("#tarhani").stopTime().mouvArretGch();
+				$("#texto").invisible();
+			}
+		}
+	});
+
+$(".vers_desert1").click(function() {
+	if($('#onTalk').val()==0){
+		$('#onTalk').val(1);	
+		var request = $.ajax({
+		url: url_site+'Core/index/desert1',
+		type: "POST"							
+		}); 
+		request.done(function(msg) {
+						$("#inThePlace").fadeOut(1000);
+						setTimeout(function(){
+						  $("#inThePlace").hide();
+						  $("#inThePlace").html(msg); 
+						$("#inThePlace").fadeIn(1000);
+						}, 1000);
+						
+					});
+	}
+});
+$(".vers_desert2").click(function() {
+	if($('#onTalk').val()==0){
+		$('#onTalk').val(1);	
+		var request = $.ajax({
+		url: url_site+'Core/index/desert2',
+		type: "POST"							
+		}); 
+		request.done(function(msg) {
+						$("#inThePlace").fadeOut(1000);
+						setTimeout(function(){
+						  $("#inThePlace").hide();
+						  $("#inThePlace").html(msg); 
+						$("#inThePlace").fadeIn(1000);
+						}, 1000);
+						
+					});
+	}
+});
+$(".vers_desert3").click(function() {
+	if($('#onTalk').val()==0){
+		$('#onTalk').val(1);	
+		var request = $.ajax({
+		url: url_site+'Core/index/desert3',
+		type: "POST"							
+		}); 
+		request.done(function(msg) {
+						$("#inThePlace").fadeOut(1000);
+						setTimeout(function(){
+						  $("#inThePlace").hide();
+						  $("#inThePlace").html(msg); 
+						$("#inThePlace").fadeIn(1000);
+						}, 1000);
+						
+					});
+	}
+});
+
+$("#porte_5").click(function() {
+		if($("#onTalk").val()==0 && $("#onMyTalk").val()==0){
+			if($(this).attr('class')=='porte_1_1'){
+				var request = $.ajax({ 
+					url: url_site+'Core/index/chambre1',
+					type: "POST"							
+		}); 
+		request.done(function(msg) {
+						$("#inThePlace").fadeOut(1000);
+						setTimeout(function(){
+						  $("#inThePlace").hide();
+						  $("#inThePlace").html(msg); 
+						$("#inThePlace").fadeIn(1000);
+						}, 1000);
+						
+					});
+			}
+		}
+});
+
+
+});
+ 
+if($("#tarhani").length)
+	$("#tarhani").mouvArretGch();
+
+
+
+</script>
+</head>
+
+<?php
+if($this->myUser->getHeure()>=67)$stylePiece='nuit';else $stylePiece='';
+$stylePiece='';
+$nb=rand(0,6);
+?>
+<div id="<?php echo $this->salle;?>" style='background:url("../images/desert/desert<?php echo $nb;?>.jpg") no-repeat scroll 0 0 rgba(0, 0, 0, 0)' class='<?php echo $stylePiece;?>'>
+	<div id="perso"></div><p>&nbsp;</p>
+	<div class='vers_desert1' style='z-index:1000'></div>
+	<div class='vers_desert2' style='z-index:1000'></div>
+	<div class='vers_desert3' style='z-index:1000'></div>
+
+	<div id="texto"></div>
+	<?php foreach($this->persoDansSalle as $clef => $perso){
+		echo '<div class="'.$clef.'_desert1" id="'.$clef.'"></div>';
+	}
+	?>
+	
+</div>
+
+

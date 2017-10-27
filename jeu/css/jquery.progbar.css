@@ -1,0 +1,55 @@
+.progBar {
+    width : 315px;
+}
+
+.progBarBg{
+    background-color:#0F0F0F;
+    height:40px;
+    width : 99%;
+    color : #fff;
+    text-align: center;
+    line-height: 40px;
+    position:relative;
+    -moz-border-radius : 6px;
+    -webkit-border-radius : 6px;
+    border-radius : 6px;
+    overflow : hidden;
+    border : 2px solid #000;
+}
+
+.progBarColors {
+    height: 100%;
+    width: 0;
+    background : #f20;
+    position: absolute;
+    left:0;
+    top:0;
+}
+
+.progBarBubbles {
+    background-image:url("bubbles.png");
+    background-position:0px 0px; 
+    background-repeat:no-repeat;
+}
+
+.progBarReflet {
+    background-image:url("reflection.png");
+    background-position:0px 1px;
+    background-repeat:repeat-x;
+    height: 100%;
+    width: 100%;
+}
+
+.progBarProgression {
+    position: absolute;
+    left:0;
+    top:0;
+    height: 100%;
+    width: 100%;
+}
+
+.progBarText {
+    text-align: right;
+    line-height: normal;
+    width:100%;
+}

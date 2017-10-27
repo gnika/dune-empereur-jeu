@@ -1,0 +1,12 @@
+<h2>Produit par categorie</h2>
+		  
+		  
+<ul>
+<?php foreach ($this->paginatedUnites as $unite) : ?>
+    <a href="<?php echo URL_MAIN_ABS.'Produit/index/unitedetails/pa_id/' . $unite->getId()  ;?>">
+    <?php echo '<li>' . $unite->getTitre() . '</li>'; ?>
+    </a> 
+<?php endforeach; ?>
+</ul>
+
+<?php echo $this->paginatedUnites; ?>

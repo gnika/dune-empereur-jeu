@@ -1,0 +1,43 @@
+
+<?php
+ foreach($this->allStar as $stars){
+	?>
+	<a href="javascript:void(0)" id="<?php echo $stars['ca_nom'];?>" class="bullet <?php echo $stars['ca_class'];?>" rel="<?php echo $stars['ca_coordonnees'];?>">&nbsp;</a> 
+	<div class="popup" id="<?php echo $stars['ca_nom'];?>-box"> 
+		<h3><?php echo $stars['ca_nom'];?></h3>
+		<div class="popupcontent">
+			<?php
+			echo '<p>'.$stars['ca_description'].'</p>';
+			if(!$stars['cau_ca_id']){
+				echo'<br/><p><a href="" onclick="envoiVaisseau('.$stars['ca_id'].', 3);return false;">Attaquer la planète</a></p>';
+				echo'<br/><p><a href="" onclick="envoiVaisseau('.$stars['ca_id'].', 4);return false;">Explorer la planète</a></p>';
+				echo'<br/><p><a href="" onclick="envoiDiplomate('.$stars['ca_id'].');return false;">Envoyer un diplomate Atréides</a></p>';
+			}
+			elseif($stars['cau_diplomate']==1) {
+				echo '<br><p>En attente du débriefing du diplomate Atréides</p>';
+			}
+			elseif($stars['cau_etat']==0) {
+				echo'<br/><p>'.$stars['ca_flotte'].' vaisseaux protègent la planète</p>';
+				echo'<br/><p>niveau social de la planète : '.$stars['ca_civ'].'</p>';
+				echo'<br/><p><a href="" onclick="envoiVaisseau('.$stars['ca_id'].', 3);return false;">Attaquer la planète</a></p>';
+				echo'<br/><p><a href="" onclick="envoiDiplomate('.$stars['ca_id'].');return false;">Envoyer un diplomate Atréides</a></p>';
+			}elseif($stars['cau_etat']==1) {
+				echo '<p>Vous possédez '.$stars['cau_troupe'].' troupes sur cette planète</p><p>'.$stars['ca_epice_jour'].' épice / jours</p>';
+				if($stars['cau_envoi']>0)
+					echo '<img src="'.URL_MAIN_ABS.'images/commun/warning.png" /><p>Nos troupes sont en déplacement vers cette planète !</p>';
+				else
+					echo'<br/><p><a href="" onclick="envoiTroupe('.$stars['ca_id'].');return false;">Défendre la planète</a></p>';
+			}elseif($stars['cau_etat']==3) {
+				echo '<img src="'.URL_MAIN_ABS.'images/commun/warning.png" /><p>Votre flotte attaque cette planète !</p>';
+			}elseif($stars['cau_etat']==4) {
+				echo '<p><img src="'.URL_MAIN_ABS.'images/commun/warning.png" /></p><p>Un vaisseau d\'exploration intervient sur cette planète !</p>';
+			}
+			
+			?>
+			<br/><br/>
+		</div>
+		<a class="close" href="javascript:void(0)">Close</a> 
+	</div>
+	<?php
+ }
+?>

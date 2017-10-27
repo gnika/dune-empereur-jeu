@@ -1,0 +1,20 @@
+<h2>Categorie produit</h2>
+
+<div id="pageContent">
+            <?php
+			foreach($this->pageData as $row)
+			{ 
+                if($this->pageus->getAuthUnite()==0 && $row->getId()==1){
+				?><a href="<?php echo URL_MAIN_ABS.'Produit/index/listeunite/pc_id/'.$row->getId() ;?>">
+                <?php echo '<p>'.$row->getCategorieUnite().'</p>';?></a>
+				<?php
+                }
+                elseif($this->pageus->getAuthUnite()!=0){
+                    ?><a href="<?php echo URL_MAIN_ABS.'Produit/index/listeunite/pc_id/'.$row->getId() ;?>">
+                <?php echo '<p>'.$row->getCategorieUnite().'</p>';?></a>
+				<?php
+                }
+			}
+				?>
+				
+          </div>

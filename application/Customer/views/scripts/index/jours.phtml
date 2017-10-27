@@ -1,0 +1,31 @@
+<?php
+$membre=new Zend_Session_Namespace('user');
+if ($membre->userInfo == null)$debutHeure=0;else	$debutHeure=$membre->userInfo->getHeure();
+// print_r($membre->userInfo);
+if(!$debutHeure)
+	$debutHeure=0;
+?>
+<script language='javascript'>
+	$(document).ready(function(){
+		jQuery('#progBar1').progBar({
+				bubbles : {
+					speed : 80
+				},
+				progress : {
+					display : false
+				},
+				activateReflection : {
+					bg : true
+				},
+				progressSpeed : 3,
+				initBarre : <?php echo $debutHeure;?>
+			});
+	});
+</script>
+<div id='nbJour'>
+<p>
+
+ <?php echo $this->infouser->getJour();?> jours <span title="Prochaine Cérémonie du partage" class="delais_<?php echo $this->infouser->getImpot();?>"></span>
+</p>
+</div>
+<div id="progBar1"></div>

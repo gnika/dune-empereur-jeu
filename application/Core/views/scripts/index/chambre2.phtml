@@ -1,0 +1,126 @@
+
+<?php /*echo $this->formatDate( date('Y-m-d') ) ?><p><a href="<?php echo $this->rewrite('Core/index/index') ?>">Accueil</a></p>*/?>
+<?php $imp=$this->myUser->getImpot();?>
+<script type="text/javascript">
+
+$(document).ready(function() {
+	$("#onTalk").val(0);
+	$("#onMyTalk").val(0);
+	aniX = 0;
+	aniY = 0;
+	
+	jQuery.fn.arretParleTle = function() {
+		$(this).oneTime(1200,function() {
+			$(this).css({backgroundPosition:'0px 0px'});
+		}).oneTime(300,function() {
+			$(this).css({backgroundPosition:'-100px 0px'});
+		}).oneTime(600,function() {
+			$(this).css({backgroundPosition:'-200px 0px'});
+		}).oneTime(900,function() {
+			$(this).css({backgroundPosition:'-100px 0px'});
+		});
+	};
+	jQuery.fn.mouvArretParleTle = function(){
+		$(this).arretParleTle();
+		$(this).everyTime(1200,function(){
+			$(this).arretParleTle();
+		});
+	}
+
+	jQuery.fn.parleTle = function() {
+		$(this).oneTime(1200,function() {
+			$(this).css({backgroundPosition:'0px -271px '});
+		}).oneTime(300,function() {
+			$(this).css({backgroundPosition:'-100px -271px '});
+		}).oneTime(600,function() {
+			$(this).css({backgroundPosition:'-200px -271px '});
+		}).oneTime(900,function() {
+			$(this).css({backgroundPosition:'-100px -271px '});
+		});
+	};
+	jQuery.fn.mouvParleTle = function(){
+		$(this).parleTle();
+		$(this).everyTime(1200,function(){
+			$(this).parleTle();
+		});
+	}
+	
+	
+	$("#representant_tleilax").click(function() {
+		if($("#onTalk").val()==0 && $("#onMyTalk").val()==0){
+			$("#texto").removeClass().addClass('representant_tleilaxTextChambre');
+			if (arret == 0 || arrestation==1) {
+				$("#texto").show();
+				$("#onTalk").val(1);
+				$("#representant_tleilax").stopTime().mouvParleTle();
+
+				var request = $.ajax({ 
+				url: url_site+'Core/index/ajaxquote',
+				type: "POST",
+				data: { idDiv: 'representant_tleilax', idPerso: 6, talk: 'mouvArretParleTle', stopTalk: 'mouvParleTle' },			
+				}); 
+				request.done(function(msg) { 
+				$("#texto").html(msg); 
+				});
+				 
+			}else{
+				arret = 0;
+				$("#representant_tleilax").stopTime().mouvArretParleTle();
+				$("#texto").invisible();
+			}
+		}
+	});
+
+$("#retour_chambre").click(function() {
+	if($('#onTalk').val()==0){
+		$('#onTalk').val(1);	
+		if(<?php echo $imp;?>>=5)
+			var dstination='trone';else dstination='representants';
+		var request = $.ajax({
+		url: url_site+'Core/index/'+dstination,
+		type: "POST"							
+		}); 
+		request.done(function(msg) {
+						$("#inThePlace").fadeOut(1000);
+						setTimeout(function(){
+						  $("#inThePlace").hide();
+						  $("#inThePlace").html(msg); 
+						$("#inThePlace").fadeIn(1000);
+						}, 1000);
+						
+					});
+	}
+});
+
+
+});
+ 
+if($("#representant_tleilax").length)
+	$("#representant_tleilax").mouvArretParleTle();
+
+$("#mesTexto").html('<img src="images/plan/representant_plan.png" />'); 
+$("#plan").val('representant_plan');
+
+</script>
+</head>
+
+<?php
+if($this->myUser->getHeure()>=67)$stylePiece='nuit';else $stylePiece='';
+$stylePiece='';
+?>
+<div id="<?php echo $this->salle;?>" class='<?php echo $stylePiece;?>'>
+	<div id="perso"></div><p>&nbsp;</p>
+	<div id='retour_chambre' style='z-index:1000'></div>
+	<?php
+	
+	foreach($this->porteDansSalle as $porte){
+		echo '<div id="porte_'.$porte['por_id'].'" class="porte_'.$porte['por_id_type'].'_'.$porte['poru_etat'].'"></div>';
+	}	?>
+	<div id="texto"></div>
+	<?php foreach($this->persoDansSalle as $clef => $perso){
+		echo '<div class="'.$clef.'_chambre2" id="'.$clef.'"></div>';
+	}
+	?>
+</div>
+
+

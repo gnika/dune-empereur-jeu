@@ -1,0 +1,197 @@
+<div id='inThePlace'>
+<?php $imp=$this->myUser->getImpot();?>
+<script type="text/javascript">
+
+$(document).ready(function() {
+	$("#onTalk").val(0);
+	$("#onMyTalk").val(0);
+	
+	jQuery.fn.arretCom = function() {
+		$(this).oneTime(1200,function() {
+			$(this).css({backgroundPosition:'0 0'});
+		}).oneTime(300,function() {
+			$(this).css({backgroundPosition:'-100px 0'});
+		}).oneTime(600,function() {
+			$(this).css({backgroundPosition:'-200px 0'});
+		}).oneTime(900,function() {
+			$(this).css({backgroundPosition:'-100px 0'});
+		});
+	};
+	
+	jQuery.fn.mouvArretCom = function(){
+		$(this).arretCom();
+		$(this).everyTime(1200,function(){
+			$(this).arretCom();
+		});
+	}
+	jQuery.fn.marcheCom = function() {
+		$(this).oneTime(1200,function() {
+			$(this).css({backgroundPosition:'0 -270px'});
+		}).oneTime(300,function() {
+			$(this).css({backgroundPosition:'-100px -270px'});
+		}).oneTime(600,function() {
+			$(this).css({backgroundPosition:'-200px -270px'});
+		}).oneTime(900,function() {
+			$(this).css({backgroundPosition:'-100px -270px'});
+		});
+	};
+	jQuery.fn.mouvMarcheCom = function(){
+		$(this).marcheCom();
+		$(this).everyTime(1200,function(){
+			$(this).marcheCom();
+		});
+	}
+	
+	var arret = 0;
+
+	$("#surplus").click(function() {
+		if($("#onTalk").val()==0 && $("#onMyTalk").val()==0){
+			$("#texto").removeClass().addClass('surplusTextVaisseau');
+			if (arret == 0 || arrestation==1) {
+				$("#texto").show();
+				$("#onTalk").val(1);
+				$("#surplus").stopTime().mouvMarcheCom();
+
+				var request = $.ajax({
+					url: url_site+"Core/index/ajaxquote", 
+					type: "POST",
+					data: { idDiv: 'surplus', idPerso: 10, talk: 'mouvArretCom', stopTalk: 'mouvMarcheCom' },			
+				}); 
+				request.done(function(msg) { 
+				$("#texto").html(msg); 
+				});
+				 
+			}else{
+				arret = 0;
+				$("#surplus").stopTime().mouvArretCom();
+				$("#texto").invisible();
+			}
+		}
+	});
+
+$("#retour_vaisseaux").click(function() {
+	if($('#onTalk').val()==0){
+		$('#onTalk').val(1);	
+		if(<?php echo $imp;?>>=5)
+			var dstination='trone';else dstination='hangar';
+		var request = $.ajax({
+		url: url_site+'Core/index/'+dstination,
+		type: "POST"							
+		}); 
+		request.done(function(msg) {
+						$("#inThePlace").fadeOut(1000);
+						setTimeout(function(){
+						  $("#inThePlace").hide();
+						  $("#inThePlace").html(msg); 
+						$("#inThePlace").fadeIn(1000);
+						}, 1000);
+						
+					});
+	}
+});
+
+});
+
+function ajaxAchat(nb) {
+	if($('#noMultiple').val()==0){
+		$('#noMultiple').val(1);
+		if(nb==1 || nb==2 || nb==5 || nb==10 ){
+			var request = $.ajax({
+			url: url_site+'Core/ajax/achatvaisseau',
+			type: "POST",
+			data: { nbAchete: nb }
+			}); 
+			request.done(function(msg) {
+				messagesDisplay();
+				afficheSpice();
+				if(msg!='')
+					$('#nbFlotte').html(msg);
+			});
+		}
+		setTimeout(function(){
+		$("#noMultiple").val(0);
+	}, 5000);
+	}
+}
+ 
+if($("#surplus").length)
+	$("#surplus").mouvArretCom();
+
+jQuery.fn.fondCom = function() {
+		$(this).oneTime(200,function() {
+			$(this).hide();
+		}).oneTime(400,function() {
+			$(this).show();
+		}).oneTime(1000,function() {
+			$(this).hide();
+		}).oneTime(1200,function() {
+			$(this).show();
+		}).oneTime(2200,function() {
+			$(this).hide();
+		}).oneTime(4200,function() {
+			$(this).hide();
+		});
+	};
+	jQuery.fn.mouvfondCom = function(){
+		$(this).fondCom();
+		$(this).everyTime(6000,function(){
+			$(this).fondCom();
+		});
+}
+
+$(".fond_vaisseau").stopTime().mouvfondCom();
+
+jQuery.fn.fondCom2 = function() {
+		$(this).oneTime(200,function() {
+			$(this).hide();
+		}).oneTime(400,function() {
+			$(this).show();
+		}).oneTime(800,function() {
+			$(this).hide();
+		}).oneTime(1500,function() {
+			$(this).show();
+		});
+	};
+	jQuery.fn.mouvfondCom2 = function(){
+		$(this).fondCom2();
+		$(this).everyTime(2000,function(){
+			$(this).fondCom2();
+		});
+}
+
+$(".fond_vaisseau2").stopTime().mouvfondCom2();
+	
+// $("span.prixEpice").html(function(i, h) { 
+	// return h.replace(/(.)/g, '<img src="images/chiffres/$1$1.png" />'); 
+// });
+
+$("#mesTexto").html('<img src="images/plan/vaisseau_plan.png" />'); 
+$("#plan").val('vaisseau_plan');
+</script>
+</head>
+
+<?php 
+if($this->myUser->getHeure()>=67)$stylePiece='nuit';else $stylePiece='';
+$stylePiece='';
+?>
+<div id="<?php echo $this->salle;?>" class='<?php echo $stylePiece;?>'>
+	<div id="perso"></div>
+	<div id='retour_vaisseaux'></div>
+	<div class='fond_vaisseau'>&nbsp;</div>
+	<div class='fond_vaisseau2'>&nbsp;</div>
+	<div id='myFlotte'>
+		<a class='achatVaisseau' value='1' href='' onclick='ajaxAchat(1);return false;'><img src="/images/epice.png" alt="epice dune jeu Frank Herbert" title="epice dune jeu"> <span class='prixEpice'><?php echo $this->myUser->getValeurVaisseau();?></span></a>
+		<a class='achatVaisseau' value='2' href='' onclick='ajaxAchat(2);return false;'><img src="/images/epice.png" alt="epice dune jeu Frank Herbert" title="epice dune jeu"> <span class='prixEpice'><?php echo 2*$this->myUser->getValeurVaisseau();?></span></a>
+		<a class='achatVaisseau' value='5' href='' onclick='ajaxAchat(5);return false;'><img src="/images/epice.png" alt="epice dune jeu Frank Herbert" title="epice dune jeu"> <span class='prixEpice'><?php echo 5*$this->myUser->getValeurVaisseau();?></span></a>
+		<a class='achatVaisseau' value='10' href='' onclick='ajaxAchat(10);return false;'><img src="/images/epice.png" alt="epice dune jeu Frank Herbert" title="epice dune jeu"> <span class='prixEpice'><?php echo 10*$this->myUser->getValeurVaisseau();?></span></a>
+		
+	 </div><p class='nbFlotte'>Vous possédez<br/><span id='nbFlotte'><?php echo $this->myUser->getVaisseau();?></span> </p>
+	<div id="texto"></div>
+	<?php foreach($this->persoDansSalle as $clef => $perso){
+		echo '<div class="'.$clef.'_vaisseaux" id="'.$clef.'"></div>';
+	}
+	?>
+	
+</div>
+
+</div>

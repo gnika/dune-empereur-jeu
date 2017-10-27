@@ -1,0 +1,89 @@
+
+<?php $imp=$this->myUser->getImpot();?>
+<script type="text/javascript">
+
+$(document).ready(function() {
+	var arret = 0;
+	$("#onTalk").val(0);
+	$("#onMyTalk").val(0);
+	
+	jQuery.fn.arretParle = function() {
+		$(this).oneTime(1000,function() {
+			$(this).css({backgroundPosition:'0 0px'});
+		}).oneTime(1500,function() {
+			$(this).css({backgroundPosition:'-320px 0px'});
+		}).oneTime(2000,function() {
+			$(this).css({backgroundPosition:'-640px 0px'});
+		}).oneTime(2500,function() {
+			$(this).css({backgroundPosition:'-320px 0px'});
+		});
+	};
+	
+	jQuery.fn.mouvArretParle = function(){
+		$(this).arretParle();
+		$(this).everyTime(2500,function(){
+			$(this).arretParle();
+		});
+	}
+	
+	jQuery.fn.mouvMarcheDrt = function(){
+		$(this).marcheDrt();
+		$(this).everyTime(2000,function(){
+			$(this).marcheDrt();
+		});
+	}
+	jQuery.fn.marcheDrt = function() {
+		$(this).oneTime(500,function() {
+			$(this).css({backgroundPosition:'0 0px'});
+		}).oneTime(1000,function() {
+			$(this).css({backgroundPosition:'-320px -457px'});
+		}).oneTime(1500,function() {
+			$(this).css({backgroundPosition:'-640px -457px'});
+		}).oneTime(2000,function() {
+			$(this).css({backgroundPosition:'-320px -457px'});
+		});
+	};
+	
+	$("#leto_ii").click(function() {
+		if($("#onTalk").val()==0 && $("#onMyTalk").val()==0 && !$("#diamant").length){
+			$("#texto").removeClass().addClass('leto_iiText');
+			if (arret == 0 || arrestation==1) {
+				$("#texto").show();
+				$("#onTalk").val(1);
+				$("#leto_ii").stopTime().mouvMarcheDrt();
+
+				var request = $.ajax({ 
+				url: url_site+'Core/index/ajaxquote',
+				type: "POST",
+				data: { idDiv: 'leto_ii', idPerso: 1, talk: 'mouvArretParle', stopTalk: 'mouvMarcheDrt' },			
+				}); 
+				request.done(function(msg) { 
+				$("#texto").html(msg); 
+				});
+				 
+			}else{
+				arret = 0;
+				$("#leto_ii").stopTime().mouvArretParle();
+				$("#texto").invisible();
+			}
+		}
+	});
+	
+	$("#leto_ii").mouvArretParle();
+});
+</script>
+</head>
+
+<?php
+if($this->myUser->getHeure()>=67)$stylePiece='nuit';else $stylePiece='';
+$stylePiece='';
+?>
+
+<div id="<?php echo $this->salle;?>" class='<?php echo $stylePiece;?>'>
+	<div id="perso"></div><p>&nbsp;</p>
+FIN DU JEU. MERCI D'AVOIR JOUE : joachim@pulsar-informatique.com
+	<div id="texto"></div>
+	<div class="leto_ii_siaynoq" id="leto_ii"></div>
+</div>
+
+

@@ -1,0 +1,311 @@
+
+<?php
+$imp=$this->myUser->getImpot();
+ /*echo $this->formatDate( date('Y-m-d') ) ?><p><a href="<?php echo $this->rewrite('Core/index/index') ?>">Accueil</a></p>*/?>
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+	$("#onTalk").val(0);
+	$("#onMyTalk").val(0);
+	aniX = 0;
+	aniY = 0;
+	
+	jQuery.fn.mouvEns = function() {
+		$(this).oneTime(200,function() {
+			$(this).css({backgroundPosition:'0px 4px'});
+		}).oneTime(400,function() {
+			$(this).css({backgroundPosition:'0px -28px'});
+		}).oneTime(1000,function() {
+			$(this).css({backgroundPosition:'0px 4px'});
+		}).oneTime(1800,function() {
+			$(this).css({backgroundPosition:'0px -28px'});
+		});
+	};
+	
+	jQuery.fn.mouvE = function(){
+		$(this).mouvEns();
+		$(this).everyTime(2500,function(){
+			$(this).mouvEns();
+		});
+	}
+	jQuery.fn.arretGch = function() {
+		$(this).oneTime(1200,function() {
+			$(this).css({backgroundPosition:'-128px 0'});
+		}).oneTime(300,function() {
+			$(this).css({backgroundPosition:'-256px 0'});
+		}).oneTime(600,function() {
+			$(this).css({backgroundPosition:'-128px 0'});
+		}).oneTime(900,function() {
+			$(this).css({backgroundPosition:'0 0'});
+		});
+	};
+	
+	jQuery.fn.mouvArretGch = function(){
+		$(this).arretGch();
+		$(this).everyTime(1200,function(){
+			$(this).arretGch();
+		});
+	}
+	jQuery.fn.marcheGch = function() {
+		$(this).oneTime(1200,function() {
+			$(this).css({backgroundPosition:'-128px -128px'});
+		}).oneTime(300,function() {
+			$(this).css({backgroundPosition:'-256px -128px'});
+		}).oneTime(600,function() {
+			$(this).css({backgroundPosition:'-128px -128px'});
+		}).oneTime(900,function() {
+			$(this).css({backgroundPosition:'0 -128px'});
+		});
+	};
+	jQuery.fn.mouvMarcheGch = function(){
+		$(this).marcheGch();
+		$(this).everyTime(1200,function(){
+			$(this).marcheGch();
+		});
+	}
+	
+	///
+	
+	jQuery.fn.arretTalk = function() {
+		$(this).oneTime(2000,function() {
+			$(this).css({backgroundPosition:'0 0'});
+		}).oneTime(500,function() {
+			$(this).css({backgroundPosition:'-144px 0px'});
+		}).oneTime(1000,function() {
+			$(this).css({backgroundPosition:'-288px 0px'});
+		}).oneTime(1500,function() {
+			$(this).css({backgroundPosition:'-144px 0px'});
+		})
+		
+	};
+	
+	jQuery.fn.mouvArretTalk = function(){
+		$(this).arretTalk();
+		$(this).everyTime(2000,function(){
+			$(this).arretTalk();
+		});
+	}
+	
+	jQuery.fn.marcheTalk = function() {
+		$(this).oneTime(2000,function() {
+			$(this).css({backgroundPosition:'0 0'});
+		}).oneTime(500,function() {
+			$(this).css({backgroundPosition:'-144px -130px'});
+		}).oneTime(1000,function() {
+			$(this).css({backgroundPosition:'-288px -130px'});
+		}).oneTime(1500,function() {
+			$(this).css({backgroundPosition:'-144px -130px'});
+		})
+	};
+	jQuery.fn.mouvMarcheTalk = function(){
+		$(this).marcheTalk();
+		$(this).everyTime(2000,function(){
+			$(this).marcheTalk();
+		});
+	}
+	///
+	
+	jQuery.fn.arretTalk2 = function() {
+		$(this).oneTime(500,function() {
+			$(this).css({backgroundPosition:'5px 0px'});
+		}).oneTime(1000,function() {
+			$(this).css({backgroundPosition:'-143px 0px'});
+		}).oneTime(1500,function() {
+			$(this).css({backgroundPosition:'-292px 0px'});
+		}).oneTime(2500,function() {
+			$(this).css({backgroundPosition:'-143px 0px'});
+		})
+		
+	};
+	
+	jQuery.fn.mouvArretTalk2 = function(){
+		$(this).arretTalk2();
+		$(this).everyTime(5000,function(){
+			$(this).arretTalk2();
+		});
+	}
+	jQuery.fn.marcheTalk2 = function() {
+		$(this).oneTime(500,function() {
+			$(this).css({backgroundPosition:'5px -295px'});
+		}).oneTime(1000,function() {
+			$(this).css({backgroundPosition:'-143px -295px'});
+		}).oneTime(1500,function() {
+			$(this).css({backgroundPosition:'-292px -295px'});
+		}).oneTime(2500,function() {
+			$(this).css({backgroundPosition:'-143px -295px'});
+		})
+	};
+	jQuery.fn.mouvMarcheTalk2 = function(){
+		$(this).marcheTalk2();
+		$(this).everyTime(5000,function(){
+			$(this).marcheTalk2();
+		});
+	}
+	
+	var arret = 0;
+
+	$("#barman").click(function() {
+		if($("#onTalk").val()==0 && $("#onMyTalk").val()==0){
+			$("#texto").removeClass().addClass('barmanText');
+			if (arret == 0 || arrestation==1) {
+				$("#texto").show();
+				$("#onTalk").val(1);
+				$("#barman").stopTime().mouvMarcheGch();
+
+				var request = $.ajax({
+				url: url_site+"Core/index/ajaxquote", 
+				type: "POST",
+				data: { idDiv: 'barman', idPerso: '13', talk: 'mouvArretGch', stopTalk: 'mouvMarcheGch' },			
+				
+				}); 
+				request.done(function(msg) { 
+				$("#texto").html(msg); 
+				});
+				 
+			}else{
+				arret = 0;
+				$("#sayyaoto").stopTime().mouvArretGch();
+				$("#texto").invisible();
+			}
+		}
+	});
+	
+	$("#client1").click(function() {
+		if($("#onTalk").val()==0 && $("#onMyTalk").val()==0){
+			$("#texto").removeClass().addClass('client1Text');
+			if (arret == 0 || arrestation==1) {
+				$("#texto").show();
+				$("#onTalk").val(1);
+				$("#client1").stopTime().mouvMarcheTalk();
+
+				var request = $.ajax({
+				url: url_site+"Core/index/ajaxquote", 
+				type: "POST",
+				data: { idDiv: 'client1', idPerso: '14', talk: 'mouvArretTalk', stopTalk: 'mouvMarcheTalk' },			
+				
+				}); 
+				request.done(function(msg) { 
+				$("#texto").html(msg); 
+				});
+				 
+			}else{
+				arret = 0;
+				$("#client1").stopTime().mouvArretTalk();
+				$("#texto").invisible();
+			}
+		}
+	});
+	
+$("#client_2").click(function() {
+		if($("#onTalk").val()==0 && $("#onMyTalk").val()==0){
+			$("#texto").removeClass().addClass('client_2Text');
+			if (arret == 0 || arrestation==1) {
+				$("#texto").show();
+				$("#onTalk").val(1);
+				$("#client_2").stopTime().mouvMarcheTalk2();
+
+				var request = $.ajax({
+				url: url_site+"Core/index/ajaxquote", 
+				type: "POST",
+				data: { idDiv: 'client_2', idPerso: '17', talk: 'mouvArretTalk2', stopTalk: 'mouvMarcheTalk2' },			
+				
+				}); 
+				request.done(function(msg) { 
+				$("#texto").html(msg); 
+				});
+				 
+			}else{
+				arret = 0;
+				$("#client_2").stopTime().mouvArretTalk2();
+				$("#texto").invisible();
+			}
+		}
+	});
+
+$("#retour_bar").click(function() {
+	if(<?php echo $imp;?>>=5)
+		var dstination='trone';else dstination='commune';
+	if($('#onTalk').val()==0){
+		$('#onTalk').val(1);	
+		var request = $.ajax({
+		url: url_site+'Core/index/'+dstination,
+		type: "POST"							
+		}); 
+		request.done(function(msg) {
+						$("#inThePlace").fadeOut(1000);
+						setTimeout(function(){
+						  $("#inThePlace").hide();
+						  $("#inThePlace").html(msg); 
+						$("#inThePlace").fadeIn(1000);
+						}, 1000);
+						
+					});
+	}
+});
+
+$("#fond_bar").click(function() {
+	if(<?php echo $imp;?>>=5)
+		var dstination='trone';else dstination='barfond';
+	if($('#onTalk').val()==0){
+		$('#onTalk').val(1);	
+		var request = $.ajax({
+		url: url_site+'Core/index/'+dstination,
+		type: "POST"							
+		}); 
+		request.done(function(msg) {
+						$("#inThePlace").fadeOut(1000);
+						setTimeout(function(){
+						  $("#inThePlace").hide();
+						  $("#inThePlace").html(msg); 
+						$("#inThePlace").fadeIn(1000);
+						}, 1000);
+						
+					});
+	}
+});
+
+
+});
+ 
+$("#barman").mouvArretGch();
+$(".enseignes").mouvE();
+$("#client1").mouvArretTalk();
+var pendu=0;
+<?php if($this->pendu){?>
+pendu =<?php echo $this->pendu;?>;
+<?php } ?>
+if(pendu)
+	$("#client_2").hide();
+else
+	$("#client_2").mouvArretTalk2();
+
+$("#mesTexto").html('<img src="images/plan/bar_plan.png" />'); 
+$("#plan").val('bar_plan');
+</script>
+</head>
+
+<?php
+if($this->myUser->getHeure()>=67)$stylePiece='nuit';else $stylePiece='';
+$stylePiece='';
+?>
+<div id="<?php echo $this->salle;?>" class='<?php echo $stylePiece;?>'>
+	<div id="perso"></div><p>&nbsp;</p>
+	<div id='retour_bar' style='z-index:1000'></div>
+	<div id='fond_bar' ></div>
+	<div class='bouteilles'></div>
+	<div class='enseignes'></div>
+	<?php
+	
+	foreach($this->porteDansSalle as $porte){
+		echo '<div id="porte_'.$porte['por_id'].'" class="porte_'.$porte['por_id_type'].'_'.$porte['poru_etat'].'"></div>';
+	}	?>
+	<div id="texto"></div>
+	<?php foreach($this->persoDansSalle as $clef => $perso){
+		echo '<div class="'.$clef.'_bar" id="'.$clef.'"></div>';
+	}
+	?>
+	
+</div>
+
+

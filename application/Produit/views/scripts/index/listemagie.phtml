@@ -1,0 +1,18 @@
+<h2>sortileges magique</h2>
+		  <?php 
+          if($this->guilde->getAuthMagie()==0){
+                echo'vous devez acheter une guilde des mages pour pouvoir acheter des sorts';
+          }
+           else
+           {
+                ?>
+                          
+                <ul>
+                <?php foreach ($this->pageData as $magie) : ?>
+                    <a href="<?php echo URL_MAIN_ABS.'Produit/index/magiedetails/pm_id/' . $magie->getId()  ;?>">
+                    <?php echo '<li>' . $magie->getTitre() . '</li>'; ?>
+                    </a> 
+                <?php endforeach; ?>
+                </ul>
+                <?php
+            }

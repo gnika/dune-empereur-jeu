@@ -1,0 +1,546 @@
+
+<?php 
+	$epiceIx=$this->epiceIx;if($epiceIx<0)$epiceIx=0;
+	$epiceGuesserit=$this->epiceGuesserit;if($epiceGuesserit<0)$epiceGuesserit=0;
+	$epiceTleilax=$this->epiceTleilax;if($epiceTleilax<0)$epiceTleilax=0;
+	$epiceGuilde=$this->epiceGuilde;if($epiceGuilde<0)$epiceGuilde=0;
+	$totalEpice=-($epiceIx+$epiceGuesserit+$epiceTleilax+$epiceGuilde);
+	
+	switch ($epiceIx) {
+    case ($epiceIx==0):
+        $repIX= "We are peacefully appalled by this drastic reduction of our precious spice melange ///The house of Ix will not be able to afford this high revs for much longer! ///";
+        break;
+    case ($epiceIx >= 100 && $epiceIx <= 500):
+        $repIX= "The parsimony you're showing to the house of Ix is detrimental to us /// The house of Ix will not be able to afford this high revs for much longer! ///";
+        break;
+    case ($epiceIx > 500 && $epiceIx <= 1000):
+        $repIX= "Ix is quite willing to receive more spice /// But we thank you for your generosity ///";
+        break;
+	 case ($epiceIx > 1000 && $epiceIx <= 1500):
+        $repIX= 'We Thank you from the bottom of our heart /// Thank Moneo for your dedication to the cause of IX ... ///';	
+        break;
+	 case ($epiceIx > 1500 && $epiceIx <= 2000):
+        $repIX= 'We Thank you from the bottom of our heart /// Thank Moneo for your dedication to the cause of IX ... ///';	
+        break;
+}
+
+switch ($epiceGuesserit) {
+    case ($epiceGuesserit==0):
+        $repGuess= "We NEED more spice : how could we hope to become Reverend Mother without the precious spice melange? /// Our entire hierarchy depends on your generosity! The Bene Gesserit officially submit its passive discontent to you///";
+        break;
+    case ($epiceGuesserit >= 100 && $epiceGuesserit <= 500):
+        $repGuess= "Your generosity has flown away at the same time with our gratitude to you! /// You who then know well Jessica through the Other memory,would you not reconsider your offer to our house? /// Learn the sound of silence and you will learn how to hear ///";
+        break;
+    case ($epiceGuesserit > 500 && $epiceGuesserit <= 1000):
+        $repGuess= "This spice portion will definitely helps the Bene Gesserit acolytes to recharge themselves /// Thank you for your calculated generosity ///";
+        break;
+	 case ($epiceGuesserit > 1000 && $epiceGuesserit <= 1500):
+        $repGuess= 'I beg you, Nayla. L \'The Emperor and ourselves sisters ... /// are sharing a lot more in common than you might suppose ... ///';	
+        break;
+	 case ($epiceGuesserit > 1500 && $epiceGuesserit <= 2000):
+        $repGuess= 'I beg you, Nayla. L \'The Emperor and ourselves sisters ... /// are sharing a lot more in common than you might suppose ... ///';	
+        break;
+}
+
+$repTleilax="Our subservience to you sire could not have been more sincere /// Long live to our goodly Emperor Leto II ... ///";
+
+
+switch ($epiceGuilde) {
+    case ($epiceGuilde==0):
+        $repGuild= "How can we carry your ''fish speakers'' without spice melange? /// The Spacing Guild will not be able to maintain its transportations without spice! ///";
+        break;
+    case ($epiceGuilde >= 100 && $epiceGuilde <= 500):
+        $repGuild= "The spacing Guild heighliner starships will not be able to go a lot further without more spice melange /// in the future, we request you to increase our spice portion ///";
+        break;
+    case ($epiceGuilde > 500 && $epiceGuilde <= 1000):
+        $repGuild= "The Navigators of the spacing Guild thank you for your attention /// But would it be possible to increase our share of spice? ///";
+        break;
+	 case ($epiceGuilde > 1000 && $epiceGuilde <= 1500):
+        $repGuild= 'Thank you from the bottom of our heart /// Thank Moneo for his dedication to our cause ... ///';	
+        break;
+	 case ($epiceGuilde > 1500 && $epiceGuilde <= 2000):
+        $repGuild= 'Thank you from the bottom of our heart /// Thank Moneo for his dedication to our cause ... ///';	
+        break;
+}
+	// die();
+	$end=0;
+	if($this->myEpice + $totalEpice < 0)
+		$notEnough=1;
+	else
+		$notEnough=0;
+
+	$totalRenommee=		$this->renommeeGagnee;
+	$totalCorruption=	$this->corruptionVoulu;
+	$globalCorr=		$this->usCorr+$totalCorruption;
+?>
+<div id='textoLink'>
+<div id='textoIn'>
+	<?php 
+	if($notEnough){$totalEpice=-$totalEpice;
+		$text='We are then meeting for the the spice melange sharing ceremony !///BUT ...///Moneo, my dear Moneo, the coffers are empty! We cannot continue!///We need '. $TotalEpice.' of spice units ...///Change the spice contribution per house using the dashboard on your right and come back to start the ceremony again///';//creer le scenarii de crise
+		$end=1;
+	}else
+		$text= 'We are then meeting for the the spice melange sharing ceremony !///To the Guild, I offer '.$epiceGuilde.' Spice units///';	
+		// echo $text;die();
+	$pieces = explode("///", $text);
+	echo $pieces[0];
+?>
+</div>
+</div><div id='triangle'></div>
+
+	<input type='hidden' id='stepDial' value='0'/>
+	<?php if(count($pieces)>1){
+	?>
+		<input type='hidden' id='closeWindow' value='0'/>
+	<?php }else{ ?>
+		<input type='hidden' id='closeWindow' value='1'/>
+	<?php } ?>
+	<input type='hidden' id='maxDial' value='<?php echo count($pieces);?>'/>
+	<!-------------------------------->
+<?php 
+	$text2= 'To the house of Ix, I offer '.$EpiceIx.' Spice units///Use this amount wiesly !///';	
+		$pieces2 = explode("///", $text2);
+		?>
+<div id='textoLink2'>
+<div id='textoIn2'>
+	<div id='text2' style='display:none;'>
+		<?php echo $pieces2[0];?>
+	</div>
+</div>
+</div><div style='display:none;' id='triangle2'></div>
+
+		<input type='hidden' id='stepDial2' value='0'/>
+		<?php if(count($pieces2)>1){
+		?>
+			<input type='hidden' id='closeWindow2' value='0'/>
+		<?php }else{ ?>
+			<input type='hidden' id='closeWindow2' value='1'/>
+		<?php } ?>
+		<input type='hidden' id='maxDial2' value='<?php echo count($pieces2);?>'/>
+	<!-------------------------------->
+<?php 
+	$text3= 'To the house of Bene Tleilax, I offer '.$EpiceIx.' Spice units/// Be thankful that we do not kill you !///';	
+		$pieces3 = explode("///", $text3);
+		?>
+<div id='textoLink3'>
+<div id='textoIn3'>
+	<div id='text3' style='display:none;'>
+		<?php echo $pieces3[0];?>
+	</div>
+</div>
+</div><div style='display:none;' id='triangle3'></div>
+		<input type='hidden' id='stepDial3' value='0'/>
+		<?php if(count($pieces3)>1){
+		?>
+			<input type='hidden' id='closeWindow3' value='0'/>
+		<?php }else{ ?>
+			<input type='hidden' id='closeWindow3' value='1'/>
+		<?php } ?>
+		<input type='hidden' id='maxDial3' value='<?php echo count($pieces3);?>'/>
+	<!-------------------------------->
+<?php 
+	$text4= 'To the house of Bene Gesserit, I offer '.$EpiceIx.' Spice units/// Enough for you to make your spice Agony !///';	
+		$pieces4 = explode("///", $text4);
+		?>
+<div id='textoLink4'>
+<div id='textoIn4'>
+	<div id='text4' style='display:none;'>
+		<?php echo $pieces4[0];?>
+	</div>
+</div>
+</div><div style='display:none;' id='triangle4'></div>
+		<input type='hidden' id='stepDial4' value='0'/>
+		<?php if(count($pieces4)>1){
+		?>
+			<input type='hidden' id='closeWindow4' value='0'/>
+		<?php }else{ ?>
+			<input type='hidden' id='closeWindow4' value='1'/>
+		<?php } ?>
+		<input type='hidden' id='maxDial4' value='<?php echo count($pieces4);?>'/>
+<!-------------------------------->
+<?php 
+	$text5= 'Thus ends the spice share for today ...///Please come back within the next 5 days for a new sharing ceremony !///';	
+		$pieces5 = explode("///", $text5);
+		?>
+<div id='textoLink5'>
+<div id='textoIn5'>
+	<div id='text5' style='display:none;'>
+		<?php echo $pieces5[0];?>
+	</div>
+</div>
+</div><div style='display:none;' id='triangle5'></div>
+
+		<input type='hidden' id='stepDial5' value='0'/>
+		<?php if(count($pieces5)>1){
+		?>
+			<input type='hidden' id='closeWindow5' value='0'/>
+		<?php }else{ ?>
+			<input type='hidden' id='closeWindow5' value='1'/>
+		<?php } ?>
+		<input type='hidden' id='maxDial5' value='<?php echo count($pieces5);?>'/>
+	<!-------------------------------->
+	<!-------------------------------->
+	<!-------------------------------->
+	<!-------------------------------->
+<div id='textoLinkGuilde' style='display:none'>
+<div style='display:none' id='textoInGuilde'>
+<?php 
+// if($this->suggGuesserit)
+$text= $repGuild;	
+	$piecesGuilde = explode("///", $text);
+	echo $piecesGuilde[0];
+	?>
+</div>
+</div><div style='display:none;' id='triangleGuilde'></div>
+	<input type='hidden' id='stepDialGuilde' value='0'/>
+	<?php if(count($piecesGuilde)>1){
+	?>
+		<input type='hidden' id='closeWindowGuilde' value='0'/>
+	<?php }else{ ?>
+		<input type='hidden' id='closeWindowGuilde' value='1'/>
+	<?php } ?>
+	<input type='hidden' id='maxDialGuilde' value='<?php echo count($piecesGuilde);?>'/>
+	
+<!--/*//////////////-->
+<div style='display:none;' id='textoLinkIx'>
+<div style='display:none' id='textoInIx'>
+<?php 
+$text= $repIX;
+	$piecesIx = explode("///", $text);
+	echo $piecesIx[0];
+	?>
+</div>
+</div><div style='display:none;' id='triangleIx'></div>
+	<input type='hidden' id='stepDialIx' value='0'/>
+	<?php if(count($piecesIx)>1){
+	?>
+		<input type='hidden' id='closeWindowIx' value='0'/>
+	<?php }else{ ?>
+		<input type='hidden' id='closeWindowIx' value='1'/>
+	<?php } ?>
+	<input type='hidden' id='maxDialIx' value='<?php echo count($piecesIx);?>'/>
+<!--/*//////////////-->
+<!--/*//////////////-->
+<div style='display:none;' id='textoLinkTleilax'>
+<div style='display:none' id='textoInTleilax'>
+<?php 
+$text= $repTleilax;	
+	$piecesTleilax = explode("///", $text);
+	echo $piecesTleilax[0];
+	?>
+</div>
+</div><div style='display:none;' id='triangleTleilax'></div>
+	<input type='hidden' id='stepDialTleilax' value='0'/>
+	<?php if(count($piecesTleilax)>1){
+	?>
+		<input type='hidden' id='closeWindowTleilax' value='0'/>
+	<?php }else{ ?>
+		<input type='hidden' id='closeWindowTleilax' value='1'/>
+	<?php } ?>
+	<input type='hidden' id='maxDialTleilax' value='<?php echo count($piecesTleilax);?>'/>
+<!--/*//////////////-->
+<!--/*//////////////-->
+<div style='display:none;' id='textoLinkGuesserit'>
+<div style='display:none' id='textoInGuesserit'>
+<?php 
+$text= $repGuess;	
+	$piecesGuesserit = explode("///", $text);
+	echo $piecesGuesserit[0];
+	?>
+</div>
+</div><div style='display:none;' id='triangleGuesserit'></div>
+	<input type='hidden' id='stepDialGuesserit' value='0'/>
+	<?php if(count($piecesGuesserit)>1){
+	?>
+		<input type='hidden' id='closeWindowGuesserit' value='0'/>
+	<?php }else{ ?>
+		<input type='hidden' id='closeWindowGuesserit' value='1'/>
+	<?php } ?>
+	<input type='hidden' id='maxDialGuesserit' value='<?php echo count($piecesGuesserit);?>'/>
+<!--/*//////////////-->
+
+	<SCRIPT language="Javascript">
+		// $("#onTalk").val(0);
+		// $("#onMyTalk").val(0);
+		// if($("#textoLink").length)
+			
+		
+		$("#texto").show();
+		var end=<?php echo $end;?>;
+		$("#texto").removeClass().addClass('naylaText');
+		$("#nayla").stopTime().mouvMarcheDrt();
+		$("#texto").css('background-color', '#FFFFFF');
+		$("#texto").visible();
+		$("#textoLink3, #textoLink2, #textoLink4, #textoLink5").hide();
+		$("#textoIn3, #textoIn2, #textoIn4, #textoIn5").hide();
+		
+		$("#textoLink, #textoLink2, #textoLink3, #textoLink4, #textoLink5").click(function() {
+			var idClique=this.id;
+			if(idClique=='textoLink2'){
+				var tab = <?php echo json_encode($pieces2); ?>;var inTex='textoIn2';var stepDial='stepDial2';var maxDial='maxDial2';var closeWindow='closeWindow2';}
+				else if(idClique=='textoLink3'){var tab = <?php echo json_encode($pieces3); ?>;var inTex='textoIn3';var stepDial='stepDial3';var maxDial='maxDial3';var closeWindow='closeWindow3';}
+				else if(idClique=='textoLink4'){var tab = <?php echo json_encode($pieces4); ?>;var inTex='textoIn4';var stepDial='stepDial4';var maxDial='maxDial4';var closeWindow='closeWindow4';}
+				else if(idClique=='textoLink5'){var tab = <?php echo json_encode($pieces5); ?>;var inTex='textoIn5';var stepDial='stepDial5';var maxDial='maxDial5';var closeWindow='closeWindow5';}
+				else if(idClique=='textoLink'){var tab = <?php echo json_encode($pieces); ?>;var inTex='textoIn';var stepDial='stepDial';var maxDial='maxDial';var closeWindow='closeWindow';}
+			
+			$("#"+inTex).empty();
+			var newVal=$("#"+stepDial).val();
+			if(newVal < $("#"+maxDial).val()){
+				newVal=parseInt(newVal)+1;
+				$("#"+stepDial).val(newVal);
+				
+				$("#"+inTex).html(tab[newVal]);
+			}
+			if(end==0){
+				if(newVal+1==$("#"+maxDial).val()){
+					$("#"+idClique).hide();
+					$("#"+closeWindow).val(1);
+				}
+			}else{
+				if(newVal+1==$("#"+maxDial).val()){
+					$("#nayla").stopTime().mouvArretDrt();
+					$("#texto").invisible();
+					$("#onTalk").val(0);
+					$("#onMyTalk").val(0);
+					$('#ceremonieBegin').val(0);
+				}
+			}
+		})
+		
+		$("#textoLinkGuilde").click(function() {
+			var tab = <?php echo json_encode($piecesGuilde); ?>;
+			$("#textoInGuilde").empty();
+			var newVal=$("#stepDialGuilde").val();
+			if(newVal < $("#maxDialGuilde").val()){
+				newVal=parseInt(newVal)+1;
+				$("#stepDialGuilde").val(newVal);
+				
+				$("#textoInGuilde").html(tab[newVal]);
+			}
+			
+			if(newVal+1==$("#maxDialGuilde").val()){
+				$("#textoLinkGuilde").hide();
+				$("#closeWindowGuilde").val(1);
+			}
+			
+		})
+		
+		$("#textoLinkIx").click(function() {
+			var tab = <?php echo json_encode($piecesIx); ?>;
+			$("#textoInIx").empty();
+			var newVal=$("#stepDialIx").val();
+			if(newVal < $("#maxDialIx").val()){
+				newVal=parseInt(newVal)+1;
+				$("#stepDialIx").val(newVal);
+				
+				$("#textoInIx").html(tab[newVal]);
+			}
+			
+			if(newVal+1==$("#maxDialIx").val()){
+				$("#textoLinkIx").hide();
+				$("#closeWindowIx").val(1);
+			}
+		})
+		
+		$("#textoLinkTleilax").click(function() {
+			var tab = <?php echo json_encode($piecesTleilax); ?>;
+			$("#textoInTleilax").empty();
+			var newVal=$("#stepDialTleilax").val();
+			if(newVal < $("#maxDialTleilax").val()){
+				newVal=parseInt(newVal)+1;
+				$("#stepDialTleilax").val(newVal);
+				
+				$("#textoInTleilax").html(tab[newVal]);
+			}
+			
+			if(newVal+1==$("#maxDialTleilax").val()){
+				$("#textoLinkTleilax").hide();
+				$("#closeWindowTleilax").val(1);
+			}
+		})
+		
+		$("#textoLinkGuesserit").click(function() {
+			var tab = <?php echo json_encode($piecesGuesserit); ?>;
+			$("#textoInGuesserit").empty();
+			var newVal=$("#stepDialGuesserit").val();
+			if(newVal < $("#maxDialGuesserit").val()){
+				newVal=parseInt(newVal)+1;
+				$("#stepDialGuesserit").val(newVal);
+				
+				$("#textoInGuesserit").html(tab[newVal]);
+			}
+			
+			if(newVal+1==$("#maxDialGuesserit").val()){
+				$("#textoLinkGuesserit").hide();
+				$("#closeWindowGuesserit").val(1);
+			}
+		})
+		
+		$("#texto").click(function() {
+			if($("#diamant").length){
+				if($("#closeWindow").val()==1){
+					$("#nayla").stopTime().mouvArretDrt();
+					$("#texto").invisible();
+					$("#triangle").hide();
+					///
+					$("#textoIn, #textoIn2, #textoIn3, #textoLink3, #textoLink2, #textoLink").hide();
+					$("#textoInGuilde").show();
+					$("#triangleGuilde").show();
+					$("#textoLinkGuilde").show();
+					$("#texto").removeClass().addClass('representant_guildeText');
+					$("#representant_guilde").stopTime().mouvParleGui();
+					$("#texto").css('background-color', '#FFFFFF');
+					$("#texto").visible();
+				}
+				if($("#closeWindow2").val()==1){
+					$("#nayla").stopTime().mouvArretDrt();
+					$("#texto").invisible();
+					$("#triangle2").hide();
+					///
+					$("#textoIn2").hide();
+					$("#textoInIx").show();
+					$("#triangleIx").show();
+					$("#textoLinkIx").show();
+					$("#texto").removeClass().addClass('representant_ixText');
+					$("#representant_ix").stopTime().mouvParleIx();
+					$("#texto").css('background-color', '#FFFFFF');
+					$("#texto").visible();
+				}
+				if($("#closeWindow3").val()==1){
+					$("#nayla").stopTime().mouvArretDrt();
+					$("#texto").invisible();
+					///
+					$("#textoIn3").hide();
+					$("#triangle3").hide();
+					$("#textoInTleilax").show();
+					$("#triangleTleilax").show();
+					$("#textoLinkTleilax").show();
+					$("#texto").removeClass().addClass('representant_tleilaxText');
+					$("#representant_tleilax").stopTime().mouvParleTle();
+					$("#texto").css('background-color', '#FFFFFF');
+					$("#texto").visible();
+				}
+				if($("#closeWindow4").val()==1){
+					$("#nayla").stopTime().mouvArretDrt();
+					$("#texto").invisible();
+					///
+					$("#textoIn4").hide();
+					$("#triangle4").hide();
+					$("#textoInGuesserit").show();
+					$("#triangleGuesserit").show();
+					$("#textoLinkGuesserit").show();
+					$("#texto").removeClass().addClass('representant_guesseritText');
+					$("#representant_guesserit").stopTime().mouvParleGue();
+					$("#texto").css('background-color', '#FFFFFF');
+					$("#texto").visible();
+				}
+				if($("#closeWindow5").val()==1){
+					$("#nayla").stopTime().mouvArretDrt();
+					$("#texto").invisible();
+					
+					var request2 = $.ajax({
+					url: "<?php echo URL_MAIN_ABS . 'Core/ajax/ajaximpot';?>", 
+					type: "POST",
+					data: {epice: <?php echo $totalEpice;?>, renommee: <?php echo $totalRenommee;?>, corruption: <?php echo $totalCorruption;?>,
+							suggIx: <?php echo $this->suggIx;?>, suggGuilde: <?php echo $this->suggGuilde;?>, 
+							suggTleilax: <?php echo $this->suggTleilax;?>, suggGuesserit: <?php echo $this->suggGuesserit;?>, corruptionTotale: <?php echo $globalCorr;?>},			
+					});
+					recompenseDisplay('<tr><td>Total épice dépensé : <?php echo $totalEpice;
+					?></td><td>Renommée :  <?php if(round($totalRenommee-($globalCorr/10))>0) echo '+';echo round($totalRenommee-($globalCorr/10));?></td></tr><?php
+					// if($totalCorruption)echo'<tr><td>Corruption : + '.$totalCorruption.'</td></tr>';
+					if($totalCorruption)echo'<tr><td>Votre corruption augmente</td></tr>';
+					if($globalCorr>0)echo'<tr><td>Votre corruption vous a fait perdre : - '.round($globalCorr/10).' Renommée</td></tr>';?>');
+					request2.done(function(msg) {
+					$("#impot").val(1);
+					});
+					afficheSpice();
+					$("#onTalk").val(0);
+					$("#onMyTalk").val(0);
+					$('#ceremonieBegin').val(0);
+					$("#diamant").remove();
+				}
+			}
+		})
+		
+		$("#textoLinkGuilde").click(function() {
+				if($("#closeWindowGuilde").val()==1){
+					$("#representant_guilde").stopTime().mouvArretParleGui();
+					$("#texto").invisible();
+					$("#closeWindow").val(0);
+					mouveLeft('representant_guilde');
+					///
+					
+					$("#textoInGuilde").hide();
+					$("#triangleGuilde").hide();
+					$("#textoIn2").show();
+					$("#text2").show();
+					$("#triangle2").show();
+					$("#textoLink2").show();
+					$("#texto").removeClass().addClass('naylaText');
+					$("#nayla").stopTime().mouvMarcheDrt();
+					$("#texto").css('background-color', '#FFFFFF');
+					$("#texto").visible();
+				}
+		})
+		
+		$("#textoLinkIx").click(function() {
+				if($("#closeWindowIx").val()==1){
+					$("#representant_ix").stopTime().mouvArretParleIx();
+					$("#texto").invisible();
+					$("#closeWindow2").val(0);
+					mouveLeft('representant_ix');
+					///
+					$("#textoInIx").hide();
+					$("#triangleIx").hide();
+					$("#textoIn3").show();
+					$("#text3").show();
+					$("#triangle3").show();
+					$("#textoLink3").show();
+					$("#texto").removeClass().addClass('naylaText');
+					$("#nayla").stopTime().mouvMarcheDrt();
+					$("#texto").css('background-color', '#FFFFFF');
+					$("#texto").visible();
+				}
+		})
+		
+		$("#textoLinkTleilax").click(function() {
+				if($("#closeWindowTleilax").val()==1){
+					$("#representant_tleilax").stopTime().mouvArretParleTle();
+					$("#texto").invisible();
+					$("#closeWindow3").val(0);
+					mouveLeft('representant_tleilax');
+					$("#textoInTleilax").hide();
+					$("#triangleTleilax").hide();
+					///
+					$("#textoIn4").show();
+					$("#text4").show();
+					$("#triangle4").show();
+					$("#textoLink4").show();
+					$("#texto").removeClass().addClass('naylaText');
+					$("#nayla").stopTime().mouvMarcheDrt();
+					$("#texto").css('background-color', '#FFFFFF');
+					$("#texto").visible();
+				}
+		})
+
+		$("#textoLinkGuesserit").click(function() {
+				if($("#closeWindowGuesserit").val()==1){
+					$("#representant_guesserit").stopTime().mouvArretParleGue();
+					$("#texto").invisible();
+					$("#closeWindow4").val(0);
+					mouveLeft('representant_guesserit');
+					$("#textoInGuesserit").hide();
+					$("#triangleGuesserit").hide();
+					///
+					$("#textoIn5").show();
+					$("#text5").show();
+					$("#triangle5").show();
+					$("#textoLink5").show();
+					$("#texto").removeClass().addClass('naylaText');
+					$("#nayla").stopTime().mouvMarcheDrt();
+					$("#texto").css('background-color', '#FFFFFF');
+					$("#texto").visible();
+				}
+		})
+		
+	</SCRIPT>

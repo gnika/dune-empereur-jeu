@@ -1,0 +1,18 @@
+<div id='information'>
+<div id='epice_renommee_user'>
+<span class="renom"><img src="/images/renommee.png" alt="renommee dune jeu Frank Herbert" title="renommmee dune jeu"> RENOMMEE : <span id='nbRenom'><?php echo $this->user->getRenommee();?></span></span> <span class="epic"><img src="/images/epice.png" alt="epice dune jeu Frank Herbert" title="epice dune jeu"> EPICE : <span id='nbSpice'><?php echo $this->user->getEpice();?></span></span>
+</div>
+</div>
+<script language='javascript'>
+/*
+$(document).ready(function(){
+	$("span#nbRenom").html(function(i, h) { 
+		return h.replace(/(.)/g, '<img src="<?php echo URL_MAIN_ABS.'images/chiffres/';?>$1$1.png" />'); 
+	});
+	$("span#nbSpice").html(function(i, h) { 
+		return h.replace(/(.)/g, '<img src="<?php echo URL_MAIN_ABS.'images/chiffres/';?>$1$1.png" />'); 
+	});
+});
+//depuis attentat, ca ne marche plus (en meme temps, c'était tres moche)
+*/
+</script>

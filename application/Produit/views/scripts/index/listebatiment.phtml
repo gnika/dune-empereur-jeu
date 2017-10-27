@@ -1,0 +1,27 @@
+<h2>Chantier Batiment</h2>
+		  <?php 
+          if($this->chateau->getAuthChateau()==0){
+            foreach ($this->pageData as $batiment){
+                if($batiment->getAuthChateau()==1){ 
+                        ?>
+                         <a href="<?php echo URL_MAIN_ABS.'Produit/index/batimentdetails/pb_id/' . $batiment->getId()  ;?>">
+                        <?php echo '<li>' . $batiment->getTitre() . '</li>'; ?>
+                        </a> 
+                           <?php
+                    }
+            
+            }
+          }
+           else
+           {
+                ?>
+                          
+                <ul>
+                <?php foreach ($this->pageData as $batiment) : ?>
+                    <a href="<?php echo URL_MAIN_ABS.'Produit/index/batimentdetails/pb_id/' . $batiment->getId()  ;?>">
+                    <?php echo '<li>' . $batiment->getTitre() . '</li>'; ?>
+                    </a> 
+                <?php endforeach; ?>
+                </ul>
+                <?php
+            }

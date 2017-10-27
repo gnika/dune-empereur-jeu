@@ -1,0 +1,4 @@
+<h2>Client identifié</h2>
+<p>Bonjour <?php echo $this->identity->cuu_name ?></p>
+<p><span class="small"><a href="<?php echo URL_MAIN_ABS . $this->rewrite('Customer/index/editaccount') ?>">Modifier mes informations</a></span></p>
+<p><a href="<?php echo URL_MAIN_ABS . 'Customer/auth/logout?redir=' . urlencode($_SERVER['REQUEST_URI']); ?>" > </a></p>

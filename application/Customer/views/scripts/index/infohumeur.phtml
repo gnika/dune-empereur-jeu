@@ -1,0 +1,38 @@
+<p>
+<div  id='contientGraph'>
+	<div id="divForGraph"><span style='left: 426px;position: relative;width: 30px;' id='sortie_graph'>sortie</span>
+	</div>
+</div>
+<?php
+ $count=count($this->humeurs);
+ $iii=1;
+?>
+   <script type="text/javascript">
+ arrayOfData = new Array(
+	<?php foreach($this->humeurs as $ids=>$value){ ?>
+     [<?php echo $value;?>,"<?php echo $ids;?>",'#f3f3f3'] <?php if($iii < $count){ ?>,<?php } 
+	 $iii++;
+	 }
+	 ?>
+);
+
+   $('#divForGraph').jqBarGraph({ data: arrayOfData, width: 400, speed:1, height:118 });
+	
+	$("#sortie_graph").click(function() {
+	if ($('#buttonObjet, #infojoueur, #information, #buttonRessources, #mesTexto, .foot').css('display') != 'none'){
+		$('#sortie_graph').css({'display': 'block'});
+		$('#buttonObjet, #infojoueur, #information, #buttonRessources, #mesTexto, .foot').css({'display': 'none'});
+	}
+	else{
+		$('#sortie_graph').css({'display': 'none'});
+		setTimeout(function(){
+		  $('#buttonObjet, #infojoueur, #information, #buttonRessources, #mesTexto, .foot').css({'display': 'block'})
+		}, 500);
+		
+	}
+	$( "#contientGraph" ).toggle( "blind" );
+});
+	
+   </script>
+</p>
+

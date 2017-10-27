@@ -1,0 +1,9 @@
+<h4><a href="<?php echo URL_MAIN_ABS ?>Produit/basket/basket">Confirmation achat des troupes</a></h4>   
+<?php echo $this->basket->getItemsCount() ?> unite(s) prête(s) a être recrutée(s)
+<ul>
+<?php if ( $this->basket->getItems() ) :
+foreach( $this->basket->getItems() as $item ) : ?>
+<li><img src='<?php echo URL_MAIN_ABS; ?>images/unite/<?php echo $item['image'];?>'></li>
+<?php endforeach;
+endif;?>
+</ul>

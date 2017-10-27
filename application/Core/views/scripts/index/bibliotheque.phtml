@@ -1,0 +1,227 @@
+
+<?php $imp=$this->myUser->getImpot();?>
+<script type="text/javascript">
+
+$(document).ready(function() {
+	$("#onTalk").val(0);
+	$("#onMyTalk").val(0);
+	aniX = 0;
+	aniY = 0;
+	
+	jQuery.fn.arretGch = function() {
+		$(this).oneTime(1200,function() {
+			$(this).css({backgroundPosition:'-140px 0'});
+		}).oneTime(300,function() {
+			$(this).css({backgroundPosition:'0 0'});
+		}).oneTime(600,function() {
+			$(this).css({backgroundPosition:'-140px 0'});
+		}).oneTime(900,function() {
+			$(this).css({backgroundPosition:'-280px 0'});
+		});
+	};
+	
+	jQuery.fn.mouvArretGch = function(){
+		$(this).arretGch();
+		$(this).everyTime(1200,function(){
+			$(this).arretGch();
+		});
+	}
+	jQuery.fn.marcheGch = function() {
+		$(this).oneTime(1200,function() {
+			$(this).css({backgroundPosition:'0px -270px'});
+		}).oneTime(300,function() {
+			$(this).css({backgroundPosition:'-140px -270px'});
+		}).oneTime(600,function() {
+			$(this).css({backgroundPosition:'-280px -270px'});
+		}).oneTime(900,function() {
+			$(this).css({backgroundPosition:'-140px -270px'});
+		});
+	};
+	jQuery.fn.mouvMarcheGch = function(){
+		$(this).marcheGch();
+		$(this).everyTime(1200,function(){
+			$(this).marcheGch();
+		});
+	}
+	
+	///
+	
+	jQuery.fn.arretTalk = function() {
+		$(this).oneTime(200,function() {
+			$(this).css({backgroundPosition:'0px 2px'});
+		}).oneTime(400,function() {
+			$(this).css({backgroundPosition:'-100px 2px'});
+		}).oneTime(600,function() {
+			$(this).css({backgroundPosition:'-200px 2px'});
+		}).oneTime(800,function() {
+			$(this).css({backgroundPosition:'-100px 2px'});
+		});
+	};
+	
+	jQuery.fn.mouvArretTalk = function(){
+		$(this).arretTalk();
+		$(this).everyTime(800,function(){
+			$(this).arretTalk();
+		});
+	}
+	jQuery.fn.marcheTalk = function() {
+		$(this).oneTime(200,function() {
+			$(this).css({backgroundPosition:'0 -268px'});
+		}).oneTime(400,function() {
+			$(this).css({backgroundPosition:'-100px -268px'});
+		})
+		.oneTime(600,function() {
+			$(this).css({backgroundPosition:'-200px -268px'});
+		}).oneTime(800,function() {
+			$(this).css({backgroundPosition:'-100px -268px'});
+		});
+	};
+	jQuery.fn.mouvMarcheTalk = function(){
+		$(this).marcheTalk();
+		$(this).everyTime(800,function(){
+			$(this).marcheTalk();
+		});
+	}
+	
+	
+	
+	var arret = 0;
+
+	$("#sayyaoto").click(function() {
+		if($("#onTalk").val()==0 && $("#onMyTalk").val()==0){
+			$("#texto").removeClass().addClass('sayyaotoTextBibliotheque');
+			if (arret == 0 || arrestation==1) {
+				$("#texto").show();
+				$("#onTalk").val(1);
+				$("#sayyaoto").stopTime().mouvMarcheGch();
+
+				var request = $.ajax({
+				url: url_site+"Core/index/ajaxquote", 
+				type: "POST",
+				data: { idDiv: 'sayyaoto', idPerso: '3', talk: 'mouvArretGch', stopTalk: 'mouvMarcheGch' },			
+				
+				}); 
+				request.done(function(msg) { 
+				$("#texto").html(msg); 
+				});
+				 
+			}else{
+				arret = 0;
+				$("#sayyaoto").stopTime().mouvArretGch();
+				$("#texto").invisible();
+			}
+		}
+	});
+	
+	$(".memoire").click(function() {
+		if($("#sayyaoto").length){
+			if($("#onTalk").val()==0 && $("#onMyTalk").val()==0){
+				$("#texto").removeClass().addClass('sayyaotoTextBibliotheque');
+				if (arret == 0 || arrestation==1) {
+					$("#texto").show();
+					$("#onTalk").val(1);
+					$("#sayyaoto").stopTime().mouvMarcheGch();
+
+					var request = $.ajax({
+					url: url_site+"Core/index/ajaxquote", 
+					type: "POST",
+					data: { idDiv: 'sayyaoto', idPerso: '3', talk: 'mouvArretGch', stopTalk: 'mouvMarcheGch', repns: 96 },			
+					
+					}); 
+					request.done(function(msg) { 
+					$("#texto").html(msg); 
+					});
+					 
+				}else{
+					arret = 0;
+					$("#sayyaoto").stopTime().mouvArretGch();
+					$("#texto").invisible();
+				}
+			}
+		}
+	});
+	
+	$("#soeur_1").click(function() {
+		if($("#onTalk").val()==0 && $("#onMyTalk").val()==0){
+			$("#texto").removeClass().addClass('soeur_1Text soeur_1Text_biblio');
+			if (arret == 0 || arrestation==1) {
+				$("#texto").show();
+				$("#onTalk").val(1);
+				$("#soeur_1").stopTime().mouvMarcheTalk();
+
+				var request = $.ajax({
+				url: url_site+"Core/index/ajaxquote", 
+				type: "POST",
+				data: { idDiv: 'soeur_1', idPerso: '15', talk: 'mouvArretTalk', stopTalk: 'mouvMarcheTalk' },			
+				
+				}); 
+				request.done(function(msg) { 
+				$("#texto").html(msg); 
+				});
+				 
+			}else{
+				arret = 0;
+				$("#soeur_1").stopTime().mouvArretTalk();
+				$("#texto").invisible();
+			}
+		}
+	});
+
+$("#retour_bibliotheque").click(function() {
+	if($('#onTalk').val()==0){
+		$('#onTalk').val(1);	
+		if(<?php echo $imp;?>>=5)
+		var dstination='trone';else dstination='commune';
+		var request = $.ajax({
+		url: url_site+'Core/index/'+dstination,
+		type: "POST"							
+		}); 
+		request.done(function(msg) {
+						$("#inThePlace").fadeOut(1000);
+						setTimeout(function(){
+						  $("#inThePlace").hide();
+						  $("#inThePlace").html(msg); 
+						$("#inThePlace").fadeIn(1000);
+						}, 1000);
+						
+					});
+	}
+});
+
+
+});
+ var heureActu=$('.progBarText').html();
+if(heureActu=="12h30" || heureActu=="16h00" || heureActu=="10h00" || heureActu=="12h00" )
+	$("#soeur_1").remove();
+if($("#sayyaoto").length)
+	$("#sayyaoto").mouvArretGch();
+if($("#soeur_1").length)
+	$("#soeur_1").mouvArretTalk();
+
+$("#mesTexto").html('<img src="images/plan/bibliotheque_plan.png" />'); 
+$("#plan").val('bibliotheque_plan');	
+</script>
+</head>
+
+<?php
+if($this->myUser->getHeure()>=67)$stylePiece='nuit';else $stylePiece='';
+$stylePiece='';
+?>
+<div id="<?php echo $this->salle;?>" class='<?php echo $stylePiece;?>'>
+	<div id="perso"></div><p>&nbsp;</p>
+<div id="inscription_bib" onclick="setInscription()"></div>
+	<div id='retour_bibliotheque' style='z-index:1000'></div>
+	
+	<div id="texto"></div>
+	<?php
+	if(!$this->vol) {	
+	?><img class="memoire" src="images/memoire.jpg" />
+	<?php 
+	}
+	foreach($this->persoDansSalle as $clef => $perso){
+		echo '<div class="'.$clef.'_bibliotheque" id="'.$clef.'"></div>';
+	}
+	?>
+</div>
+
+

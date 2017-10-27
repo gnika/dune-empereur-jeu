@@ -1,0 +1,154 @@
+<script type="text/javascript" src="js/paper-full.min.js" />
+<?php $imp=$this->myUser->getImpot();?>
+<script type="text/javascript">
+
+$(document).ready(function() {
+	$("#onTalk").val(0);
+	$("#onMyTalk").val(0);
+	aniX = 0;
+	aniY = 0;
+	
+
+
+$("#retour_couloir4").click(function() {
+	if($('#onTalk').val()==0){
+		$('#onTalk').val(1);	
+		if(<?php echo $imp;?>>=5)
+			var dstination='trone';else dstination='couloir';
+		var request = $.ajax({
+		url: url_site+'Core/index/'+dstination,
+		type: "POST"							
+		}); 
+		request.done(function(msg) {
+			$("#inThePlace").fadeOut(1000);
+			setTimeout(function(){
+			  $("#inThePlace").hide();
+			  $("#inThePlace").html(msg); 
+			$("#inThePlace").fadeIn(1000);
+			}, 1000);
+			
+		});
+	}
+});
+
+$("#porte_4").click(function() {
+		if($("#onTalk").val()==0 && $("#onMyTalk").val()==0){
+			if($(this).attr('class')=='porte_1_1'){
+				var request = $.ajax({ 
+					url: url_site+'Core/index/siaynoq',
+					type: "POST"							
+		}); 
+		request.done(function(msg) {
+						$("#inThePlace").fadeOut(1000);
+						setTimeout(function(){
+						  $("#inThePlace").hide();
+						  $("#inThePlace").html(msg); 
+						$("#inThePlace").fadeIn(1000);
+						}, 1000);
+						
+					});
+			}
+		}
+	});
+
+});
+
+
+$("#mesTexto").html('<img src="images/plan/couloir3_plan.png" />'); 
+$("#plan").val('couloir3_plan');
+</script>
+</head>
+
+<?php
+if($this->myUser->getHeure()>=67)$stylePiece='nuit';else $stylePiece='';
+$stylePiece='';
+?>
+<div id="<?php echo $this->salle;?>" class='<?php echo $stylePiece;?>'>
+	<div id="perso"></div><p>&nbsp;</p>
+	<div id='retour_couloir4' style='z-index:1000'></div>
+	<?php
+	
+	foreach($this->porteDansSalle as $porte){
+		echo '<div id="porte_'.$porte['por_id'].'" class="porte_'.$porte['por_id_type'].'_'.$porte['poru_etat'].'"></div>';
+	}	?>
+	<div id="texto"></div>
+	<?php foreach($this->persoDansSalle as $clef => $perso){
+		echo '<div class="'.$clef.'_couloir2" id="'.$clef.'"></div>';
+	}
+	?>
+	<canvas id="canvas" resize>
+		<img id="email" width="600px" height="512" style="display: none;" src="images/email.png"/>
+	</canvas>
+</div>
+    <script type="text/paperscript" canvas="canvas">
+
+        // Based on 'JPEG Raster' by Jonathan Puckey:
+// http://www.flickr.com/photos/puckey/3179779686/in/photostream/
+
+// Create a raster item:
+var raster = new Raster('images/email.png');
+var loaded = false;
+
+raster.on('load', function() {
+	loaded = true;
+	onResize();
+});
+
+// Make the raster invisible:
+raster.visible = false;
+
+var lastPos = view.center;
+function moveHandler(event) {
+	if (!loaded)
+		return;
+	if (lastPos.getDistance(event.point) < 10)
+		return;
+	lastPos = event.point;
+
+	var size = this.bounds.size.clone();
+	var isLandscape = size.width > size.height;
+
+	// If the path is in landscape orientation, we're going to
+	// split the path horizontally, otherwise vertically:
+
+	size /= isLandscape ? [2, 1] : [1, 2];
+
+	var path = new Path.Rectangle({
+		point: this.bounds.topLeft.floor(),
+		size: size.ceil(),
+		onMouseMove: moveHandler
+	});
+	path.fillColor = raster.getAverageColor(path);
+
+	var path = new Path.Rectangle({
+		point: isLandscape
+			? this.bounds.topCenter.ceil()
+			: this.bounds.leftCenter.ceil(),
+		size: size.floor(),
+		onMouseMove: moveHandler
+	});
+	path.fillColor = raster.getAverageColor(path);
+
+	this.remove();
+}
+
+function onResize(event) {
+	if (!loaded)
+		return;
+	project.activeLayer.removeChildren();
+
+	// Transform the raster so that it fills the bounding rectangle
+	// of the view:
+	raster.fitBounds(view.bounds, true);
+
+	// Create a path that fills the view, and fill it with
+	// the average color of the raster:
+	new Path.Rectangle({
+		rectangle: view.bounds,
+		fillColor: raster.getAverageColor(view.bounds),
+		onMouseMove: moveHandler
+	});
+}
+
+    </script>
+

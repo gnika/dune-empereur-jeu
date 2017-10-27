@@ -1,0 +1,735 @@
+<div id='inThePlace'>
+<?php 
+// foreach($this->persoDansSalle as $clef => $perso){
+		// echo '<script type="text/javascript" src="'.URL_MAIN_ABS .'js/perso/'.$clef.'.js"></script>';
+	// }
+	// echo $this->InlineScript()  . CRLF;
+?>
+<script type="text/javascript">
+
+$(document).ready(function() {
+	 // $(function() {
+		// $('#nayla').tooltip({
+		// position: {
+		// my: "center bottom-20",
+		// at: "center top",
+		// using: function( position, feedback ) {
+		// $( this ).css( position );
+		// $( "<div>" )
+		// .addClass( "arrow" )
+		// .addClass( feedback.vertical )
+		// .addClass( feedback.horizontal )
+		// .appendTo( this );
+		// }
+		// }
+		// });
+	// });
+
+	jQuery.fn.arretGch = function() {
+		$(this).oneTime(200,function() {
+			$(this).css({backgroundPosition:'-23px -28px'});
+		}).oneTime(400,function() {
+			$(this).css({backgroundPosition:'-123px -28px'});
+		}).oneTime(600,function() {
+			$(this).css({backgroundPosition:'-223px -28px'});
+		}).oneTime(800,function() {
+			$(this).css({backgroundPosition:'-123px -28px'});
+		});
+	};
+	
+	jQuery.fn.mouvArretGch = function(){
+		$(this).arretGch();
+		$(this).everyTime(800,function(){
+			$(this).arretGch();
+		});
+	}
+	jQuery.fn.marcheGch = function() {
+		$(this).oneTime(200,function() {
+			$(this).css({backgroundPosition:'-23px -228px'});
+		}).oneTime(400,function() {
+			$(this).css({backgroundPosition:'-123px -228px'});
+		}).oneTime(600,function() {
+			$(this).css({backgroundPosition:'-223px -228px'});
+		}).oneTime(800,function() {
+			$(this).css({backgroundPosition:'-323px -228px'});
+		});
+	};
+	jQuery.fn.mouvMarcheGch = function(){
+		$(this).marcheGch();
+		$(this).everyTime(800,function(){
+			$(this).marcheGch();
+		});
+	}
+	
+	var arret = 0;
+	$('#ceremonieBegin').val(0);
+	$("#sayyaoto").click(function() {
+		if($("#onTalk").val()==0 && $("#onMyTalk").val()==0){
+			$("#texto").removeClass().addClass('sayyaotoText');
+			if (arret == 0 || arrestation==1) {
+				$("#texto").show();
+				$("#onTalk").val(1);
+				$("#sayyaoto").stopTime().mouvMarcheGch();
+				if( !$("#diamant").length)
+					var request = $.ajax({
+					url: url_site+"Core/index/ajaxquote", 
+					type: "POST",
+					data: { idDiv: 'sayyaoto', idPerso: '3', talk: 'mouvArretGch', stopTalk: 'mouvMarcheGch' },			
+					}); 
+				else
+					var request = $.ajax({ 
+					url: url_site+'Core/index/ajaxquote',
+					type: "POST",	
+					data: { idDiv: 'nayla', idPerso: 2, talk: 'mouvArretDrt', stopTalk: 'mouvMarcheDrt', repns:215 },
+					}); 
+				request.done(function(msg) { 
+				$("#texto").html(msg); 
+				});
+				 
+			}else{
+				arret = 0;
+				$("#sayyaoto").stopTime().mouvArretGch();
+				$("#texto").invisible();
+			}
+		}
+	});
+
+	
+	jQuery.fn.mouvRigole = function(){
+		$(this).rigole();
+		$(this).everyTime(1000,function(){
+			$(this).rigole();
+		});
+	}
+	jQuery.fn.mouvArretRigole = function(){
+		$(this).arretRigole();
+		$(this).everyTime(1000,function(){
+			$(this).arretRigole();
+		});
+	}
+	jQuery.fn.rigole = function() {
+		// var mousePos = new Array(419, 511);
+		// $(this).oneTime(50,function() {
+			// interact(mousePos, ["-356px", "-475px", "-593px"]);
+		// }).oneTime(200,function() {
+			// interact(mousePos, ["-1px", "-120px", "-238px"])
+		// });
+		$(this).oneTime(200,function() {
+			$(this).css({backgroundPosition:'0px -270px'});
+		}).oneTime(600,function() {
+			$(this).css({backgroundPosition:'-100px -270px'});
+		}).oneTime(800,function() {
+			$(this).css({backgroundPosition:'-200px -270px'});
+		}).oneTime(1000,function() {
+			$(this).css({backgroundPosition:'-100px -270px'});
+		});
+	};
+	
+	jQuery.fn.arretRigole = function() {
+		// var mousePos = new Array(419, 511);
+		// $(this).oneTime(800,function() {
+			// interact(mousePos, ["-1px", "-120px", "-238px"]);
+		// });
+		$(this).oneTime(200,function() {
+			$(this).css({backgroundPosition:'0px 0px'});
+		}).oneTime(600,function() {
+			$(this).css({backgroundPosition:'-100px 0px'});
+		}).oneTime(800,function() {
+			$(this).css({backgroundPosition:'-200px 0px'});
+		}).oneTime(1000,function() {
+			$(this).css({backgroundPosition:'-100px 0px'});
+		});
+	};
+	
+$("#aloa").click(function() {
+		if($("#onTalk").val()==0 && $("#onMyTalk").val()==0 && $('#ceremonieBegin').val()==0){
+			$("#texto").removeClass().addClass('aloaText');
+			if (arret == 0 || arrestation==1) {
+				$("#texto").show();
+				$("#onTalk").val(1);
+				if($("#diamant").length){
+					$("#nayla").stopTime().mouvMarcheDrt();
+					$("#texto").removeClass().addClass('naylaText');
+				}else{
+					$('#yeuxMouve').val(1);
+					$("#aloa").stopTime().mouvRigole();
+				}
+				if( !$("#diamant").length)
+					var request = $.ajax({ 
+					url: url_site+'Core/index/ajaxquote',
+					type: "POST",	
+					data: { idDiv: 'aloa', idPerso: 4, talk: 'mouvArretRigole', stopTalk: 'mouvRigole', XY: 1 },							
+					}); 
+				else
+					var request = $.ajax({ 
+					url: url_site+'Core/index/ajaxquote',
+					type: "POST",	
+					data: { idDiv: 'nayla', idPerso: 2, talk: 'mouvArretDrt', stopTalk: 'mouvMarcheDrt', repns:215 },
+					}); 
+				request.done(function(msg) { 
+				$("#texto").html(msg); 
+				});
+				 
+			}else{
+				arret = 0;
+				$("#aloa").stopTime().mouvArretRigole();
+				$("#texto").invisible();
+			}
+		}
+	});
+	
+
+	
+// $(document).mousemove(function(event) {
+	// if($('#yeuxMouve').val()==0){
+		// aniX = $("#aloa").offset().left;
+		// aniY = $("#aloa").offset().top;
+		// var mousePos = new Array(event.pageX, event.pageY);
+		// interact(mousePos, ["-1px", "-120px", "-238px"]);
+	// }
+// });
+
+function interact(mouseCord, aniCord){
+    if (mouseCord[0] < aniX && mouseCord[1] < aniY){ // Box-1 
+        $("#aloa").css("background-position", aniCord[0]+" 0px");
+    } else if (mouseCord[0] > aniX && mouseCord[0] < aniX+117 && mouseCord[1] < aniY){ // Box-2
+        $("#aloa").css("background-position", aniCord[1]+" 0px");
+    } else if (mouseCord[0] > aniX+117 && mouseCord[1] < aniY){ // Box-3
+        $("#aloa").css("background-position", aniCord[2]+" 0px");
+    } else if (mouseCord[0] < aniX && mouseCord[1] > aniY && mouseCord[1] < aniY+117){ // Box-4
+        $("#aloa").css("background-position", aniCord[0]+" -119px");
+    } else if (mouseCord[0] > aniX && mouseCord[0] < aniX+117 && mouseCord[1] > aniY && mouseCord[1] < aniY+117){ // Box-5
+        $("#aloa").css("background-position", aniCord[1]+" -119px");
+    }else if (mouseCord[0] > aniX+117 && mouseCord[1] > aniY && mouseCord[1] < aniY+117){ // Box-6
+        $("#aloa").css("background-position", aniCord[2]+" -119px");
+    } else if (mouseCord[0] < aniX && mouseCord[1] > aniY+117){ // Box-7
+        $("#aloa").css("background-position", aniCord[0]+" -237px");
+    } else if (mouseCord[0] > aniX && mouseCord[0] < aniX+117 && mouseCord[1] > aniY+117){ // Box-8
+        $("#aloa").css("background-position", aniCord[1]+" -237px");
+    } else if (mouseCord[0] > aniX+117 && mouseCord[1] > aniY+117){ // Box-9
+        $("#aloa").css("background-position", aniCord[2]+" -237px");
+    }
+}
+
+jQuery.fn.arretParle = function() {
+		$(this).oneTime(1000,function() {
+			$(this).css({backgroundPosition:'0 0px'});
+		}).oneTime(1500,function() {
+			$(this).css({backgroundPosition:'-320px 0px'});
+		}).oneTime(2000,function() {
+			$(this).css({backgroundPosition:'-640px 0px'});
+		}).oneTime(2500,function() {
+			$(this).css({backgroundPosition:'-320px 0px'});
+		});
+	};
+	
+	jQuery.fn.mouvArretParle = function(){
+		$(this).arretParle();
+		$(this).everyTime(2500,function(){
+			$(this).arretParle();
+		});
+	}
+	
+	jQuery.fn.arretParleGui = function() {
+		$(this).oneTime(1200,function() {
+			$(this).css({backgroundPosition:'0px 0px'});
+		}).oneTime(300,function() {
+			$(this).css({backgroundPosition:'-100px 0px'});
+		}).oneTime(600,function() {
+			$(this).css({backgroundPosition:'-200px 0px'});
+		}).oneTime(900,function() {
+			$(this).css({backgroundPosition:'-100px 0px'});
+		});
+	};
+	jQuery.fn.mouvArretParleGui = function(){
+		$(this).arretParleGui();
+		$(this).everyTime(1200,function(){
+			$(this).arretParleGui();
+		});
+	}
+
+	jQuery.fn.parleGui = function() {
+		$(this).oneTime(1200,function() {
+			$(this).css({backgroundPosition:'0px -271px '});
+		}).oneTime(300,function() {
+			$(this).css({backgroundPosition:'-100px -271px '});
+		}).oneTime(600,function() {
+			$(this).css({backgroundPosition:'-200px -271px '});
+		}).oneTime(900,function() {
+			$(this).css({backgroundPosition:'-100px -271px '});
+		});
+	};
+	jQuery.fn.mouvParleGui = function(){
+		$(this).parleGui();
+		$(this).everyTime(1200,function(){
+			$(this).parleGui();
+		});
+	}
+	
+	$("#representant_guilde").click(function() {
+		if($("#onTalk").val()==0 && $("#onMyTalk").val()==0 && $('#ceremonieBegin').val()==0){
+			$("#texto").removeClass().addClass('representant_guildeText');
+			if (arret == 0 || arrestation==1) {
+				$("#texto").show();
+				$("#onTalk").val(1);
+				if($("#diamant").length){
+					$("#nayla").stopTime().mouvMarcheDrt();
+					$("#texto").removeClass().addClass('naylaText');
+				}else
+					$("#representant_guilde").stopTime().mouvParleGui();
+				if( !$("#diamant").length)
+					var request = $.ajax({ 
+					url: url_site+'Core/index/ajaxquote',
+					type: "POST",
+					data: { idDiv: 'representant_guilde', idPerso: 8, talk: 'mouvArretParleGui', stopTalk: 'mouvParleGui' },			
+					}); 
+				else
+					var request = $.ajax({ 
+					url: url_site+'Core/index/ajaxquote',
+					type: "POST",
+					data: { idDiv: 'nayla', idPerso: 2, talk: 'mouvArretDrt', stopTalk: 'mouvMarcheDrt', repns:215 },
+					}); 
+				request.done(function(msg) { 
+				$("#texto").html(msg); 
+				});
+				 
+			}else{
+				arret = 0;
+				$("#representant_guilde").stopTime().mouvArretParleGui();
+				$("#texto").invisible();
+			}
+		}
+	});
+	
+	jQuery.fn.arretParleIx = function() {
+		$(this).oneTime(1300,function() {
+			$(this).css({backgroundPosition:'0px 0px'});
+		}).oneTime(400,function() {
+			$(this).css({backgroundPosition:'-100px 0px'});
+		}).oneTime(700,function() {
+			$(this).css({backgroundPosition:'-200px 0px'});
+		}).oneTime(1000,function() {
+			$(this).css({backgroundPosition:'-100px 0px'});
+		});
+	};
+	jQuery.fn.mouvArretParleIx = function(){
+		$(this).arretParleIx();
+		$(this).everyTime(1300,function(){
+			$(this).arretParleIx();
+		});
+	}
+
+	jQuery.fn.parleIx = function() {
+		$(this).oneTime(1200,function() {
+			$(this).css({backgroundPosition:'0px -271px '});
+		}).oneTime(300,function() {
+			$(this).css({backgroundPosition:'-100px -271px '});
+		}).oneTime(600,function() {
+			$(this).css({backgroundPosition:'-200px -271px '});
+		}).oneTime(900,function() {
+			$(this).css({backgroundPosition:'-100px -271px '});
+		});
+	};
+	jQuery.fn.mouvParleIx = function(){
+		$(this).parleIx();
+		$(this).everyTime(1200,function(){
+			$(this).parleIx();
+		});
+	}
+	
+	$("#representant_ix").click(function() {
+		if($("#onTalk").val()==0 && $("#onMyTalk").val()==0 && $('#ceremonieBegin').val()==0){
+			$("#texto").removeClass().addClass('representant_ixText');
+			if (arret == 0 || arrestation==1) {
+				$("#texto").show();
+				$("#onTalk").val(1);
+				if($("#diamant").length){
+					$("#nayla").stopTime().mouvMarcheDrt();
+					$("#texto").removeClass().addClass('naylaText');
+				}else
+					$("#representant_ix").stopTime().mouvParleIx();
+				if( !$("#diamant").length)
+					var request = $.ajax({ 
+					url: url_site+'Core/index/ajaxquote',
+					type: "POST",
+					data: { idDiv: 'representant_ix', idPerso: 7, talk: 'mouvArretParleIx', stopTalk: 'mouvParleIx' },			
+					}); 
+				else
+					var request = $.ajax({ 
+					url: url_site+'Core/index/ajaxquote',
+					type: "POST",
+					data: { idDiv: 'nayla', idPerso: 2, talk: 'mouvArretDrt', stopTalk: 'mouvMarcheDrt', repns:215 },
+					}); 
+				request.done(function(msg) { 
+				$("#texto").html(msg); 
+				});
+				 
+			}else{
+				arret = 0;
+				$("#representant_ix").stopTime().mouvArretParleIx();
+				$("#texto").invisible();
+			}
+		}
+	});
+	
+	jQuery.fn.arretParleTle = function() {
+		$(this).oneTime(1200,function() {
+			$(this).css({backgroundPosition:'0px 0px'});
+		}).oneTime(300,function() {
+			$(this).css({backgroundPosition:'-100px 0px'});
+		}).oneTime(600,function() {
+			$(this).css({backgroundPosition:'-200px 0px'});
+		}).oneTime(900,function() {
+			$(this).css({backgroundPosition:'-100px 0px'});
+		});
+	};
+	jQuery.fn.mouvArretParleTle = function(){
+		$(this).arretParleTle();
+		$(this).everyTime(1200,function(){
+			$(this).arretParleTle();
+		});
+	}
+
+	jQuery.fn.parleTle = function() {
+		$(this).oneTime(1200,function() {
+			$(this).css({backgroundPosition:'0px -271px '});
+		}).oneTime(300,function() {
+			$(this).css({backgroundPosition:'-100px -271px '});
+		}).oneTime(600,function() {
+			$(this).css({backgroundPosition:'-200px -271px '});
+		}).oneTime(900,function() {
+			$(this).css({backgroundPosition:'-100px -271px '});
+		});
+	};
+	jQuery.fn.mouvParleTle = function(){
+		$(this).parleTle();
+		$(this).everyTime(1200,function(){
+			$(this).parleTle();
+		});
+	}
+	
+	$("#representant_tleilax").click(function() {
+		if($("#onTalk").val()==0 && $("#onMyTalk").val()==0 && $('#ceremonieBegin').val()==0){
+			$("#texto").removeClass().addClass('representant_tleilaxText');
+			if (arret == 0 || arrestation==1) {
+				$("#texto").show();
+				$("#onTalk").val(1);
+				if($("#diamant").length){
+					$("#nayla").stopTime().mouvMarcheDrt();
+					$("#texto").removeClass().addClass('naylaText');
+				}else
+					$("#representant_tleilax").stopTime().mouvParleTle();
+				if( !$("#diamant").length)
+					var request = $.ajax({ 
+					url: url_site+'Core/index/ajaxquote',
+					type: "POST",
+					data: { idDiv: 'representant_tleilax', idPerso: 6, talk: 'mouvArretParleTle', stopTalk: 'mouvParleTle' },			
+					}); 
+				else
+					var request = $.ajax({ 
+					url: url_site+'Core/index/ajaxquote',
+					type: "POST",
+					data: { idDiv: 'nayla', idPerso: 2, talk: 'mouvArretDrt', stopTalk: 'mouvMarcheDrt', repns:215 },
+					}); 
+				request.done(function(msg) { 
+				$("#texto").html(msg); 
+				});
+				 
+			}else{
+				arret = 0;
+				$("#representant_tleilax").stopTime().mouvArretParleTle();
+				$("#texto").invisible();
+			}
+		}
+	});
+	
+	jQuery.fn.arretDrt = function() {
+		$(this).oneTime(1200,function() {
+			$(this).css({backgroundPosition:'0px 0px'});
+		}).oneTime(300,function() {
+			$(this).css({backgroundPosition:'-100px 0px'});
+		}).oneTime(600,function() {
+			$(this).css({backgroundPosition:'-200px 0px'});
+		}).oneTime(900,function() {
+			$(this).css({backgroundPosition:'-100px 0px'});
+		});
+	};
+	jQuery.fn.mouvArretDrt = function(){
+		$(this).arretDrt();
+		$(this).everyTime(1200,function(){
+			$(this).arretDrt();
+		});
+	}
+
+	jQuery.fn.marcheDrt = function() {
+		$(this).oneTime(1200,function() {
+			$(this).css({backgroundPosition:'0px -271px '});
+		}).oneTime(300,function() {
+			$(this).css({backgroundPosition:'-100px -271px '});
+		}).oneTime(600,function() {
+			$(this).css({backgroundPosition:'-200px -271px '});
+		}).oneTime(900,function() {
+			$(this).css({backgroundPosition:'-100px -271px '});
+		});
+	};
+	jQuery.fn.mouvMarcheDrt = function(){
+		$(this).marcheDrt();
+		$(this).everyTime(1200,function(){
+			$(this).marcheDrt();
+		});
+	}
+	
+	$("#nayla").click(function() {
+		if($("#onTalk").val()==0 && $("#onMyTalk").val()==0 && $('#ceremonieBegin').val()==0){
+			$("#texto").removeClass().addClass('naylaText');
+			if (arret == 0 || arrestation==1) {
+				$("#texto").show();
+				$("#onTalk").val(1);
+				$("#nayla").stopTime().mouvMarcheDrt();
+				if(!$("#diamant").length)
+					var request = $.ajax({ 
+					url: url_site+'Core/index/ajaxquote',
+					type: "POST",
+					data: { idDiv: 'nayla', idPerso: 2, talk: 'mouvArretDrt', stopTalk: 'mouvMarcheDrt' },			
+					});
+				else
+					var request = $.ajax({ 
+					url: url_site+'Core/index/ajaxquote',
+					type: "POST",
+					data: { idDiv: 'nayla', idPerso: 2, talk: 'mouvArretDrt', stopTalk: 'mouvMarcheDrt', repns:215 },			
+					});
+				
+				request.done(function(msg) { 
+				$("#texto").html(msg); 
+				});
+				 
+			}else{
+				arret = 0;
+				$("#nayla").stopTime().mouvArretDrt();
+				$("#texto").invisible();
+			}
+		}
+	});
+	
+	jQuery.fn.arretParleGue = function() {
+		$(this).oneTime(300,function() {
+			$(this).css({backgroundPosition:'0px 0px'});
+		}).oneTime(600,function() {
+			$(this).css({backgroundPosition:'-100px 0px'});
+		}).oneTime(900,function() {
+			$(this).css({backgroundPosition:'-200px 0px'});
+		}).oneTime(1200,function() {
+			$(this).css({backgroundPosition:'-100px 0px'});
+		});
+	};
+	jQuery.fn.mouvArretParleGue = function(){
+		$(this).arretParleGue();
+		$(this).everyTime(1200,function(){
+			$(this).arretParleGue();
+		});
+	}
+
+	jQuery.fn.parleGue = function() {
+		$(this).oneTime(300,function() {
+			$(this).css({backgroundPosition:'0px -270px'});
+		}).oneTime(600,function() {
+			$(this).css({backgroundPosition:'-100px -270px'});
+		}).oneTime(900,function() {
+			$(this).css({backgroundPosition:'-200px -270px'});
+		}).oneTime(1200,function() {
+			$(this).css({backgroundPosition:'-100px -270px'});
+		});
+	};
+	jQuery.fn.mouvParleGue = function(){
+		$(this).parleGue();
+		$(this).everyTime(1200,function(){
+			$(this).parleGue();
+		});
+	}
+	
+	$("#representant_guesserit").click(function() {
+		if($("#onTalk").val()==0 && $("#onMyTalk").val()==0 && $('#ceremonieBegin').val()==0){
+			$("#texto").removeClass().addClass('representant_guesseritText');
+			if (arret == 0 || arrestation==1) {
+				$("#texto").show();
+				$("#onTalk").val(1);
+				if($("#diamant").length){
+					$("#nayla").stopTime().mouvMarcheDrt();
+					$("#texto").removeClass().addClass('naylaText');
+				}else
+					$("#representant_guesserit").stopTime().mouvParleGue();
+				if(!$("#diamant").length)
+					var request = $.ajax({ 
+					url: url_site+'Core/index/ajaxquote',
+					type: "POST",
+					data: { idDiv: 'representant_guesserit', idPerso: 5, talk: 'mouvArretParleGue', stopTalk: 'mouvParleGue' },			
+					});
+				else
+					var request = $.ajax({ 
+					url: url_site+'Core/index/ajaxquote',
+					type: "POST",
+					data: { idDiv: 'nayla', idPerso: 2, talk: 'mouvArretDrt', stopTalk: 'mouvMarcheDrt', repns:215 },
+					});
+				request.done(function(msg) { 
+				$("#texto").html(msg); 
+				});
+				 
+			}else{
+				arret = 0;
+				$("#representant_guesserit").stopTime().mouvArretParleGue();
+				$("#texto").invisible();
+			}
+		}
+	});
+
+	
+	$("#onTalk").val(0);
+	$("#onMyTalk").val(0);
+	
+	
+	if($("#nayla").length)
+		$("#nayla").mouvArretDrt();
+		$("#aloa").mouvArretRigole();
+	if($("#sayyaoto").length)
+		$("#sayyaoto").mouvArretGch();
+	$("#leto_ii").mouvArretParle();
+	if($("#representant_guesserit").length)
+		$("#representant_guesserit").mouvArretParleGue();
+	if($("#representant_guilde").length)
+		$("#representant_guilde").mouvArretParleGui();
+	if($("#representant_ix").length)
+		$("#representant_ix").mouvArretParleIx();
+	if($("#representant_tleilax").length)
+		$("#representant_tleilax").mouvArretParleTle();
+	
+	$("#porte_2").click(function() {
+		if($("#onTalk").val()==0 && $("#onMyTalk").val()==0){
+			if($(this).attr('class')=='porte_2_1'){
+				var request = $.ajax({ 
+					url: url_site+'Core/index/tableaubord',
+					type: "POST"							
+		}); 
+		request.done(function(msg) {
+						$("#inThePlace").fadeOut(1000);
+						setTimeout(function(){
+						  $("#inThePlace").hide();
+						  $("#inThePlace").html(msg); 
+						$("#inThePlace").fadeIn(1000);
+						}, 1000);
+						
+					});
+			}
+		}
+	});
+
+/////
+
+$("#porte_1").click(function() {
+	if(this.id=='porte_1'){
+		var className = $('#'+this.id).attr('class');
+		if(className=='porte_1_1'){
+			if($("#onTalk").val()==0 && $("#onMyTalk").val()==0){
+				$('#onTalk').val(1);	
+				var request = $.ajax({
+					url: url_site+'Core/index/couloir', 
+					type: "GET"						
+				}); 
+				request.done(function(msg) {
+					$("#inThePlace").fadeOut(1000);
+					setTimeout(function(){
+					  $("#inThePlace").hide();
+					  $("#inThePlace").html(msg); 
+					$("#inThePlace").fadeIn(1000);
+					}, 1000);
+					
+				});
+			}
+		}
+	}
+});
+
+$("#retour").click(function() {
+	var className = $('#'+this.id).attr('class');
+	if($("#onTalk").val()==0 && $("#onMyTalk").val()==0){
+		$('#onTalk').val(1);	
+		var request = $.ajax({
+			url: url_site+'Core/index/couloir2', 
+			type: "GET"						
+		}); 
+		request.done(function(msg) {
+			$("#inThePlace").fadeOut(1000);
+			setTimeout(function(){
+			  $("#inThePlace").hide();
+			  $("#inThePlace").html(msg); 
+			$("#inThePlace").fadeIn(1000);
+			}, 1000);
+			
+		});
+	}
+});
+
+$("#diamant").click(function() {	
+	if($('#ceremonieBegin').val()==0){
+		$('#ceremonieBegin').val(1);
+		if($("#onTalk").val()==0 && $("#onMyTalk").val()==0 && $("#impot").val()==0){
+			$("#onTalk").val(1);
+			var request = $.ajax({
+			url: url_site+'Core/index/ajaxpaye',
+			type: "POST",
+				data: { idDiv: 'sayyaoto', idPerso: 2, talk: 'mouvArretDrt', stopTalk: 'mouvArretDrt' },							
+			}); 
+			
+			request.done(function(msg) { 
+			$("#texto").html(msg); 
+			});
+		}
+	}
+});
+
+});
+ 
+// if($('#diamant').length){
+	// $('#diamant').everyTime(800,function(){
+		// $('#diamant').oneTime(200,function() {
+			// $('#diamant').attr('class', 'diamant2');
+		// }).oneTime(400,function() {
+			// $('#diamant').attr('class', 'diamant');
+		// }).oneTime(600,function() {
+			// $('#diamant').attr('class', 'diamant2');
+		// }).oneTime(800,function() {
+			// $('#diamant').attr('class', 'diamant');
+		// });
+	// })
+// }
+
+$("#mesTexto").html('<img src="images/plan/trone_plan.png" />'); 
+$("#plan").val('trone_plan');
+</script>
+</head>
+<?php
+if($this->myUser->getHeure()>=67)$stylePiece='nuit';else $stylePiece='';
+$stylePiece='';
+?>
+<div id="<?php echo $this->salle;?>" class='<?php echo $stylePiece;?>'>
+	<div id="perso"></div>
+	<div id="retour">&nbsp;</div>	
+	<?php
+	
+	foreach($this->porteDansSalle as $porte){
+		echo '<div id="porte_'.$porte['por_id'].'" class="porte_'.$porte['por_id_type'].'_'.$porte['poru_etat'].'"></div>';
+	}	?>
+	<div id="texto"></div>
+	<?php foreach($this->persoDansSalle as $clef => $perso){
+		// echo '<div class="'.$clef.'" id="'.$clef.'" title="'.$clef.'"></div>';
+		echo '<div class="'.$clef.'" id="'.$clef.'" ></div>';
+	}
+	if($this->myUser->getImpot() >=5){
+		echo'<div id="diamant" class="diamant"></div>';/*<script>$("#porte_1").attr("class", "porte_1_0");</script>*/
+	}
+	?>
+	
+	<input type='hidden' value='0' id='yeuxMouve' />
+	<input type='hidden' value='0' id='impot' />
+</div>
+
+</div>

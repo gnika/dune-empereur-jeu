@@ -1,0 +1,17 @@
+<h2>Produit <?php echo $this->pageData['categorie']->getCategorieUnite();?></h2>
+
+<div id="pageContent">
+<?php
+echo '<p> image : <img src="'.URL_MAIN_ABS.'images/unite/' . $this->pageData['unite']->getImage() . '"></p>';
+echo '<p> or : ' . $this->pageData['unite']->getPrix() . '</p>';
+echo '<p> bois : ' . $this->pageData['unite']->getBois() . '</p>';
+echo '<p> population : ' . $this->pageData['unite']->getPopulation() . '</p>';
+echo '<p> mana : ' . $this->pageData['unite']->getMana() . '</p>';
+echo '<p> description : ' . $this->pageData['unite']->getDescription() . '</p>';
+echo '<p> attaque : ' . $this->pageData['unite']->getAttaque() . '</p>';
+echo '<p> defense : ' . $this->pageData['unite']->getDefense() . '</p>';
+echo '<p> magie : ' . $this->pageData['unite']->getMagie() . '</p>';
+
+?>
+          </div>
+          <?php echo $this->form;?>

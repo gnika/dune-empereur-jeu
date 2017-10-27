@@ -1,0 +1,30 @@
+VOUS AVEZ GAGNE!
+
+vous avez perdu :
+<?php
+	foreach($this->uniteAttaquePerdu as $key=>$unitPerdu)
+	{
+		echo '<p>'.$unitPerdu.' '$key['pu_titre'].'<img src="'.URL_MAIN_ABS.'images/unite/' .$key['pu_image'].'"></p>';
+	}
+?>
+<br/>l'adversaire a perdu :
+<?php
+	foreach($this->uniteDefensePerdu as $key=>$unitPerdu)
+	{
+		echo '<p>'.$unitPerdu.' '$key['pu_titre'].'<img src="'.URL_MAIN_ABS.'images/unite/' .$key['pu_image'].'"></p>';
+	}
+?>
+
+
+<br/>
+
+votre attaque compte <?php echo $this->attaque;?> points, la defense ennemi compte <?php echo $this->defense;?> points.<br/>
+<?php 
+echo 'Votre magie est de '.$this->myMagie.'<br/>';
+echo 'La magie de votre adversaire est de '.$this->hisMagie.'<br/>';
+if($this->myMagie > $this->hisMagie)
+echo 'VOUS GAGNEZ LE DUEL DE MAGIE : VOUS PERDEZ MOINS D\'UNITE';
+else
+echo 'VOTRE ADVERSAIRE GAGNE LE DUEL DE MAGIE : IL PERD MOINS D\'UNITE';
+
+

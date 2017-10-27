@@ -1,0 +1,12 @@
+<h2>Joueurs</h2>
+		  
+		  
+<ul>
+<?php foreach ($this->paginatedUser as $user) : ?>
+    <a href="<?php echo URL_MAIN_ABS.'Attaque/index/userdetails/pa_id/' . $user->getId()  ;?>">
+    <?php echo '<li>' . $user->getLogin () . '</li>'; ?>
+    </a> 
+<?php endforeach; ?>
+</ul>
+
+<?php echo $this->paginatedUser; ?>
